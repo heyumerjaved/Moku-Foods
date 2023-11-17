@@ -183,9 +183,11 @@
               {% endcapture %}
             {% assign slide_popups_html = slide_popups_html | append: slide_popup %}
             
+                {% comment %}
                 {% if block.settings.popup_btn_text and block.settings.popup_content %}
                     <label for="popup-{{ block.id }}" class="fe-cta-popup">{{ block.settings.popup_btn_text }}</label>
                 {% endif %}
+                {% endcomment %}
           </div>
         </div>
       </div>

@@ -1,0 +1,109 @@
+{% if template == 'page.veg-news' %}{% assign product = all_products['variety-pack'] %}{% endif %}
+
+<section id="section-{{ section.id }}" class="Section">
+  <div class="Container Container--full">
+    <div class="Stats__Wrapper">
+      <div class="Stats__TheNumbers Section--spacingNormal Container">
+        <div class="Stats__Inner">
+          {%- for block in section.blocks -%}
+          <div class="Stats__Number">
+            <h2 class="u-h1 be-bold">{{ block.settings.stat_name }}</h2>
+            <p>{{ block.settings.stat_description }}</p>
+          </div>
+          {%- endfor -%}
+        </div>
+      </div>
+      
+      {% assign section2Img = product.metafields.Moku.ImageSection2 %}
+      {% if section2Img != blank %}
+      
+        {% for image in section2Img %}
+         <div class="Stats__TheImage Image--lazyLoad metafield_img" style="background-image: url({{image.src}})"></div>
+        {% endfor %}
+      
+      {% else %}
+      
+        {% if product.id == 6606146535533 %}
+         <div class="Stats__TheImage Container" style="background-image: url(//cdn.shopify.com/s/files/1/0024/2483/2109/files/vegnews-hi.jpg?v=1626800654)"></div>
+        {% else %}
+         <div class="Stats__TheImage Container" style="background-image: url({{ product.images[1] | product_img_url: 'x1300' }})"></div>
+        {% endif %}
+      {% endif %}
+      
+    </div>
+  </div>
+</section>
+
+{%- if product.metafields.global.background-override -%}  
+<style>
+  #section-{{ section.id }} {
+    background-color: {{ settings.moku_color_4 }};
+  }  
+  
+  #section-{{ section.id }} .Stats__Number h2,
+  #section-{{ section.id }} .Stats__Number p {
+    color: {{ product.metafields.global.background-override }};
+  } 
+</style>
+{%- else -%}
+<style>
+  #section-{{ section.id }} {
+    background-color: {{ section.settings.color_background }};
+  }  
+  
+  #section-{{ section.id }} .Stats__Number h2 {
+    color: #fde384;
+  } 
+  
+  #section-{{ section.id }} .Stats__Number p {
+    color: {{ section.settings.color_text }};
+  } 
+</style>
+{%- endif -%}
+
+
+{% schema %}
+{
+  "name": "Stats",
+  "class": "moku-section--stats shopify-section--bordered",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section colors"
+    },
+    {
+      "type": "color",
+      "id": "color_background",
+      "label": "Background",
+      "default": "#eaeaea"
+    },
+    {
+      "type": "color",
+      "id": "color_text",
+      "label": "Text",
+      "default": "#fff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "Stat",
+      "settings": [
+        {
+          "type": "text",
+          "id": "stat_name",
+          "label": "Stat",
+          "default": "Stat name"
+        },
+        {
+          "type": "text",
+          "id": "stat_description",
+          "label": "Stat description",
+          "default": "Stat description"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

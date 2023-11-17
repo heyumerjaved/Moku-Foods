@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "1651309638eb3fc348": {
+      "type": "junip-reviews",
+      "settings": {
+        "layout": "list",
+        "reviewsType": "all",
+        "showSummary": false,
+        "reviewsCount": 10
+      }
+    }
+  },
+  "order": [
+    "1651309638eb3fc348"
+  ]
+}

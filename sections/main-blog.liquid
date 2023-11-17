@@ -1,0 +1,298 @@
+<div id="scrollToDiv" data-url="{{ canonical_url }}" style="font-size: 0;"> </div>
+{{ 'component-article-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'section-main-blog.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+
+<div class="search_cate">
+  <div class="Container">
+    <div class="search_cate_inner">
+      <div class="search_item">
+        <form method="GET" action="{{ routes.search_url }}" class="Form">
+          <input class="Form__Input" type="text" name="q" autocomplete="off" autocorrect="off" aria-label="Search..." placeholder="Search...">
+          <input type="hidden" name="type" value="blog">
+        </form>
+      </div>
+      <div class="cate_item_p">
+        <div class="deskHide cate_item_fillter"><span>Filter</span>{%- render 'icon' with 'select-arrow' -%}</div>
+        <div class="cate_item">
+          {%- for link in linklists.blog-menu.links -%}
+      	  {% assign blog1 = link.object %}
+          {% if blog.url == link.url %}
+          <div class="cate_item_lin active"><a href="{{ blog1.url }}">{{ link.title }}</a></div>
+          {%- else -%}          
+            <div class="cate_item_lin"><a href="{{ blog1.url }}{%- unless blog1.url contains "/recipe" -%}#scrollToDiv{%- endunless -%}">{{ link.title }}</a></div>                    
+          {%- endif -%}
+          {%- endfor -%}
+          {% comment %}<div class="cate_item_lin"><a href="#">All</a></div>
+          <div class="cate_item_lin"><a href="#">Nutrition</a></div>
+          <div class="cate_item_lin"><a href="#">Recipes</a></div>{% endcomment %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{%- for link in linklists.blog-menu.links -%}
+{% assign blog1 = link.object %}
+  {%- paginate blog1.articles by blog1.articles_count -%}	
+  {% assign _blog = _blog | concat: blog1.articles %}    
+  {%- endpaginate -%}
+{% endfor %}
+{% assign _blog = _blog | sort: 'published_at' | reverse | uniq %}
+
+{%- assign blogArti = blog.articles_count -%}
+{%- if blog.url == '/blogs/all' -%}
+	{%- assign blogArti = _blog.size -%}
+{%- endif -%}
+
+{%- if section.settings.show_featured_article and current_tags == blank -%}
+          {%- assign articles_per_page = 7 -%}
+        {%- else -%}
+          {%- assign articles_per_page = 6 -%}
+        {%- endif -%}
+
+{%- paginate blog.articles by articles_per_page -%}
+  <div class="Blog main-blog section-{{ section.id }}-padding blog-temp">
+    <div class="Container">
+    {% comment %}<h1 class="title--primary">{{ blog.title | escape }}</h1>{% endcomment %}
+        
+    
+          {% assign is_first_article_featured = false %}
+          {%- if section.settings.show_featured_article and current_tags == blank and blog.articles.first.image -%}
+            {%- assign is_first_article_featured = true -%}
+          {%- endif -%}
+    
+
+    <div class="blog-articles article_featured_{{ is_first_article_featured }} {% if section.settings.layout == 'collage' %}blog-articles--collage{% endif %}">
+      {%- if blog.url == '/blogs/all' -%}      
+        {%- for article in _blog -%}
+          <div class="blog-articles__article article">
+            {%- render 'article-card',
+              article: article,
+              media_height: section.settings.image_height,
+              media_aspect_ratio: article.image.aspect_ratio,
+              show_image: section.settings.show_image,
+              show_date: section.settings.show_date,
+              show_author: section.settings.show_author,
+              show_excerpt: false 
+            -%}
+          </div>
+        {%- endfor -%}      
+      {% else %}
+        {%- for article in blog.articles -%}
+        {%- if is_first_article_featured and forloop.first -%}
+        <div class="article_featured blog-articles__article article small-hide">
+          <div class="FlexboxIeFix">
+            <div class="ImageHero ImageHero--small" style="background: url({{ article.image | img_url: '1x1', format: 'jpg' }})">
+              <div class="ImageHero__ImageWrapper">
+                <div class="ImageHero__Image Image--lazyLoad Image--zoomOut"
+                     data-optimumx="1.4"
+                     data-bgset="{{ article.image | img_url: mobile_size, crop: 'center' }} 750w, {{ article.image | img_url: '1000x' }} 1000w, {{ article.image | img_url: '1500x' }} 1500w">
+                </div>
+
+                <noscript>
+                  <div class="ImageHero__Image" style="background-image: url({{ article.image | img_url: '1000x' }})"></div>
+                </noscript>
+              </div>
+
+              <div class="ImageHero__TextContent">
+                <header class="SectionHeader">
+                  {%- if section.settings.show_category and article.tags != empty -%}
+                  <span class="SectionHeader__SubHeading Heading u-h6">{{ article.tags.first }}</span>
+                  {%- endif -%}
+
+                  <h2 class="SectionHeader__Heading Heading u-h1">
+                    <a href="{{ article.url }}">{{ article.title }}</a>
+                  </h2>
+
+                  <div class="SectionHeader__ButtonWrapper">
+                    <a href="{{ article.url }}" class="_button Button Button--primary">{{ 'blogs.article.read_more' | t }}</a>
+                  </div>
+                </header>
+              </div>
+            </div>
+          </div>
+</div>
+        {%- endif -%}        
+          <div class="blog-articles__article article{% if is_first_article_featured and forloop.first %} medium-hide large-up-hide{% else %}{% endif %}">
+            {%- render 'article-card',
+                article: article,
+            media_height: section.settings.image_height,
+            media_aspect_ratio: article.image.aspect_ratio,
+            show_image: section.settings.show_image,
+            show_date: section.settings.show_date,
+            show_author: section.settings.show_author,
+            show_excerpt: false 
+            -%}
+          </div>     
+        {%- endfor -%}
+      {% endif %}
+    </div>
+
+    {%- if paginate.pages > 1 -%}
+      {%- render 'pagination', paginate: paginate -%}
+    {%- endif -%}
+    </div>
+  </div>
+{%- endpaginate -%}
+{% capture _style %}<style>
+  #shopify-section-{{ section.id }} .ImageHero,
+  #shopify-section-{{ section.id }} .ImageHero .Heading {
+    color: #ffffff; }
+
+  #shopify-section-{{ section.id }} .ImageHero .Button,
+  #shopify-section-{{ section.id }} .ImageHero .button{
+    color: #1c1c1c; border-color: #ffffff; }
+
+  #shopify-section-{{ section.id }} .ImageHero .Button::before,
+  #shopify-section-{{ section.id }} .ImageHero .button::before {
+    background-color: #ffffff; }
+  
+  @media (-moz-touch-enabled: 0), (hover: hover) {
+    #shopify-section-{{ section.id }} .ImageHero .Button:hover,
+    #shopify-section-{{ section.id }} .ImageHero .button:hover {
+      color: #ffffff; }
+  }
+  {%- if settings.show_button_transition -%}{%- endif -%}
+</style>{%- endcapture -%}{{ _style | strip_newlines }}
+<script defer="defer">
+  document.querySelector('.search_cate_inner .cate_item_fillter').addEventListener('click', event => {
+    var _this =  !event.target.classList.contains('cate_item_fillter') ? event.target.closest('.cate_item_fillter') : event.target;
+    event.preventDefault();        
+    _this.classList.toggle("active");
+  });
+</script>
+<script defer="defer" type="text/javascript">
+  if( window.location.hash != null && (window.location.hash) == "#scrollToDiv" ){
+    window.scrollTo({ top: 0 });
+    setTimeout(function(){
+      window.scrollTo({
+        top: ( document.querySelector('#scrollToDiv').offsetTop - (document.querySelector('#shopify-section-header').offsetHeight) ),
+        left: 0,
+        behavior: 'smooth'
+      });
+    },10);
+  }
+</script>
+{% schema %}
+{
+  "name": "t:sections.main-blog.name",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.main-blog.settings.header.content"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "options": [
+        {
+          "value": "grid",
+          "label": "t:sections.main-blog.settings.layout.options__1.label"
+        },
+        {
+          "value": "collage",
+          "label": "t:sections.main-blog.settings.layout.options__2.label"
+        }
+      ],
+      "default": "collage",
+      "label": "t:sections.main-blog.settings.layout.label",
+      "info": "t:sections.main-blog.settings.layout.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_image",
+      "default": true,
+      "label": "t:sections.main-blog.settings.show_image.label"
+    },
+    {
+      "type": "select",
+      "id": "image_height",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "t:sections.main-blog.settings.image_height.options__1.label"
+        },
+        {
+          "value": "small",
+          "label": "t:sections.main-blog.settings.image_height.options__2.label"
+        },
+        {
+          "value": "medium",
+          "label": "t:sections.main-blog.settings.image_height.options__3.label"
+        },
+        {
+          "value": "large",
+          "label": "t:sections.main-blog.settings.image_height.options__4.label"
+        }
+      ],
+      "default": "medium",
+      "label": "t:sections.main-blog.settings.image_height.label",
+      "info": "t:sections.main-blog.settings.image_height.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_date",
+      "default": true,
+      "label": "t:sections.main-blog.settings.show_date.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_author",
+      "default": false,
+      "label": "t:sections.main-blog.settings.show_author.label"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.main-blog.settings.paragraph.content"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    },
+    {
+      "type": "checkbox",
+      "id": "show_featured_article",
+      "label": "Show featured article",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

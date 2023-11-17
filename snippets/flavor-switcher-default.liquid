@@ -1,0 +1,38 @@
+<div class="flavor_switcher" tabindex="1">
+  <span class="selected_flavor">{{ product.title }}</span>
+  <ul class="dropdown">
+    {% for productFlavor in collections['plant-based-jerky'].products %}
+    {% if productFlavor.id == 6606146535533 %}{% continue %}{% endif %}
+    {% unless productFlavor.handle == product.handle %}
+    <li><a class="flavor_choice" href="{{ productFlavor.url }}" data-flavor="{{ productFlavor.title }}">{{ productFlavor.title }}</a></li>
+    {% endunless %}
+    {% endfor %}
+  </ul>
+</div>
+
+<!-- Moku: Flavor Switcher -->
+<script type="text/javascript" defer>
+  function DropDown(el) {
+    this.dd = el;
+    this.initEvents();
+  }
+  DropDown.prototype = {
+    initEvents : function() {
+      var obj = this;
+      obj.dd.on('click', function(event){
+        $(this).toggleClass('active');
+        event.stopPropagation();
+      });
+    }
+  }
+
+  $(function() {
+    var dd = new DropDown($('.flavor_switcher'));
+    $(document).click(function() {
+      $('.flavor_switcher').removeClass('active');
+    });
+    $('.flavor_choice').click(function() {
+      $('.selected_flavor').text($(this).attr("data-flavor"));
+    });
+  });
+</script>

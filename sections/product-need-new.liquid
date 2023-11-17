@@ -1,0 +1,98 @@
+<div class="product-need-row">
+  <div class="Container">
+    {% if section.settings.bottom_txt != blank %}
+      <div class="product-need-head">
+        <h2 class="title">{{ section.settings.bottom_txt }}</h2>
+      </div>
+    {% endif %}
+    
+    <div class="product-need-list">
+      <div class="product-need-grid">
+        {% for block in section.blocks %}
+          {% if block.settings.logo != blank %}
+            <div class="product-need-col">
+              <img class="product-need-img"
+                   srcset="{% if block.settings.logo.width >= 100 %}{{ block.settings.logo | image_url: width: 100 }} 100w,{% endif %}
+                           {% if block.settings.logo.width >= 150 %}{{ block.settings.logo | image_url: width: 150 }} 150w,{% endif %}
+                           {% if block.settings.logo.width >= 200 %}{{ block.settings.logo | image_url: width: 200 }} 200w,{% endif %}
+                           {% if block.settings.logo.width >= 250 %}{{ block.settings.logo | image_url: width: 250 }} 250w,{% endif %}
+                           {% if block.settings.logo.width >= 300 %}{{ block.settings.logo | image_url: width: 300 }} 300w,{% endif %}
+                           {% if block.settings.logo.width >= 350 %}{{ block.settings.logo | image_url: width: 350 }} 350w,{% endif %}
+                           {% if block.settings.logo.width >= 400 %}{{ block.settings.logo | image_url: width: 400 }} 400w,{% endif %}
+                           {{ block.settings.logo | image_url }} {{ block.settings.logo.width }}w"
+                   src="{{ block.settings.logo | image_url: width: master }}"
+                   sizes="100vw"
+                   alt="{{ block.settings.title | escape }}"
+                   height="{{block.settings.logo.width | divided_by: block.settings.logo.aspect_ratio}}"
+                   width="{{block.settings.logo.width}}"
+                   loading="lazy"
+                   />
+              {% if block.settings.title != blank %}<h5>{{ block.settings.title }}</h5>{% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" defer>
+  $(document).ready(function() {
+    if ($(window).width() < 768 ) {
+      $('.product-need-grid').slick({
+        infinite: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 3000,
+        dots: true,
+        arrows: false
+      });
+    }
+  });
+</script>
+
+
+{% schema %}
+  {
+    "name": "Product needs",
+	"class": "product-need-new",
+    "settings": [
+      {
+        "type": "html",
+        "id": "bottom_txt",
+        "label": "Title"
+      }
+  ],
+  "blocks": [
+      {
+        "type": "need",
+        "name": "Need",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "logo",
+            "label": "Logo"
+          },
+          {
+            "type": "html",
+            "id": "title",
+            "label": "Title"
+          }
+        ]
+      }
+   ],
+	"presets": [
+      {
+        "name": "Product needs",
+        "category": "Custome"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

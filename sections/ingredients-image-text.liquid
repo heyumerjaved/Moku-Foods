@@ -1,0 +1,206 @@
+<style>
+    .container-fe{
+        padding: 18px 15%;
+    }
+    .fe-mobile-image {
+        display: none;
+    }
+    .fe-section-bg-color {
+        background-color: {{ section.settings.bg_color }};
+        padding-bottom: 70px;
+    }
+    #fe-section-{{ section.id }} h3 {
+        text-align: center;
+        margin: 50px 0 30px;
+        font-size: 4.32rem;
+        color: {{ section.settings.headline_color }};
+    }
+    #fe-section-{{ section.id }} h5 {
+        margin: 15px 0 5px;
+        font-size: 2.4rem;
+        color: {{ section.settings.text_color }};
+    }
+    .fe-items-wrap {
+        display: flex;
+        justify-content: center;
+    }
+    .fe-items-wrap .fe-item {
+        flex-basis: 30%;
+        margin-right: 20px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .fe-item .fe-pull-down {
+        margin-top: auto;
+    }
+    .fe-item .fe-pull-down div.SectionHeader__Heading{
+        font-size: 0.9em;
+        margin-top: 5px;
+    }
+
+    .fe-items-wrap .fe-item:last-of-type {
+        margin-right: 0;
+    }
+    .fe-item .item-image {
+        width: 100%;
+    }
+    .fe-item p {
+        color: {{ section.settings.text_color }};
+      font-weight: 400;
+    }
+    @media only screen and (max-width: 980px) {
+        #fe-section-{{ section.id }} h3 {
+            font-size: 3.2rem;
+            margin: 50px 0 0;
+            text-align: left;
+            line-height: 1;
+        }
+        .fe-section-bg-color {
+            padding-bottom: 30px;
+        }
+        .fe-desktop-image {
+            display: none;
+        }
+        .fe-mobile-image {
+            display: inline-block;
+            /*max-height: 170px;*/
+        }
+        .fe-items-wrap {
+            flex-wrap: wrap;
+        }
+        .fe-items-wrap .fe-item {
+            flex-basis: 100%;
+            margin-right: 0;
+            padding: 25px 0;
+        }
+    }
+    @media only screen and (max-width: 400px) {
+        .fe-mobile-image {
+            max-height: 170px;
+        }
+    }
+</style>
+<section id="fe-section-{{ section.id }}" class="container-fe">
+    <h3 class="SectionHeader__SubHeading Heading u-h1 be-bold">{{ section.settings.headline }}</h3>
+    <div class="fe-items-wrap">
+        {% for block in section.blocks %}
+            <div class="fe-item">
+                {% if block.settings.desk_image and block.settings.mob_image %}
+              
+                  <img 
+                       srcset="{% if block.settings.desk_image.width >= 200 %}{{ block.settings.desk_image | image_url: width: 200 }} 200w,{% endif %}
+                               {% if block.settings.desk_image.width >= 300 %}{{ block.settings.desk_image | image_url: width: 300 }} 300w,{% endif %}
+                               {% if block.settings.desk_image.width >= 400 %}{{ block.settings.desk_image | image_url: width: 400 }} 400w,{% endif %}
+                               {% if block.settings.desk_image.width >= 500 %}{{ block.settings.desk_image | image_url: width: 500 }} 500w,{% endif %}
+                               {% if block.settings.desk_image.width >= 600 %}{{ block.settings.desk_image | image_url: width: 600 }} 600w,{% endif %}
+                               {% if block.settings.desk_image.width >= 700 %}{{ block.settings.desk_image | image_url: width: 700 }} 700w,{% endif %}
+                               {% if block.settings.desk_image.width >= 800 %}{{ block.settings.desk_image | image_url: width: 800 }} 800w,{% endif %}
+                               {% if block.settings.desk_image.width >= 900 %}{{ block.settings.desk_image | image_url: width: 900 }} 900w,{% endif %}
+                               {% if block.settings.desk_image.width >= 1000 %}{{ block.settings.desk_image | image_url: width: 1000 }} 1000w,{% endif %}
+                               {% if block.settings.desk_image.width >= 1200 %}{{ block.settings.desk_image | image_url: width: 1200 }} 1200w,{% endif %}
+                               {{ block.settings.desk_image | image_url }} {{ block.settings.desk_image.width }}w"
+                       src="{{ block.settings.desk_image | image_url : width: master }}"
+                       sizes="100vw"
+                       class="item-image fe-desktop-image"
+                       alt="{{ block.settings.desk_image.alt | escape }}"
+                       height="{{ block.settings.desk_image.width | divided_by: block.settings.desk_image.aspect_ratio | ceil }}"
+                       width="{{block.settings.desk_image.width}}"
+                       loading="lazy"
+                       />
+
+                  <img 
+                       srcset="{% if block.settings.mob_image.width >= 200 %}{{ block.settings.mob_image | image_url: width: 200 }} 200w,{% endif %}
+                               {% if block.settings.mob_image.width >= 300 %}{{ block.settings.mob_image | image_url: width: 300 }} 300w,{% endif %}
+                               {% if block.settings.mob_image.width >= 400 %}{{ block.settings.mob_image | image_url: width: 400 }} 400w,{% endif %}
+                               {% if block.settings.mob_image.width >= 500 %}{{ block.settings.mob_image | image_url: width: 500 }} 500w,{% endif %}
+                               {% if block.settings.mob_image.width >= 600 %}{{ block.settings.mob_image | image_url: width: 600 }} 600w,{% endif %}
+                               {% if block.settings.mob_image.width >= 700 %}{{ block.settings.mob_image | image_url: width: 700 }} 700w,{% endif %}
+                               {% if block.settings.mob_image.width >= 800 %}{{ block.settings.mob_image | image_url: width: 800 }} 800w,{% endif %}
+                               {% if block.settings.mob_image.width >= 900 %}{{ block.settings.mob_image | image_url: width: 900 }} 900w,{% endif %}
+                               {% if block.settings.mob_image.width >= 1000 %}{{ block.settings.mob_image | image_url: width: 1000 }} 1000w,{% endif %}
+                               {% if block.settings.mob_image.width >= 1200 %}{{ block.settings.mob_image | image_url: width: 1200 }} 1200w,{% endif %}
+                               {{ block.settings.mob_image | image_url }} {{ block.settings.mob_image.width }}w"
+                       src="{{ block.settings.mob_image | image_url : width: master }}"
+                       sizes="100vw"
+                       class="item-image fe-mobile-image"
+                       alt="{{ block.settings.mob_image.alt | escape }}"
+                       height="{{ block.settings.mob_image.width | divided_by: block.settings.mob_image.aspect_ratio | ceil }}"
+                       width="{{block.settings.mob_image.width}}"
+                       loading="lazy"
+                       />
+              
+                {% else %}
+                    <div class="item-image" style="background-color: {{ section.settings.headline_color }};">{{ 'product-1' | placeholder_svg_tag }}</div>
+                {% endif %}
+                <div class="fe-pull-down">
+                    <h5 class="SectionHeader__SubHeading Heading u-h3 be-bold">{{ block.settings.title }}</h5>
+                    <div class="SectionHeader__Heading SectionHeader__Heading--emphasize Heading u-h5">
+                        {{ block.settings.content }}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
+{% schema %}
+{
+    "name": "Items with image and text",
+    "class": "fe-section-bg-color",
+    "max_blocks": 3,
+    "settings": [
+        {
+            "type": "text",
+            "id": "headline",
+            "label": "Headline",
+            "default": "Headline"
+        },
+        {
+            "type": "color",
+            "id": "bg_color",
+            "label": "Background Color"
+        },
+        {
+            "type": "color",
+            "id": "headline_color",
+            "label": "Headline Color"
+        },
+        {
+            "type": "color",
+            "id": "text_color",
+            "label": "Text Color",
+            "default": "#ffffff"
+        }
+    ],
+    "blocks": [
+        {
+            "type": "image",
+            "name": "Image with text",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "desk_image",
+                    "label": "Desktop Image"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "mob_image",
+                    "label": "Mobile Image"
+                },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title",
+                    "default": "Title"
+                },
+                {
+                    "type": "richtext",
+                    "id": "content",
+                    "label": "text",
+                    "default": "<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

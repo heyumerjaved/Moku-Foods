@@ -1,0 +1,113 @@
+{% assign flavor_product = product.metafields.Moku.Flavors | split: '|' %}
+{% if flavor_product != blank %}
+  <div class="flavor-switcher-list">
+    <label class="Product_Variants_label">Flavors</label>
+
+    <div class="flavor-box-row">
+      
+      <a href="{{product.url}}" class="flavor-box-col handle-{{product.handle}} active{% if product.handle contains 'variety-pack' %} is-variety{% endif %}">
+        <div class="flavor-switcher-img">
+          <div class="flavor-switcher-img-box">
+            <img 
+                 srcset="{% if product.featured_image.width >= 236 %}{{ product.featured_image | image_url: width: 236 }} 236w,{% endif %}
+                         {% if product.featured_image.width >= 472 %}{{ product.featured_image | image_url: width: 472 }} 472w,{% endif %}
+                         {% if product.featured_image.width >= 650 %}{{ product.featured_image | image_url: width: 650 }} 650w,{% endif %}
+                         {% if product.featured_image.width >= 950 %}{{ product.featured_image | image_url: width: 950 }} 950w{% endif %}"
+                 src="{{ product.featured_image | image_url: grande }}"
+                 sizes="100vw"
+                 alt="{{ product.title | escape }}"
+                 height="350"
+                 width="500"
+                 loading="lazy"
+                 />
+          </div>
+        </div>
+        <span>{{- product.title | escape -}}</span>
+      </a>
+      
+      {%- for flvr_prod in flavor_product -%}
+        {% assign prod = all_products[flvr_prod] %}
+        <a href="{{prod.url}}" class="flavor-box-col handle-{{prod.handle}}{% if prod.handle contains 'variety-pack' %} is-variety{% endif %}">
+          <div class="flavor-switcher-img">
+            <div class="flavor-switcher-img-box">
+              <img 
+                   srcset="{% if prod.featured_image.width >= 236 %}{{ prod.featured_image | image_url: width: 236 }} 236w,{% endif %}
+                           {% if prod.featured_image.width >= 472 %}{{ prod.featured_image | image_url: width: 472 }} 472w,{% endif %}
+                           {% if prod.featured_image.width >= 650 %}{{ prod.featured_image | image_url: width: 650 }} 650w,{% endif %}
+                           {% if prod.featured_image.width >= 950 %}{{ prod.featured_image | image_url: width: 950 }} 950w{% endif %}"
+                   src="{{ prod.featured_image | image_url: grande }}"
+                   sizes="100vw"
+                   alt="{{ prod.title | escape }}"
+                   height="350"
+                   width="500"
+                   loading="lazy"
+                   />
+            </div>
+          </div>
+          <span>{{ prod.title | escape }}</span>
+        </a>
+      {%- endfor -%}
+      
+    </div>
+
+  </div>
+{% endif %}
+
+
+{% comment %}
+{% assign flavor_product = product.metafields.Moku.Flavors | split: '|' %}
+{% if flavor_product != blank %}
+  <div class="flavor_switcher_new_wrap">
+    <label class="Product_Variants_label">Flavors</label>
+    <div class="flavor_switcher_new">
+      <div class="flavor-dropdown-label">
+        <span class="flavor-dropdown-shape">
+          <img 
+               srcset="{% if product.featured_image.width >= 59 %}{{ product.featured_image | image_url: width: 59 }} 59x,{% endif %}
+                       {% if product.featured_image.width >= 118 %}{{ product.featured_image | image_url: width: 118 }} 118w,{% endif %}
+                       {% if product.featured_image.width >= 84 %}{{ product.featured_image | image_url: width: 84 }} 84w,{% endif %}
+                       {% if product.featured_image.width >= 168 %}{{ product.featured_image | image_url: width: 168 }} 168w,{% endif %}
+                       {% if product.featured_image.width >= 130 %}{{ product.featured_image | image_url: width: 130 }} 130w,{% endif %}
+                       {% if product.featured_image.width >= 260 %}{{ product.featured_image | image_url: width: 260 }} 260w{% endif %}"
+               src="{{ product.featured_image | image_url: width: 100, height: 100 }}"
+               sizes="(min-width: 1200px) calc((1200px - 19.5rem) / 12), (min-width: 750px) calc((100vw - 16.5rem) / 8), calc((100vw - 8rem) / 5)"
+               alt="{{ product.title | escape }}"
+               height="100"
+               width="150"
+               loading="lazy"
+               />
+        </span>
+        {{ product.title | escape }}
+      </div>
+      <ul>
+        {% for flvr_prod in flavor_product %}
+          {% assign prod = all_products[flvr_prod] %}
+            <li class="{{prod.title|handleize}}">
+              <a href="{{prod.url}}">
+                <span class="flavor-dropdown-shape">
+                  <img 
+                       srcset="{% if prod.featured_image.width >= 59 %}{{ prod.featured_image | image_url: width: 59 }} 59x,{% endif %}
+                               {% if prod.featured_image.width >= 118 %}{{ prod.featured_image | image_url: width: 118 }} 118w,{% endif %}
+                               {% if prod.featured_image.width >= 84 %}{{ prod.featured_image | image_url: width: 84 }} 84w,{% endif %}
+                               {% if prod.featured_image.width >= 168 %}{{ prod.featured_image | image_url: width: 168 }} 168w,{% endif %}
+                               {% if prod.featured_image.width >= 130 %}{{ prod.featured_image | image_url: width: 130 }} 130w,{% endif %}
+                               {% if prod.featured_image.width >= 260 %}{{ prod.featured_image | image_url: width: 260 }} 260w{% endif %}"
+                       src="{{ prod.featured_image | image_url: width: 100, height: 100 }}"
+                       sizes="(min-width: 1200px) calc((1200px - 19.5rem) / 12), (min-width: 750px) calc((100vw - 16.5rem) / 8), calc((100vw - 8rem) / 5)"
+                       alt="{{ prod.title | escape }}"
+                       height="100"
+                       width="150"
+                       loading="lazy"
+                       />
+                </span>{{ prod.title | escape }}
+              </a>
+            </li>
+          {% if prod.metafields.Moku.FlavorBackground != blank %}
+           {% comment %}{% style %}.flavor_switcher_new li.{{prod.title|handleize}} a{ background-color:{{prod.metafields.Moku.FlavorBackground}}; }{% endstyle %}{% endcomment %}
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+{% endif %}
+{% endcomment %}

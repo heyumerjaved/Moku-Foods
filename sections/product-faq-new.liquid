@@ -1,0 +1,135 @@
+{% if template == 'page.veg-news' %}{% assign product = all_products['variety-pack'] %}{% endif %}
+{%- if product.metafields.global.background-override -%}
+    {% assign pdt_color = '#78C9B6' %}
+{% else %}
+    {% assign pdt_color = '#227461' %}
+{% endif %}
+<style>
+    .fe-faq {
+        padding: 100px 0;
+    }
+    .container-sec-fe{
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    .fe-questions {
+        padding: 0 2em;
+    }
+    .fe-faq h3 {
+        text-align: center;
+        font-size: 3rem !important;
+        color: {{ pdt_color }};
+    }
+    .show-answer-cta {
+        display: none;
+    }
+    .answer-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: all 0.5s;
+        color: {{ pdt_color }};
+        font-size: 18px;
+    }
+    .show-answer-cta:checked ~ .answer-content {
+        padding: 20px 0;
+        max-height: 500px;
+    }
+
+    .fe-question {
+        padding: 20px 10px 20px 0;
+        border-top: 2px solid {{ pdt_color }};
+    }
+    .fe-question:last-of-type {
+        border-bottom: 2px solid {{ pdt_color }};
+    }
+    .fe-question label {
+        cursor: pointer;
+        color: {{ pdt_color }};
+        width: 100%;
+        display: block;
+        position: relative;
+    }
+    .fe-question label p {
+        margin-bottom: 0;
+    }
+    .fe-question label:after {
+        content: '+';
+        position: absolute;
+        right: -10px;
+        top: 2px;
+        transition: all .5s;
+    }
+    .show-answer-cta:checked + label:after {
+        content: '-';
+    }
+</style>
+<div class="fe-faq container-sec-fe">
+  <div class="Container">
+  	<h2 class="SectionHeader__SubHeading Heading title">{{ section.settings.headline }}</h2>
+  </div>
+    <div class="fe-questions">
+        {% if section.blocks.size > 0 %}
+            {% for block in section.blocks %}
+                <div class="fe-question">
+                    <input class="show-answer-cta" type="checkbox" id="q-{{ block.id }}">
+                    <label for="q-{{ block.id }}" onclick="closeFaq(this)">{{ block.settings.question }}</label>
+                    <div class="answer-content">{{ block.settings.answer }}</div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+<script>
+    const closeFaq = (label) => {
+        let currentChecked = document.getElementById(label.htmlFor);
+        let allCheckboxes = document.querySelectorAll('.show-answer-cta');
+        allCheckboxes.forEach(checkbox => {
+            if(checkbox.id !== currentChecked.id){
+                if(checkbox.checked){
+                    checkbox.checked = false
+                }
+            }
+        });
+    }
+</script>
+
+{% schema %}
+{
+    "name": "Product FAQ",
+	"class": "product-faq-new",
+    "settings": [
+        {
+            "type": "text",
+            "id": "headline",
+            "label": "Headline",
+            "default": "Frequently asked questions"
+        }
+    ],
+    "blocks": [
+        {
+            "name": "Faq",
+            "type": "faq",
+            "settings": [
+                {
+                    "type": "richtext",
+                    "id": "question",
+                    "label": "Question",
+                    "default": "<p>Question text here</p>"
+                },
+                {
+                    "type": "richtext",
+                    "id": "answer",
+                    "label": "Answer",
+                    "default": "<p>Answer text here</p>"
+                }
+            ]
+        }
+    ],
+	"presets": [
+      {
+        "name": "Product FAQ",
+        "category": "Custome"
+      }
+    ]
+}
+{% endschema %}

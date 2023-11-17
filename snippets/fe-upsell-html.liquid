@@ -1,0 +1,150 @@
+{%- if cart.item_count > 0 -%}
+    {% assign allow_upsell = false %}
+    {%- for cart_item in cart.items -%}
+        {% if cart_item.product.metafields.global.is_upsell %}
+           {% continue %}
+        {% endif %}
+        {% assign allow_upsell = true %}
+    {% endfor %}
+    {% if allow_upsell %}
+        {% capture upsell_product_handles %}{{ shop.metafields.global.upsell_cart }}{% endcapture %}
+        {% assign upsell_product_handles_array = upsell_product_handles | split: ' ' %}
+
+        {% comment %} Set not used upsells {% endcomment %}
+
+        {% assign keys_to_remove = '' %}
+        {% assign increment = 0 %}
+        {% for upsell_handle in upsell_product_handles_array %}
+            {% assign upsell_product = all_products[upsell_handle] %}
+            {% assign related_product = all_products[upsell_product.metafields.global.related_handle] %}
+            {% for fe_item in cart.items %}
+
+                {% if fe_item.product.id == related_product.id %}
+                    {% assign keys_to_remove = keys_to_remove | append: increment | append: ' ' %}
+                {% elsif fe_item.product.id == upsell_product.id %}
+                    {% assign keys_to_remove = keys_to_remove | append: increment | append: ' ' %}
+                {% endif %}
+
+            {% endfor %}
+            {% assign increment = increment | plus: 1 %}
+        {% endfor%}
+
+        {% assign keys_to_remove_array = keys_to_remove | split: ' ' %}
+        {% assign upsell_next = '' %}
+
+        {% assign inc_key = 0 %}
+        {% for upsell_handle in upsell_product_handles_array %}
+            {% assign remove_item = false %}
+            {% for key_remove in keys_to_remove_array %}
+
+                {% assign key_int = key_remove | times: 1 %}
+
+                {% if key_int == inc_key %}
+                    {% assign remove_item = true %}
+                {% endif %}
+            {% endfor %}
+
+            {% if remove_item == false %}
+                {% assign upsell_next = upsell_next | append: upsell_handle | append: ' ' %}
+            {% endif %}
+
+            {% assign inc_key = inc_key | plus: 1 %}
+        {% endfor %}
+
+
+        {% comment %} Check Priority from upsell_next {% endcomment %}
+        {% assign upsell_next_array = upsell_next | split: ' ' %}
+        {% assign priority = all_products[upsell_next_array[0]].metafields.global.priority | plus: 0 %}
+
+
+        {% assign upsell_key = 0 %}
+        {% comment %} next handle key {% endcomment %}
+        {% assign upsell_next_key = 0 %}
+
+        {% for upsell_handle in upsell_next_array %}
+            {% assign upsell_product = all_products[upsell_handle] %}
+            {% assign upsell_product_priority = upsell_product.metafields.global.priority | plus: 0 %}
+
+            {% if priority > upsell_product_priority %}
+                {% assign priority = upsell_product_priority %}
+                {% assign upsell_next_key = upsell_key | plus: 0 %}
+            {% endif %}
+
+            {% assign upsell_key = upsell_key | plus: 1 %}
+
+        {% endfor %}
+
+        {% comment %} next product {% endcomment %}
+        {% assign upsell_next_product = all_products[upsell_next_array[upsell_next_key]] %}
+        {% assign related_next_product = all_products[upsell_next_product.metafields.global.related_handle] %}
+		{%- assign upsell_next_array_size = upsell_next_array | size -%}
+        {% if upsell_next_product.title != blank %}
+            <div class="upsell-wrap US_wrap-new">
+                <div class="upsell-item">
+                    <div class="upsell-content-wrap">                      
+                      <div class="us-static-msg">Customers Also Ordered</div>
+                      {%- if upsell_next_array != blank -%}
+                      <div class="upsell-grid{% if upsell_next_array_size < 3 %} only-grid-slide{% endif %}" data-number-slide="{{ upsell_next_array_size }}">
+                      {% for upsell_handle in upsell_next_array %}                      
+                        {% assign related_next_product = all_products[upsell_handle] %}
+                        {% assign upsell_next_product = related_next_product %}
+                        
+                      <div class="upsell-item">
+                        <div class="upsell-image">
+                          <img src="{{ related_next_product.metafields.global.cartimg }}" loading="lazy" alt="{{ upsell_next_product.title }}"/>
+                        </div>
+                        <div class="upsell-content">
+                          <p class="title">{{ related_next_product.title }}</p>
+                          <p class="prev-price">{{ upsell_next_product.compare_at_price | money }}</p>
+                          <p class="price">{{ upsell_next_product.price | money }}</p>
+                        </div>
+                        <div class="upsell-cta">
+                          <button class="atc-button" onclick="addUpsellItem(event, {{ upsell_next_product.variants[0].id }})">
+                            ADD
+                            <div class="loading-overlay hidden">
+                              <div class="loading-overlay__spinner">
+                                <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                                  <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                                </svg>
+                              </div>
+                            </div>
+                          </button>
+                        </div>
+                      </div>                     
+                      {% endfor %}
+                      </div>
+                      {% endif %}
+                      {% comment %}
+                       <div class="us-static-msg">Amplify your snack cabinet with 15% off...</div>
+                        <div class="upsell-image">
+                          <img src="{{ related_next_product.metafields.global.cartimg }}" loading="lazy" alt="{{ upsell_next_product.title }}"/>
+                        </div>
+                        <div class="upsell-content">
+                          <p class="title">{{ related_next_product.title }}</p>
+                          <p class="prev-price">{{ upsell_next_product.compare_at_price | money }}</p>
+                          <p class="price">{{ upsell_next_product.price | money }}</p>
+                        </div>
+                        <div class="upsell-cta">
+                          <button class="atc-button" onclick="addUpsellItem(event, {{ upsell_next_product.variants[0].id }})">
+                            ADD
+                            <div class="loading-overlay hidden">
+                              <div class="loading-overlay__spinner">
+                                <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                                  <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                                </svg>
+                              </div>
+                            </div>
+                          </button>
+                        </div>                      
+                      {% endcomment %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% else %}
+        <div class="upsell-wrap">
+            <a class="fe-clear-and-reload-drawer" data-action="remove-item" style="display: none">reload-drawer</a>
+        </div>
+    {% endif %}
+      <p class="upsell-txt">1% of your purchase is going to your choice nonprofit - finish checkout to choose.</p>
+{%- endif -%}

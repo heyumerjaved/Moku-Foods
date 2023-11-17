@@ -1,0 +1,163 @@
+<section id="section-{{ section.id }}" class="Section section-moku-about-text-with-image {% unless section.settings.image %}Section--spacingLarge{% endunless %}">
+  {%- capture section_content -%}
+    <div class="FeatureText__ContentWrapper">
+      <div class="FeatureText__Content">
+        {%- if section.settings.subheading != blank or section.settings.title != blank -%}
+          <header class="SectionHeader">
+            {%- if section.settings.subheading != blank -%}
+              <h6 class="SectionHeader__SubHeading Heading u-h6 be-medium">{{ section.settings.subheading }}</h6>
+            {%- endif -%}
+
+            {%- if section.settings.title != blank -%}
+              <p class="SectionHeader__Heading Heading u-h3 be-medium">{{ section.settings.title }}</p>
+            {%- endif -%}
+
+            {%- if section.settings.content != blank -%}
+              <div class="SectionHeader__Description Rte">
+                {{ section.settings.content }}
+              </div>
+            {%- endif -%}
+
+            {%- if section.settings.link_text != blank -%}
+              <a href="{{ section.settings.link_url }}" class="Link Link--underline be-black">{{ section.settings.link_text | escape }}</a>
+            {%- endif -%}
+          </header>
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endcapture -%}
+
+  {%- capture section_image -%}
+    {%- if section.settings.image != blank -%}
+      <div class="FeatureText__ImageWrapper">
+        <div class="AspectRatio" style="max-width: {{ section.settings.image.width }}px; --aspect-ratio: {{ section.settings.image.aspect_ratio }}">
+          <img
+               srcset="{%- if section.settings.image.width >= 200 -%}{{ section.settings.image | image_url: width: 200 }} 200w,{%- endif -%}
+                       {%- if section.settings.image.width >= 300 -%}{{ section.settings.image | image_url: width: 300 }} 300w,{%- endif -%}
+                       {%- if section.settings.image.width >= 400 -%}{{ section.settings.image | image_url: width: 400 }} 400w,{%- endif -%}
+                       {%- if section.settings.image.width >= 500 -%}{{ section.settings.image | image_url: width: 500 }} 5000w,{%- endif -%}
+                       {%- if section.settings.image.width >= 600 -%}{{ section.settings.image | image_url: width: 600 }} 600w,{%- endif -%}
+                       {%- if section.settings.image.width >= 700 -%}{{ section.settings.image | image_url: width: 700 }} 700w,{%- endif -%}
+                       {%- if section.settings.image.width >= 800 -%}{{ section.settings.image | image_url: width: 800 }} 800w,{%- endif -%}
+                       {%- if section.settings.image.width >= 1000 -%}{{ section.settings.image | image_url: width: 1000 }} 1000w,{%- endif -%}
+                       {%- if section.settings.image.width >= 1200 -%}{{ section.settings.image | image_url: width: 1200 }} 1200w,{%- endif -%}
+                       {{ section.settings.image | image_url }} {{ section.settings.image.width }}w"
+               sizes="100vw"
+               src="{{ section.settings.image | image_url: width: 1500 }}"
+               loading="lazy"
+               alt="{{ section.settings.image.alt | escape }}"
+               width="{{ section.settings.image.width }}"
+               height="{{ section.settings.image.width | divided_by: section.settings.image.aspect_ratio | round }}"
+               >
+        </div>
+      </div>
+    {%- endif -%}
+  {%- endcapture -%}
+
+  <div class="FeatureText {% if section.settings.image != blank %}FeatureText--withImage FeatureText--image{{ section.settings.image_position | capitalize }}{% endif %}">
+    {%- if section.settings.image_position == 'left' -%}
+      {{- section_image -}}
+      {{- section_content -}}
+    {%- else -%}
+      {{- section_content -}}
+      {{- section_image -}}
+    {%- endif -%}
+  </div>
+</section>
+
+<style>
+  #section-{{ section.id }} {
+    background-color: {{ section.settings.color_background }};
+  }
+  #section-{{ section.id }} .Heading {
+    color: {{ section.settings.color_text }};
+  }
+  #section-{{ section.id }} .Link--underline {
+    color: {{ section.settings.color_link }};
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Rich text with image",
+  "class": "shopify-section--bordered",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section colors"
+    },
+    {
+      "type": "color",
+      "id": "color_background",
+      "label": "Background",
+      "default": "#eaeaea"
+    },
+    {
+      "type": "color",
+      "id": "color_text",
+      "label": "Text",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "color_link",
+      "label": "Link",
+      "default": "#fff"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Sub-heading",
+      "default": "Sub-heading"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Title"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "1200 x 1200px .png recommended"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Text",
+      "default": "<p>Add your own custom content to give more information about your store, availability details...</p>"
+    },
+    {
+      "type": "text",
+      "id": "link_text",
+      "label": "Link text"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Link URL"
+    }
+  ]
+}
+{% endschema %}

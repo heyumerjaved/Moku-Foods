@@ -1,0 +1,72 @@
+<div class="Veg_News_Brands">
+  <div class="Vn_Brand_Items">
+    {% for block in section.blocks %}
+      <div class="Vn_Brand_Item">
+        <img 
+             srcset="{% if block.settings.img.width >= 150 %}{{ block.settings.img | image_url: width: 150 }} 150w,{% endif %}
+                     {% if block.settings.img.width >= 200 %}{{ block.settings.img | image_url: width: 200 }} 200w,{% endif %}
+                     {% if block.settings.img.width >= 300 %}{{ block.settings.img | image_url: width: 300 }} 300w,{% endif %}
+                     {% if block.settings.img.width >= 400 %}{{ block.settings.img | image_url: width: 400 }} 400w,{% endif %}
+                     {% if block.settings.img.width >= 500 %}{{ block.settings.img | image_url: width: 500 }} 500w,{% endif %}
+                     {% if block.settings.img.width >= 600 %}{{ block.settings.img | image_url: width: 600 }} 600w,{% endif %}
+                     {% if block.settings.img.width >= 700 %}{{ block.settings.img | image_url: width: 700 }} 700w,{% endif %}
+                     {% if block.settings.img.width >= 900 %}{{ block.settings.img | image_url: width: 900 }} 900w,{% endif %}
+                     {% if block.settings.img.width >= 1000 %}{{ block.settings.img | image_url: width: 1000 }} 1000w,{% endif %}
+                     {{ block.settings.img | image_url }} {{ block.settings.img.width }}w"
+             src="{{ block.settings.img | image_url: width: master }}"
+             sizes="100vw"
+             alt="{{ block.settings.img.alt | escape }}"
+             height="{{block.settings.img.width | divided_by: block.settings.img.aspect_ratio}}"
+             width="{{block.settings.img.width}}"
+             loading="lazy"
+             />
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<style>
+  {% if section.settings.bg_clr != blank or section.settings.bg_clr != 'rgba(0,0,0,0)' %}
+  .Veg_News_Brands { background-color: {{section.settings.bg_clr | escape}}; }
+  {% endif %}
+</style>
+
+
+{% schema %}
+  {
+    "name": "Logos",
+    "settings": [
+       {
+         "type": "color",
+         "id": "bg_clr",
+         "label": "Background color"
+       }
+	],
+    "blocks": [
+        {
+          "name": "Logo",
+          "type": "text",
+          "settings": [
+              {
+                "type": "image_picker",
+                "id": "img",
+                "label": "Logo",
+                "info": "300x90 .png recomended"
+              }
+          ]
+        }
+    ],
+ 	"presets": [
+      {  
+        "name": "Custom logo", 
+        "category": "Custom" 
+      }
+  ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "main": {
+      "type": "refer_friend_template",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

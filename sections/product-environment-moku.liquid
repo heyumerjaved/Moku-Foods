@@ -1,0 +1,279 @@
+{% if template == 'page.veg-news' %}{% assign product = all_products['variety-pack'] %}{% endif %}
+<section id="section-{{ section.id }}" class="Section Section--spacingLarge section-moku-product-environment">
+  <div class="Container Fe__FlexSection">
+    
+    {% assign section3Img = product.metafields.Moku.ImageSection3 %}
+    {% if section3Img != blank %}
+    
+      {% for image in section3Img %}
+       <div class="Environmental__ImageWrapper metafield-img">
+        <img class="Image--lazyLoad" src="{{ image.src }}" alt="{{ image.src.alt | escape }}"/>
+       </div>
+      {% endfor %}
+
+    {% else %}
+    
+      <div class="Environmental__ImageWrapper">
+        {% if product.id == 1598152933485 %}
+          <script>
+            const fixPosition = () => {
+              let img = document.getElementById('fe-pdt-{{ product.id }}');
+              let imgWrap = img.parentNode;
+              let sectionWrap = img.parentNode.parentNode.parentNode;
+              sectionWrap.style.position = 'relative';
+              if(window.innerWidth < 450){
+                imgWrap.style.height = img.height + 'px';
+              }else{
+                imgWrap.style.height = (img.height + 50) + 'px';
+              }
+              img.style.position = 'absolute';
+              img.style.left = '0';
+              img.style.bottom = '0';
+            }
+            window.addEventListener('resize', () => {
+              fixPosition();
+            })
+          </script>
+          <img id="fe-pdt-{{ product.id }}" src="{{ product.metafields.global.env_img }}" alt="{{ product.images[2].alt | escape }}" onload="fixPosition()">
+          {% comment %} Mushroom Jerky 6-Pack - 6606146535533 {% endcomment %}
+        {% elsif product.id == 3944526217325 or product.id == 6606146535533 %}
+          <script>
+            const fixPosition = () => {
+              let img = document.getElementById('fe-pdt-{{ product.id }}');
+              let imgWrap = img.parentNode;
+              let sectionWrap = img.parentNode.parentNode.parentNode;
+              sectionWrap.style.position = 'relative';
+              if(window.innerWidth < 450){
+                imgWrap.style.height = img.height + 'px';
+              }else{
+                imgWrap.style.height = (img.height + 30) + 'px';
+              }
+              img.style.position = 'absolute';
+              img.style.left = '0';
+              img.style.bottom = '0';
+            }
+            window.addEventListener('resize', () => {
+              fixPosition();
+            })
+          </script>
+         <img id="fe-pdt-{{ product.id }}" src="{{ product.metafields.global.env_img }}" alt="{{ product.images[2].alt | escape }}" onload="fixPosition()">
+        {% else %}
+          <img class="Image--lazyLoad" src="{{ product.metafields.global.env_img }}" alt="{{ product.images[2].alt | escape }}">
+        {% endif %}
+      </div>
+    
+    {% endif %}
+    
+    <div class="Fe__EnvironmentalRight">
+      <div class="Fe__KeepTogether">
+        <div class="Section__IntroText">
+          <h1 class="u-h1 be-bold">{{ section.settings.section_heading }}</h1>
+          <p>{{ section.settings.section_description }}</p>
+          {% if section.settings.fe_under_p != blank %}
+            <p style="color: #1c7561;font-style: italic;">{{ section.settings.fe_under_p }}</p>
+          {% endif %}
+        </div>
+        <div class="Environmental__StatsWrapper">
+          <ul>
+            {% if product.id == 6606146535533 %}
+              <li data-stat="land">
+                <svg viewBox="0 0 250 250">
+                  <path fill="{{ product.metafields.global.background-override }}" d="M157.29,52.41c-11.72-20.3-30.71-20.3-42.43,0l-31.6,54.74c-11.71,20.29-2.22,36.74,21.21,36.74h63.21c23.43,0,32.93-16.45,21.21-36.74Z"/>
+                  <path fill="{{ product.metafields.global.background-override }}" d="M99.27,81.17c-8-13.91-21-13.91-29.08,0L48.53,118.7c-8,13.91-1.53,25.19,14.54,25.19H106.4c16.06,0,22.57-11.28,14.54-25.19Z"/>
+                </svg>
+                <span>{{ section.settings.land_stat }}</span>
+              </li>
+              <li data-stat="H2O">
+                <svg viewBox="0 0 250 250">
+                  <polygon fill="{{ product.metafields.global.background-override }}" points="125.17 25.84 89.7 84.64 160.63 84.64 125.17 25.84"/>
+                  <g>
+                    <path fill="{{ product.metafields.global.background-override }}" d="M125,155.23c23.82,0,43.13-20.19,43.13-45.09S148.82,65.05,125,65.05,81.87,85.23,81.87,110.14s19.31,45.09,43.13,45.09"/>
+                  </g>
+                </svg>
+                <span>{{ section.settings.water_stat }}</span>
+              </li>
+              <li data-stat="CO2">
+                <svg viewBox="0 0 250 250">
+                  <path fill="{{ product.metafields.global.background-override }}" d="M105.88,122A34.95,34.95,0,1,0,70.94,87.05a35,35,0,0,0,34.94,35"/>
+                  <path fill="{{ product.metafields.global.background-override }}" d="M149.69,114.74a19.92,19.92,0,1,0-19.92-19.91,19.92,19.92,0,0,0,19.92,19.91"/>
+                  <path fill="{{ product.metafields.global.background-override }}" d="M79,140.54a22.86,22.86,0,1,0-22.86-22.86A22.86,22.86,0,0,0,79,140.54"/>
+                  <path fill="{{ product.metafields.global.background-override }}" d="M171.05,140.54a22.86,22.86,0,1,0-22.85-22.86,22.86,22.86,0,0,0,22.85,22.86"/>
+                  <rect fill="{{ product.metafields.global.background-override }}" x="78.19" y="101.86" width="91.76" height="38.68"/>
+                </svg>
+                <span>{{ section.settings.carbon_stat }}</span>
+              </li>
+            {% else %}
+              <li data-stat="land">
+                <svg viewBox="0 0 250 250">
+                  <path fill="{{ product.metafields.global.product-color }}" d="M157.29,52.41c-11.72-20.3-30.71-20.3-42.43,0l-31.6,54.74c-11.71,20.29-2.22,36.74,21.21,36.74h63.21c23.43,0,32.93-16.45,21.21-36.74Z"/>
+                  <path fill="{{ product.metafields.global.product-color }}" d="M99.27,81.17c-8-13.91-21-13.91-29.08,0L48.53,118.7c-8,13.91-1.53,25.19,14.54,25.19H106.4c16.06,0,22.57-11.28,14.54-25.19Z"/>
+                </svg>
+                <span>{{ section.settings.land_stat }}</span>
+              </li>
+              <li data-stat="H2O">
+                <svg viewBox="0 0 250 250">
+                  <polygon fill="{{ product.metafields.global.product-color }}" points="125.17 25.84 89.7 84.64 160.63 84.64 125.17 25.84"/>
+                  <g>
+                    <path fill="{{ product.metafields.global.product-color }}" d="M125,155.23c23.82,0,43.13-20.19,43.13-45.09S148.82,65.05,125,65.05,81.87,85.23,81.87,110.14s19.31,45.09,43.13,45.09"/>
+                  </g>
+                </svg>
+                <span>{{ section.settings.water_stat }}</span>
+              </li>
+              <li data-stat="CO2">
+                <svg viewBox="0 0 250 250">
+                  <path fill="{{ product.metafields.global.product-color }}" d="M105.88,122A34.95,34.95,0,1,0,70.94,87.05a35,35,0,0,0,34.94,35"/>
+                  <path fill="{{ product.metafields.global.product-color }}" d="M149.69,114.74a19.92,19.92,0,1,0-19.92-19.91,19.92,19.92,0,0,0,19.92,19.91"/>
+                  <path fill="{{ product.metafields.global.product-color }}" d="M79,140.54a22.86,22.86,0,1,0-22.86-22.86A22.86,22.86,0,0,0,79,140.54"/>
+                  <path fill="{{ product.metafields.global.product-color }}" d="M171.05,140.54a22.86,22.86,0,1,0-22.85-22.86,22.86,22.86,0,0,0,22.85,22.86"/>
+                  <rect fill="{{ product.metafields.global.product-color }}" x="78.19" y="101.86" width="91.76" height="38.68"/>
+                </svg>
+                <span>{{ section.settings.carbon_stat }}</span>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<style>
+  #section-{{ section.id }} {
+    padding-bottom: 0px;
+    background-color: {{ section.settings.color_background }};
+  }
+  
+  #section-{{ section.id }} h1 {
+    color: {{ section.settings.color_heading }};
+  }  
+  
+  #section-{{ section.id }} p,
+  #section-{{ section.id }} .Environmental__StatsWrapper {
+    color: {{ section.settings.color_text }};
+  } 
+  
+  #section-{{ section.id }} ul li {
+    background-color: {{ section.settings.color_stat }};
+  }
+  #section-{{ section.id }} .Section__IntroText p {
+    font-size: 2.7rem;
+  }
+  #section-{{ section.id }} .Section__IntroText h1 {
+    line-height: 1;
+  }
+  #section-{{ section.id }} .Fe__FlexSection {
+    display: flex;
+  }
+  #section-{{ section.id }} .Fe__FlexSection .Environmental__ImageWrapper,
+  #section-{{ section.id }} .Fe__FlexSection .Fe__EnvironmentalRight {
+    flex-basis: 50%;
+  }
+  #section-{{ section.id }} .Fe__FlexSection .Fe__EnvironmentalRight {
+    display: flex;
+  }
+  #section-{{ section.id }} .Fe__FlexSection .Fe__EnvironmentalRight .Fe__KeepTogether {
+    align-self: center;
+    margin: 0 auto;
+  }
+
+  @media only screen and (max-width: 1080px) {
+    #section-{{ section.id }} .Fe__FlexSection {
+      flex-wrap: wrap;
+    }
+    #section-{{ section.id }} .Fe__FlexSection .Environmental__ImageWrapper {
+      order: 1;
+    }
+    #section-{{ section.id }} .Fe__FlexSection .Environmental__ImageWrapper,
+    #section-{{ section.id }} .Fe__FlexSection .Fe__EnvironmentalRight {
+      flex-basis: 100%;
+    }
+  }
+  @media only screen and (max-width: 450px) {
+    #section-{{ section.id }} .Section__IntroText p {
+      font-size: 16px;
+    }
+    #section-{{ section.id }} .Environmental__StatsWrapper ul {
+      max-width: 250px;
+      margin: 0 auto;
+    }
+  }
+</style>
+
+
+
+{% schema %}
+{
+  "name": "Environment",
+  "class": "moku-section--environment shopify-section--bordered",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section colors"
+    },
+    {
+      "type": "color",
+      "id": "color_background",
+      "label": "Background",
+      "default": "#eaeaea"
+    },
+    {
+      "type": "color",
+      "id": "color_heading",
+      "label": "Heading",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "color_text",
+      "label": "Text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "color_stat",
+      "label": "Stat background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "html",
+      "id": "section_heading",
+      "label": "Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "section_description",
+      "label": "Text"
+    },
+    {
+    "type": "text",
+    "id": "fe_under_p",
+    "label": "[fe] Under Text"
+    },
+    {
+      "type": "header",
+      "content": "Stats"
+    },
+    {
+      "type": "text",
+      "id": "land_stat",
+      "label": "Land"
+    },
+    {
+      "type": "text",
+      "id": "water_stat",
+      "label": "Water"
+    },
+    {
+      "type": "text",
+      "id": "carbon_stat",
+      "label": "Carbon"
+    }
+  ]
+}
+{% endschema %}

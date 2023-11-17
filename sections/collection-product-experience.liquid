@@ -1,0 +1,148 @@
+<div class="Container">
+  <div class="experience-new-grid{% if product.tags contains "What's inside" %} whIn_tag_enable{% endif %}">
+    <div class="experience-new-col left">
+      <div class="experience-new-text">
+        {% if collection.metafields.Moku.MushroomText != blank %}
+         <div class="new-pro-text experience-new-head">{{ collection.metafields.Moku.MushroomText }}</div>
+        {% endif %}
+        
+        
+        {% assign whatsInsidePro = product.metafields.Moku.WhatsNewMushroomPro | split: '|' %}
+        
+        {% if _WhatInside and whatsInsidePro != blank %}
+        
+          {% capture insideProduct %}
+           {% for insideProd in whatsInsidePro %}
+            {% assign prod = all_products[insideProd] %}
+            {{prod.featured_image | img_url: '400x'}}|{{prod.title}}||{{prod.metafields.Moku.MushroomContent}}|||{{prod.metafields.Moku.LabelColor}}{% unless forloop.last %},{% endunless %}
+           {% endfor %}
+          {% endcapture %}
+
+          <div class="exp-variety-new">
+            <div class="exp-inside">
+              <div class="exp-inside-row">
+                {% assign insideProductContant = insideProduct | split:',' %}
+                {% for content1 in insideProductContant %}
+                 {% assign k = forloop.index %}
+                 {% assign arr1 = content1 | split: '||' %}
+
+                   {% for imgContent in arr1[0] %}
+                    {% assign arr2 = imgContent | split: '|' %}
+                    {% for proImg in arr2[0] %}
+                     {% for proTitle in arr2[1] %}
+                      <a href="#" class="exp-inside-col{% if k == 1 %} active{% endif %}" id="{{proTitle|handleize}}">
+                       <div class="exp-inside-img">
+                        <img class="Image--lazyLoad" data-src="{{proImg|strip}}" data-sizes="auto" alt="{{proTitle|strip}}"/>
+                       </div>
+                       <p>{{proTitle|strip}}</p>
+                      </a>
+                     {% endfor %}
+                    {% endfor %}
+                   {% endfor %}
+
+                {% endfor %}
+              </div>
+            </div>
+            
+            {% for content2 in insideProductContant %}
+             {% assign k1 = forloop.index %}
+             {% assign arr1 = content2 | split: '||' %}
+            
+              {% capture divID %}
+               {% for m in arr1[0] %}
+                {% assign arr2 = m | split: '|' %}
+                {% for id in arr2[1] %}{{id}}{% endfor %}
+               {% endfor %}
+              {% endcapture %}
+            
+              {% for tabContent in arr1[1] %}
+                <div class="experience-new-list new-pro-text{% if k1 == 1 %} active{% endif %}" id="{{divID|handleize}}">
+                  {% assign tab_desc_1 = tabContent | split:'<h4>' %}
+                  {% assign i = tab_desc_1.size | minus: 1 %}
+                  {% for arr in (1..i) %}
+                  {% assign tab_desc_2 = tab_desc_1[arr] | split:'</h4>' %}
+                    <div class="list-li">
+                      <h4 style="background:{{arr1[2]|strip|remove: '|'}}">{{ tab_desc_2[0] }}</h4>
+                      {{ tab_desc_2[1] }}
+                    </div>
+                  {% endfor %}
+                </div>
+              {% endfor %}
+            
+            {% endfor %}
+          </div>
+        
+        {% else %}
+        
+          {% assign content = collection.metafields.Moku.MushroomContent %}
+          {% if content != blank %}
+            <div class="experience-new-list new-pro-text">
+              {% assign desc_1 = content | split:'<h4>' %}
+              {% assign i = desc_1.size | minus: 1 %}
+               {% for arr in (1..i) %}
+                {% assign desc_2 = desc_1[arr] | split:'</h4>' %}
+                <div class="list-li">
+                  <h4>{{ desc_2[0] }}</h4>
+                  {{ desc_2[1] }}
+                </div>
+               {% endfor %}
+            </div>
+          {% endif %}
+        
+        {% endif %}
+        
+      </div>
+    </div>
+    
+    {% for img in collection.metafields.Moku.MushroomImage %}
+      {% if img.src != blank %}
+        <div class="experience-new-col right">
+          <div class="experience-new-img">
+            <img class="Image--lazyLoad" data-src="{{ img.src }}" data-sizes="auto" alt="{{ img.alt | escape }}"/>	
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+    
+  </div>
+</div>
+
+{% if collection.metafields.Moku.MushroomCurvedText %}
+  <div class="exp-curved-text{% if product.tags contains "What's inside" %} whIn_tag_enable{% endif %}">
+    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+         viewBox="150 125.3 857 184" xml:space="preserve">
+      <style type="text/css">.st0{fill:none;}</style>
+      <path id="SVGID_x5F_1_x5F_" class="st0" d="M165.5,180.9c0,0,66-44,238.7-30c0,0,41.3,5.3,180.7,73.3c0,0,124.7,58,164.7,58.7c0,0,127.3,31.3,242-94"/>
+      <text><textPath  xlink:href="#SVGID_x5F_1_x5F_" startOffset="0.2625%">
+        <tspan  style="fill:Currentcolor;">{{ collection.metafields.Moku.MushroomCurvedText }}</tspan></textPath>
+      </text>
+    </svg>
+  </div>
+{% endif %}
+
+
+
+{% schema %}
+  {
+    "name": "Col Product experience",
+	"class": "product-experience-new",
+    "settings": [
+        {
+          "type": "paragraph",
+          "content": "This whole section is managed throgh metafield"
+        }
+	 ],
+    "presets": [
+      {
+        "name": "Collection Product experience",
+        "category": "Custome"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

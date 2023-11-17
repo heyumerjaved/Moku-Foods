@@ -1,0 +1,110 @@
+{
+  "sections": {
+    "main": {
+      "type": "faqs-template",
+      "blocks": {
+        "b21db9e2-f4b5-44a4-b7d6-f9148aeab9ab": {
+          "type": "faq",
+          "settings": {
+            "faq_category": "product",
+            "faq_question": "What is Moku Jerky?",
+            "faq_answer": "Moku is a mushroom based jerky that was developed to look and taste like meat.  We use clean, allergen-free ingredients that are good for your body and the planet."
+          }
+        },
+        "71e56b38-d6b0-4963-be23-b0ede6197fd1": {
+          "type": "faq",
+          "settings": {
+            "faq_category": "product",
+            "faq_question": "Why is this better than beef jerky?",
+            "faq_answer": "The increased rate of beef production is taking a monumental toll on our planet and it's only getting worse. More and more forest land is being destroyed in order to pave the way for industrial cattle ranching. Moku's jerky is made from king oyster mushrooms which grow indoors and require very little water and sunlight, making them one of the most sustainable foods on Earth.  Moku also packs 7g of fiber compared to zero grams of fiber in a bag of beef jerky."
+          }
+        },
+        "97ef0fb6-2676-44fa-a2b6-b864011f2e64": {
+          "type": "faq",
+          "settings": {
+            "faq_category": "product",
+            "faq_question": "What does Moku even mean anyways?",
+            "faq_answer": "Moku means “land division” in Hawaiian.  Rooted in our founder's Hawaiian upbringing, Moku's mission is to create food that will preserve our land rather than destroy it."
+          }
+        },
+        "c765d042-4d30-4247-8c41-96e05576a43e": {
+          "type": "faq",
+          "settings": {
+            "faq_category": "product",
+            "faq_question": "Can you use compostable packaging?",
+            "faq_answer": "We'd love to but to preserve a food like jerky, there are no compostable options out there yet that can create a barrier which allows for a long shelf life.  We're working on it though!"
+          }
+        },
+        "13027f34-aa07-425c-83a4-13b4919c293d": {
+          "type": "faq",
+          "settings": {
+            "faq_category": "shipping",
+            "faq_question": "How long does it take for my order to arrive?",
+            "faq_answer": "Once you place an order, it’ll process within 1 business day. We'll then ship it out and send you your tracking number once it’s out the door. Give your tracking number 24 hours to update once you receive it, and then wait patiently for your Moku to arrive."
+          }
+        },
+        "936c3d03-549d-46e9-a670-e38e72ac3e6c": {
+          "type": "faq",
+          "settings": {
+            "faq_category": "shipping",
+            "faq_question": "Where do you ship to?",
+            "faq_answer": "We ship to all 50 states, offering free shipping to the 48 continental states."
+          }
+        },
+        "1926e9f0-9c6b-4f0e-b186-ef63626e1279": {
+          "type": "faq",
+          "settings": {
+            "faq_category": "product",
+            "faq_question": "Do you use any artificial sweeteners?",
+            "faq_answer": "Nada! We rely on the magic of maple syrup for our jerky."
+          }
+        },
+        "e080a1fc-0f35-4870-a7f8-9f78c96d1fbc": {
+          "type": "faq",
+          "settings": {
+            "faq_category": "product",
+            "faq_question": "Are the mushrooms organic?",
+            "faq_answer": "While our king oyster mushrooms are technically not certified, we source mushrooms that grow organically without the use of any synthetic fertilizers or pesticides."
+          }
+        },
+        "00d90044-6f9b-4509-b64c-0486916e76aa": {
+          "type": "faq",
+          "settings": {
+            "faq_category": "product",
+            "faq_question": "What is the shelf life for Moku?",
+            "faq_answer": "Please enjoy Moku within 8 months of opening."
+          }
+        },
+        "48086059-cf15-4ccd-aadb-2a4446b4e9dc": {
+          "type": "faq",
+          "settings": {
+            "faq_category": "product",
+            "faq_question": "When can we find it in stores?",
+            "faq_answer": "Moku is sold in Whole Foods (CA, NV, AZ, and HI), Mother's Market, Mollie Stones, Down to Earth, Olivers, Good Earth (UT), CIBO Express, and many more retailers soon!"
+          }
+        }
+      },
+      "block_order": [
+        "b21db9e2-f4b5-44a4-b7d6-f9148aeab9ab",
+        "71e56b38-d6b0-4963-be23-b0ede6197fd1",
+        "97ef0fb6-2676-44fa-a2b6-b864011f2e64",
+        "c765d042-4d30-4247-8c41-96e05576a43e",
+        "13027f34-aa07-425c-83a4-13b4919c293d",
+        "936c3d03-549d-46e9-a670-e38e72ac3e6c",
+        "1926e9f0-9c6b-4f0e-b186-ef63626e1279",
+        "e080a1fc-0f35-4870-a7f8-9f78c96d1fbc",
+        "00d90044-6f9b-4509-b64c-0486916e76aa",
+        "48086059-cf15-4ccd-aadb-2a4446b4e9dc"
+      ],
+      "settings": {
+        "color_category_heading": "#105d49",
+        "color_question": "#105d49",
+        "color_answer": "#105d49",
+        "color_separator": "#1c7561"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

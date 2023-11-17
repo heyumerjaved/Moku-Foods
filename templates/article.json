@@ -1,0 +1,34 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-article",
+      "blocks": {
+        "82f83bd5-16b6-47b1-8ab5-9e8ea52e9be3": {
+          "type": "featured_image",
+          "settings": {
+            "show_article_image": true
+          }
+        },
+        "b1d239b4-c872-42ba-80cd-18d7d0095339": {
+          "type": "content",
+          "settings": {
+            "show_date": true,
+            "show_category": false,
+            "show_author": true,
+            "show_share_buttons": true
+          }
+        }
+      },
+      "block_order": [
+        "82f83bd5-16b6-47b1-8ab5-9e8ea52e9be3",
+        "b1d239b4-c872-42ba-80cd-18d7d0095339"
+      ],
+      "settings": {
+        "feature_article_title": "See more from Moku"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

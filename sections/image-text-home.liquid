@@ -1,0 +1,125 @@
+<section class="Section" id="section-{{ section.id }}" data-section-id="{{ section.id }}" data-section-type="stats">
+  <div class="Container Container--full">
+    <div class="Stats__Wrapper">
+      <div class="Stats__TheNumbers Section--spacingNormal Container">
+        {%- for block in section.blocks -%}
+        <div class="Stats__Number">
+          <h2 class="u-h1 be-bold">{{ block.settings.stat_name }}</h1>
+          <h3 class="u-h3">{{ block.settings.stat_description }}</h3>
+        </div>
+        {%- endfor -%}
+      </div>
+
+      <div class="Stats__TheImage Container" style="background-image: url({{ section.settings.image_featured | img_url: 'master' }});">
+        {% comment %}
+        <img 
+             srcset="{% if section.settings.image_featured.width >= 200 %}{{ section.settings.image_featured | image_url: width: 200 }} 200w,{% endif %}
+                     {% if section.settings.image_featured.width >= 300 %}{{ section.settings.image_featured | image_url: width: 300 }} 300w,{% endif %}
+                     {% if section.settings.image_featured.width >= 400 %}{{ section.settings.image_featured | image_url: width: 400 }} 400w,{% endif %}
+                     {% if section.settings.image_featured.width >= 500 %}{{ section.settings.image_featured | image_url: width: 500 }} 500w,{% endif %}
+                     {% if section.settings.image_featured.width >= 600 %}{{ section.settings.image_featured | image_url: width: 600 }} 600w,{% endif %}
+                     {% if section.settings.image_featured.width >= 700 %}{{ section.settings.image_featured | image_url: width: 700 }} 700w,{% endif %}
+                     {% if section.settings.image_featured.width >= 800 %}{{ section.settings.image_featured | image_url: width: 800 }} 800w,{% endif %}
+                     {% if section.settings.image_featured.width >= 900 %}{{ section.settings.image_featured | image_url: width: 900 }} 900w,{% endif %}
+                     {% if section.settings.image_featured.width >= 1100 %}{{ section.settings.image_featured | image_url: width: 1100 }} 1100w,{% endif %}
+                     {% if section.settings.image_featured.width >= 1300 %}{{ section.settings.image_featured | image_url: width: 1300 }} 1300w,{% endif %}
+                     {{ section.settings.image_featured | image_url }} {{ section.settings.image_featured.width }}w"
+             src="{{ section.settings.image_featured | image_url: width: master }}"
+             sizes="100vw"
+             alt="{{ section.settings.image_featured.alt | escape }}"
+             height="{{section.settings.image_featured.width | divided_by: section.settings.image_featured.aspect_ratio}}"
+             width="{{section.settings.image_featured.width}}"
+             loading="lazy"
+             />
+         {% endcomment %}
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<style>
+  #section-{{ section.id }} {
+    background-color: {{ section.settings.color_background }};
+  }  
+  
+  #section-{{ section.id }} .Stats__Number:nth-child(even) {
+    color: {{ section.settings.color_text_even }};
+  } 
+  
+  #section-{{ section.id }} .Stats__Number:nth-child(odd) {
+    color: {{ section.settings.color_text_odd }};
+  }
+  
+  #section-{{ section.id }} .Stats__Number p {
+    color: {{ section.settings.color_text }};
+  }
+  
+  {% if section.blocks.size <= 3 %}
+  #section-{{ section.id }} .Stats__Number {
+    width: 100%;
+  } 
+  {% endif %}
+</style>
+
+
+{% schema %}
+{
+  "name": "Stats",
+  "class": "moku-section--stats",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section colors"
+    },
+    {
+      "type": "color",
+      "id": "color_background",
+      "label": "Background",
+      "default": "#eaeaea"
+    },
+    {
+      "type": "color",
+      "id": "color_text_even",
+      "label": "Even numbered stats",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "color_text_odd",
+      "label": "Odd numbered stats",
+      "default": "#fff"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_featured",
+      "label": "Image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        {
+          "type": "text",
+          "id": "stat_name",
+          "label": "Stat",
+          "default": "Stat name"
+        },
+        {
+          "type": "text",
+          "id": "stat_description",
+          "label": "Stat description",
+          "default": "Stat description"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,53 @@
+{% if section.settings.top_txt != blank %}
+  <div class="need-text-bar">
+    <div class="Container">
+      <div class="need-text-info">
+        {{ section.settings.top_txt }}
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+<style>
+{% if section.settings.bkg_clr != blank or section.settings.bkg_clr != 'rgba(0,0,0,0)' %}
+  .need-text-bar { background: {{ section.settings.bkg_clr }}; }
+{% endif %}
+{% if section.settings.txt_color != blank or section.settings.txt_color != 'rgba(0,0,0,0)' %}
+  .need-text-info { color: {{ section.settings.txt_color }} }
+{% endif %}
+</style>
+
+{% schema %}
+  {
+    "name": "Product need text",
+    "settings": [
+      {
+        "type": "color",
+        "id": "bkg_clr",
+        "label": "Background"
+      },
+      {
+        "type": "color",
+        "id": "txt_color",
+        "label": "Text color"
+      },
+      {
+        "type": "richtext",
+        "id": "top_txt",
+        "label": "Top title"
+      }
+  ],
+  "presets": [
+    {
+      "name": "Product need text",
+      "category": "Custome"
+    }
+  ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

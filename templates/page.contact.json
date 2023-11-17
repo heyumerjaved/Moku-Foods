@@ -1,0 +1,28 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "custom_css": [
+        ".rte a:not(.Button) {color: #155644; -webkit-text-decoration-color: #155644; text-decoration-color: #155644;}"
+      ],
+      "settings": {
+        "padding_top": 48,
+        "padding_bottom": 20
+      }
+    },
+    "form": {
+      "type": "contact-form",
+      "settings": {
+        "heading": "",
+        "heading_size": "h1",
+        "color_scheme": "background-2",
+        "padding_top": 28,
+        "padding_bottom": 80
+      }
+    }
+  },
+  "order": [
+    "main",
+    "form"
+  ]
+}

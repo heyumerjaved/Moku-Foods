@@ -1,0 +1,59 @@
+<div class="recipe-carousel-wrapper article-carousel-wrapper">
+  <div class="Container">
+  	
+    {% if section.settings.title != blank %}
+   	 <h2 class="sec-title">{{ section.settings.title }}</h2>
+    {% endif %}
+    
+    <div class="recipe-carousel-list">
+      {% for article in blog.articles %}
+        <div class="recipe-item">      	
+          <figure>
+            <img
+                 srcset="{%- if article.image.width >= 165 -%}{{ article.image | img_url: '165x' }} 165w,{%- endif -%}
+                         {%- if article.image.width >= 360 -%}{{ article.image | img_url: '360x' }} 360w,{%- endif -%}
+                         {%- if article.image.width >= 533 -%}{{ article.image | img_url: '533x' }} 533w,{%- endif -%}
+                         {%- if article.image.width >= 720 -%}{{ article.image | img_url: '720x' }} 720w,{%- endif -%}
+                         {%- if article.image.width >= 1000 -%}{{ article.image | img_url:'1000x' }} 1000w,{%- endif -%}
+                         {%- if article.image.width >= 1500 -%}{{ article.image | img_url: '1500x' }} 1500w,{%- endif -%}
+                         {{ article.image | img_url: 'master' }} {{ article.image.width }}w"
+                 src="{{ article.image | img_url: '533x' }}"
+                 sizes="100vw"
+                 alt="{{ article.title | escape }}"
+                 loading="lazy"
+                 width="{{ article.image.width }}"
+                 height="{{ article.image.height }}"
+                 />
+            <a href="{{article.url}}" class="Button Button--secondary">See recipe</a>
+          </figure>        
+          <div class="content">
+            <h3>{{article.title}}</h3>          
+            <a href="{{article.url}}" class="more">See recipe</a>
+          </div>
+        </div>
+      {% endfor %}     
+    </div>
+
+  </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "Article Carousel",
+    "settings": [
+		{
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "About the shop"
+        }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

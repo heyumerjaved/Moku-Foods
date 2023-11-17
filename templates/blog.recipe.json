@@ -1,0 +1,92 @@
+{
+  "sections": {
+    "1650460423b66d0566": {
+      "type": "slideshow",
+      "blocks": {
+        "1650460423534f4cef-0": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/recipe-banner_0984389c-0a74-486d-8ea9-2b4b89f78173.jpg",
+            "image_mobile": "shopify:\/\/shop_images\/blog-mobi.jpg",
+            "heading": "It’s what on the  inside that counts.",
+            "heading_size": "h1",
+            "subheading": "We spent a year in the kitchen working with two of the top culinary experts and chefs to create a meat-like jerky from clean, plant-based, allergen free ingrdients.",
+            "button_label": "",
+            "link": "",
+            "button_style_secondary": false,
+            "box_align": "middle-left",
+            "show_text_box": false,
+            "text_alignment": "center",
+            "image_overlay_opacity": 0,
+            "color_scheme": "background-1",
+            "text_alignment_mobile": "center"
+          }
+        }
+      },
+      "block_order": [
+        "1650460423534f4cef-0"
+      ],
+      "settings": {
+        "layout": "full_bleed",
+        "slide_height": "adapt_image",
+        "slider_visual": "counter",
+        "auto_rotate": false,
+        "change_slides_speed": 5,
+        "show_text_below": false,
+        "accessibility_info": "Slideshow about our brand"
+      }
+    },
+    "main": {
+      "type": "recipe-list",
+      "blocks": {
+        "6cceca8c-d7f0-44f8-a4bd-0f651657e1de": {
+          "type": "article",
+          "settings": {
+            "article": "recipe\/hawaiian-teriyaki-pizza",
+            "image": "shopify:\/\/shop_images\/list-1.jpg",
+            "title": "",
+            "btn": "See recipe"
+          }
+        },
+        "2cd829f8-58b7-4f5d-ad44-a87d7fef481f": {
+          "type": "article",
+          "settings": {
+            "article": "recipe\/bacon-burger",
+            "image": "shopify:\/\/shop_images\/list-3.jpg",
+            "title": "",
+            "btn": "See recipe"
+          }
+        },
+        "d3f92440-259f-4608-b571-0007a7d7df63": {
+          "type": "article",
+          "settings": {
+            "article": "recipe\/breakfast-sandwich",
+            "image": "shopify:\/\/shop_images\/blog-3.jpg",
+            "title": "",
+            "btn": "See recipe"
+          }
+        }
+      },
+      "block_order": [
+        "6cceca8c-d7f0-44f8-a4bd-0f651657e1de",
+        "2cd829f8-58b7-4f5d-ad44-a87d7fef481f",
+        "d3f92440-259f-4608-b571-0007a7d7df63"
+      ],
+      "settings": {
+        "title": "This is how we rock meatless Monday."
+      }
+    },
+    "recipe-carousel": {
+      "type": "recipe-carousel",
+      "settings": {
+        "show_loadMore": true,
+        "loadMore": "Loading More"
+      }
+    }
+  },
+  "order": [
+    "1650460423b66d0566",
+    "main",
+    "recipe-carousel"
+  ]
+}

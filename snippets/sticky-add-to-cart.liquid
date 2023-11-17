@@ -1,0 +1,83 @@
+{%- liquid
+  assign subPrice = product.selected_or_first_available_variant.selling_plan_allocations[0].price | money   
+  assign oneTimePrice = product.price | money 
+  
+  if product.variants.size > 1
+   assign oneTimePrice = product.variants.first.price | money 
+   assign subPrice = product.variants.first.selling_plan_allocations[0].price | money   
+  endif
+-%}
+
+<div class="stikey-add-to-cart">  
+  <div class="page-width">
+    <div class="stikey-add-to-cart-wrap">
+      <div class="main-title">
+        <h3>{{- product.title -}}</h3>
+        <h5 class="var__title">{{- product.variants.first.title -}}</h5>
+      </div>
+      <div class="main-options">
+        {% if product.available %}{% render 'rtx-pdp-sticky', oneTimePrice: oneTimePrice, subPrice: subPrice %}{% endif %}
+      </div>
+      <div class="main-add">
+        <a href="#" data-type="sticky-add-cart" class="stikey-add-cart button btn green-btn" {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}>
+          {% comment %}<span class="btn-price">{%- if subPrice != blank -%}{{subPrice}}{%- else -%}{{oneTimePrice}}{%- endif -%}</span>{% endcomment %}
+          <span class="btn-price">{{oneTimePrice}}</span>
+          {%- if product.selected_or_first_available_variant.available -%}
+            <span class="btn-text">{{ 'products.product.add_to_cart' | t }}</span>
+          {%- else -%}
+            <span class="btn-text">{{ 'products.product.sold_out' | t }}</span>
+          {%- endif -%}
+          <div class="loading-overlay__spinner hidden">
+            <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+              <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+            </svg>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function() {
+    
+    document.querySelectorAll('.stikey-add-to-cart .main-options .sub_options input[name="selling_plan_select"]').forEach((ele) => {
+      ele.addEventListener("change",function(e){
+        let eleVal = ele.value, elePrice = ele.dataset.price;        
+        document.querySelectorAll('.stikey-add-to-cart .main-options .sub_options').forEach((option) => {
+          option.classList.remove('active');
+        });
+        this.closest('.sub_options').classList.add('active');
+         document.querySelector('.stikey-add-to-cart .main-add [data-type="sticky-add-cart"] .btn-price').textContent = elePrice;
+        document.querySelector('.rtx_buy_box .rtx_option input[value="'+eleVal+'"]').click(); // trigger click main subscription widget option
+      });
+    });
+
+    document.querySelector('.stikey-add-to-cart .main-options .selected_sub_option').addEventListener("click",function(e){
+      this.classList.toggle('active');
+    });
+    
+    document.querySelectorAll('.stikey-add-to-cart .main-options .sticky-sub-option-plans li').forEach((ele) => {
+      ele.addEventListener("click",function(e){
+        let selectedval = this.dataset.value;
+        let selectedTitle = this.textContent;
+        document.querySelector('.stikey-add-to-cart .main-options .selected_sub_option').textContent = selectedTitle;
+        document.querySelector('.stikey-add-to-cart .main-options .selected_sub_option').classList.remove('active');
+        document.querySelector('.rtx_buy_box .rtx_option_sub .options li[rel="'+selectedval+'"]').click(); // trigger click main subscription options value
+      });
+    });
+    
+    //trigger main add to cart button
+    document.querySelector('.stikey-add-to-cart .main-add [data-type="sticky-add-cart"]').addEventListener("click",function(e){
+      e.preventDefault();
+      this.querySelector('.loading-overlay__spinner').classList.remove('hidden');
+      this.classList.add('loading');
+      this.setAttribute('aria-disabled', true);
+      document.querySelector('form[action="/cart/add"] button[type="submit"]').click();
+    });
+    
+  });
+</script>

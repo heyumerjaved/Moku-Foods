@@ -1,0 +1,195 @@
+<div class="article-detail-wrapper">
+
+  <div class="Container">
+
+    <div class="article-banner">
+      <div class="content">
+        <h2 class="article-title">{{ article.title }}</h2>
+      </div>
+
+      {% assign bannerImg = article.metafields.MFF.blogpostimage %}      
+
+      {% if bannerImg != blank %}
+      <img class="article-img Image--lazyLoad Image--fadeIn" src="{{ bannerImg }}" />
+      {% else %}
+      <img
+           srcset="{%- if article.image.width >= 165 -%}{{ article.image | img_url: '165x' }} 165w,{%- endif -%}
+                   {%- if article.image.width >= 360 -%}{{ article.image | img_url: '360x' }} 360w,{%- endif -%}
+                   {%- if article.image.width >= 533 -%}{{ article.image | img_url: '533x' }} 533w,{%- endif -%}
+                   {%- if article.image.width >= 720 -%}{{ article.image | img_url: '720x' }} 720w,{%- endif -%}
+                   {%- if article.image.width >= 1000 -%}{{ article.image | img_url:'1000x' }} 1000w,{%- endif -%}
+                   {%- if article.image.width >= 1500 -%}{{ article.image | img_url: '1500x' }} 1500w,{%- endif -%}
+                   {{ article.image | img_url: 'master' }} {{ article.image.width }}w"
+           src="{{ article.image | img_url: '533x' }}"
+           sizes="100vw"
+           alt="{{ article.title | escape }}"
+           class="article-img"
+           loading="lazy"
+           width="{{ article.image.width }}"
+           height="{{ article.image.height }}"
+           />
+      {% endif %}
+      
+    </div>
+    
+    
+    <div class="article-description">
+      
+      {% assign split_content = article.content | split:'<h2>' %}
+      
+      {% for inner_content in split_content %}
+        {% assign inner_split = inner_content | split:'</h2>' %}
+      	{% unless forloop.first %}
+          {% if forloop.index == 2 %}
+              <div class="ingredients"><h2>{{inner_split[0]}}</h2>{{inner_split[1]}}</div>
+          {% elsif forloop.index == 3 %}
+              <div class="instructions"><h2>{{inner_split[0]}}</h2>{{inner_split[1]}}</div>
+          {% else %}
+              <div class="other-content"><h2>{{inner_split[0]}}</h2>{{inner_split[1]}}</div>
+          {% endif%}
+      	{% endunless %}
+      {% endfor %}      
+      
+      
+    </div>
+    
+    {% assign meta_product = article.metafields.MFF.blogproduct %}
+    
+    {% if meta_product != blank %}
+    {% assign prod_object = all_products[meta_product] %}
+      <div class="article-product">
+        {% assign metaImg = prod_object.metafields.Moku.MainImage %}
+
+        {% if metaImg != blank %}
+
+          {% for metaImage in metaImg %}
+            <figure>
+              <img class="Image--lazyLoad Image--fadeIn metafield-img" src="{{ metaImage.src }}" data-sizes="auto" alt="{{ prod_object.title | escape }}" data-original-src="{{ metaImage.src }}">
+              <span class="Image__Loader"></span>
+              <noscript>
+                <img src="{{ metaImage.src}}" alt="{{ prod_object.title | escape }}">
+              </noscript>
+            </figure>
+          {% endfor %}
+
+        {% else %}
+
+          <figure>
+            <img class="Image--lazyLoad Image--fadeIn" src="{{prod_object.featured_image | img_url:'master' }}" data-sizes="auto">
+          </figure>
+
+        {% endif %}
+
+        <div class="content">
+          <h3>{{prod_object.title}}</h3>
+          <div class="price">{{prod_object.price | money }}</div>
+          <form method="post" action="/cart/add" data-productid="{{prod_object.id}}" class="ProductForm" id="product_form_{{prod_object.id}}"> 
+            <input name="id" value="{{ prod_object.selected_or_first_available_variant.id }}" type="hidden" />
+            <input name="add" class="add-to-cart" value="Add to Cart" type="submit" data-action="add-to-cart" />
+          </form>
+        </div> 
+
+      </div> 
+    {% endif %}
+
+
+  </div>
+  
+  
+  <div class="article-nav-wrapper">
+    <div class="Container">
+      {%- if blog.next_article or blog.previous_article -%}
+      <div class="ArticleToolbar__Nav">
+
+        {%- if blog.next_article -%}
+        <a href="{{ blog.next_article }}" class="ArticleToolbar__NavItem ArticleToolbar__NavItem--next Heading Text--subdued Link u-h8">{{ 'blogs.article.previous' | t }}</a>
+        {%- endif -%}
+
+        {%- if blog.previous_article -%}
+        <a href="{{ blog.previous_article }}" class="ArticleToolbar__NavItem ArticleToolbar__NavItem--prev Heading Text--subdued Link u-h8">{{ 'blogs.article.next' | t }}</a>
+        {%- endif -%}
+      </div>
+      {%- endif -%}
+    </div>
+  </div>
+
+
+</div>
+
+<script defer="defer">  
+  function _serialize (data) {
+    let obj = {};
+    for (let [key, value] of data) {
+      if (obj[key] !== undefined) {
+        if (!Array.isArray(obj[key])) {
+          obj[key] = [obj[key]];
+        }
+        obj[key].push(value);
+      } else {
+        obj[key] = value;
+      }
+    }
+    return obj;
+  }
+  document.querySelector('.article-product .content [data-action="add-to-cart"]').addEventListener("click", function(event) {var _this = this; _addToCartArticle(event, _this) } );  
+  function _addToCartArticle(event, _this) {
+    var _this7 = _this;
+    event.preventDefault(); // Prevent form to be submitted
+
+//     var addToCartButton = _this7.element.querySelector('.add-to-cart');
+    var addToCartButton = _this7;
+
+    // First, we switch the status of the button	
+    // Then we add the product in Ajax
+    var formElement = _this7.closest('form[action*="/cart/add"]');
+    var _data = new FormData(formElement);
+    var formObj = _serialize(_data);
+    var currentId = formElement.querySelector('input[name="id"]').value;
+    fetch(window.routes.cart_add_url + '.js', {
+      body: JSON.stringify(formObj),
+      credentials: 'same-origin',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest' // This is needed as currently there is a bug in Shopify that assumes this header
+      }
+    }).then(function (response) {
+      if (response.ok) {
+        addToCartButton.removeAttribute('disabled');
+        setTimeout(function(){          
+          document.querySelector('cart-drawer-items').renderCart();          
+        },250); 
+        setTimeout(function(){ 
+          document.querySelector('.header .js-drawer-open-right').click();
+        },250); 
+      } else {
+        response.json().then(function (content) {
+          var errorMessageElement = document.createElement('span');
+          errorMessageElement.className = 'ProductForm__Error Alert Alert--error';
+          errorMessageElement.innerHTML = content['description'];
+          addToCartButton.removeAttribute('disabled');
+          addToCartButton.insertAdjacentElement('afterend', errorMessageElement);
+          setTimeout(function () {
+            errorMessageElement.remove();
+          }, 2500);
+        });
+      }
+    });
+
+    event.preventDefault();
+  }
+</script>
+
+
+{% schema %}
+  {
+    "name": "Article Detail",
+    "settings": []
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

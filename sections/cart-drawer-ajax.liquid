@@ -1,0 +1,119 @@
+<cart-drawer>
+  
+  {% assign isFreeShipRularEnabled = false %}
+
+  {% if settings.freeshipping_enable and settings.freeshipping_val != blank %}
+
+    {% assign isFreeShipRularEnabled = true %}
+    {% assign freeShipProgress = 0 %}
+    {%- assign freeShipVal = settings.freeshipping_val | plus: 0 | times: 100 -%}
+    {%- assign cartSubTotal = cart.total_price | plus: 0 -%}
+
+
+    {%- if cartSubTotal >= freeShipVal -%}
+      {%- assign freeShipProgress = 100 -%}
+      {% assign freeShipUnlockText = settings.after_freeship_unlock %}
+    {%- else -%}
+      {% assign remainFreeShipAmonut = freeShipVal | minus: cartSubTotal | money %}
+      {%- assign freeShipProgress = cartSubTotal | times: 100 | divided_by: freeShipVal | round: 2 -%}
+      {% assign freeShipUnlockText = settings.before_freeship_unlock | replace: '[value]', remainFreeShipAmonut %}
+    {%- endif -%}
+  	
+  {% endif %}
+  
+  <div id="CartDrawer" class="drawer drawer--right{% if isFreeShipRularEnabled %} has_free_ship{% endif %}{% if freeShipProgress >= 100 %} free_shipp_unlock{% endif %}{% if cart == empty %} is-empty{% endif %}">
+    <div class="Drawer__Header Drawer__Container Dark__Wrap">
+      <input type="hidden" class="cartQty" value="{{cart.item_count}}">
+      {% if settings.header_text != blank %}
+       <p class="drawer-header-text-fe">{{ settings.header_text | upcase | escape }}</p>
+      {% endif %}
+      <div class="drawer__close js-drawer-close">
+        <button type="button" class="icon-fallback-text">
+          <span class="icon icon-x" aria-hidden="true">
+            {% render 'icon-close-new' %}
+          </span>
+          <span class="fallback-text">close</span>
+        </button>
+      </div>
+    </div>
+    {% if isFreeShipRularEnabled %}
+      <div class="header_free_shipbar">
+        <div class="drawer__header_wrap">
+          {% if freeShipUnlockText != blank %}
+            <p class="shipping-text">{{ freeShipUnlockText | escape }}</p>
+          {% if freeShipProgress >= 100 %}
+            <div class="animated-progress"><span style="width:{{freeShipProgress}}%;"></span></div>
+          {% endif %}
+          {% endif %}
+          {% if freeShipProgress < 100 %}
+            <div class="animated-progress"><span style="width:{{freeShipProgress}}%;"></span></div>
+          {% endif %}
+        </div>
+      </div>
+    {% endif %}
+    <div class="Drawer__Header Drawer__HeaderTitle">
+      <h2 class="h1">Your Cart</h2>
+    </div>
+    <div id="CartContainer">
+      	<p class="empty-cart">{{ 'sections.cart.empty' | t }}</p>
+        <cart-drawer-items>
+          <form action="/checkout/" method="POST" novalidate class="cart ajaxcart">
+            <div class="ajaxcart__inner">
+              {% render 'cart-ajax-items' %}
+              {% render 'fe-upsell-html' %}
+            </div>
+          </form>
+        </cart-drawer-items>
+        <div class="cart-drawer-footer ajaxcart__footer">          
+          <div class="ajaxcart__footer__bottom">            
+            <div class="ajaxcart__total ajaxcart__SubtotalTemp hidden"><span class="ajx-cart-label">Subtotal</span>{{ cart.total_price | money }}</div>
+            {% comment %}{% if isFreeShipRularEnabled and freeShipProgress >= 100 %}            
+            
+            <div class="ajaxcart__freeShipping"><span class="ajx-cart-label">Shipping</span>Free</div>
+            {% endif %}{% endcomment %}
+            <div class="ajaxcart__total ajaxcart__total_main"><span class="ajx-cart-label">Total</span>{{ cart.total_price | money }}</div>
+            
+            {%- if cart.note == blank -%}
+             <button type="button" class="Cart__NoteButton Cart__NoteBtn" data-action="cartNoteAdd">{{'Add Order Note'}}</button>
+            {%- else -%}
+             <button type="button" class="Cart__NoteButton Cart__NoteBtn" data-action="cartNoteEdit">{{'Edit Order Note'}}</button>
+            {%- endif -%}
+            
+            {% if settings.cart_notes_enable %}
+              <cart-drawer-note class="ajaxcart__note">                
+                {%- if cart.note == blank -%}
+                 <span class="CartNoteHeading">{{'Add Order Note'}}</span>
+                {%- else -%}
+                 <span class="CartNoteHeading">{{'Edit Order Note'}}</span>
+                {%- endif -%}
+                <div class="cartnote-box">
+                  <textarea name="note" class="input-full" id="CartSpecialInstructions" rows="3" placeholder="How can we help you?">{{ cart.note }}</textarea>
+                </div>
+                <button type="button" class="button Button--primary button--full-width Cart__NoteButton">Save</button>
+              </cart-drawer-note>
+          	{% endif %}
+            
+            {%- if cart.cart_level_discount_applications != blank -%}
+             {%- for discount_application in cart.cart_level_discount_applications -%}
+              <p class="ajaxcart__savings text-center">{%- render 'icon-discount' -%} {{ 'cart.general.discount' | t }} ({{ discount_application.title }}): 
+              -<span>{{ discount_application.total_allocated_amount | money }}</span></p>
+             {%- endfor -%}
+            {%- endif -%}
+            <button type="submit" name="checkout" class="button button--full-width" {% if cart == empty %} disabled{% endif %} form="cart" onclick="feCheckoutHelper(event)">{{ 'sections.cart.checkout' | t }}</button>
+          </div>
+        </div>
+    </div>
+  </div>
+</cart-drawer>
+
+
+
+{% schema %}
+{
+  "name": "Cart drawer",
+  "settings": []
+}
+{% endschema %}
+
+
+

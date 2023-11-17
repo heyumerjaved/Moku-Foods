@@ -1,0 +1,128 @@
+<div class="Container product-compere-new">
+  {% if section.settings.main_title != blank %}
+   <h2 class="title-head">{{ section.settings.main_title }}</h2>
+  {% endif %}
+  <div class="product-compere-row">
+    <ul>
+      <li class="compere-table-head">
+        {% if section.settings.title != blank %}
+          <div class="left product-compere-col">
+            <h2 class="title">{{ section.settings.title }}</h2>
+             {% if section.settings.logo != blank %}
+              <img class="Image--lazyLoad" data-src="{{ section.settings.logo | img_url: '300x' }}" data-sizes="auto" alt="{{ shop.name | escape }}"/>
+             {% endif %}
+          </div>
+        {% endif %}
+        {% if section.settings.veg_title != blank %}
+          <div class="center product-compere-col">
+            <h4>{{ section.settings.veg_title }}</h4>
+          </div>
+        {% endif %}
+        {% if section.settings.snack_title != blank %}
+          <div class="right product-compere-col">
+            <h2 class="title">{{ section.settings.snack_title }}</h2>
+            {% if section.settings.snack_sub_title != blank %}<p>{{ section.settings.snack_sub_title }}</p>{% endif %}
+          </div>
+        {% endif %}
+      </li>
+
+      {% for block in section.blocks %}
+        {% if block.settings.title != blank %}
+          <li>
+            {% if block.settings.check_icon != blank %}
+              <div class="product-compere-col left">
+                <div class="check-icon">
+                  {{ block.settings.check_icon }}
+                </div>
+              </div>
+            {% endif %}
+            <div class="product-compere-col center">
+              <div class="product-compere-text">{{ block.settings.title | escape }}</div>
+            </div>
+            {% if block.settings.emoji_icon != blank %}
+              <div class="product-compere-col right">
+                <div class="emoji-icon">
+                  {{ block.settings.emoji_icon }}
+                </div>
+              </div>
+            {% endif %}
+          </li>
+        {% endif %}
+      {% endfor %}
+
+    </ul>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Product compere",
+    "settings": [
+        {
+          "type": "html",
+          "id": "main_title",
+          "label": "Section title"
+        },
+        {
+          "type": "html",
+          "id": "title",
+          "label": "Mian title"
+        },
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Main logo"
+        },
+        {
+          "type": "html",
+          "id": "veg_title",
+          "label": "Vegetables title"
+        },
+        {
+          "type": "html",
+          "id": "snack_title",
+          "label": "Snacks title"
+        },
+        {
+          "type": "html",
+          "id": "snack_sub_title",
+          "label": "Snacks subtitle"
+        }
+	],
+    "blocks": [
+        {
+          "type": "compare",
+          "name": "Compare",
+          "settings": [
+            {
+              "type": "html",
+              "id": "check_icon",
+              "label": "Check icon SVG"
+            },
+            {
+              "type": "html",
+              "id": "title",
+              "label": "Title"
+            },
+            {
+              "type": "html",
+              "id": "emoji_icon",
+              "label": "Emoji icon SVG"
+            }
+          ]
+        }
+     ],
+    "presets": [
+      {
+        "name": "Product compere",
+        "category": "Custome"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

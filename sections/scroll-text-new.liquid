@@ -1,0 +1,72 @@
+{% if section.blocks.size > 0 %}
+  <div class="scroll-text-new loop-scroll">
+   {% for block in section.blocks %}
+      {% if block.settings.scroll_txt != blank %}
+       <div class="scroll-text">
+         {{block.settings.scroll_txt}}
+       </div>
+      {% endif %}
+   {% endfor %}
+  </div>
+{% endif %}
+
+
+
+
+<style>
+  {% if section.settings.bg_clr != blank or section.settings.bg_clr != 'rgba(0,0,0,0)' %}
+  	.scroll-text-new { background-color: {{section.settings.bg_clr}}; }
+  {% endif %}
+</style>
+
+
+<!-- <script type="text/javascript" defer>
+  $(document).ready(function(e) { 
+    
+  }); 
+</script> -->
+
+
+
+{% schema %}
+  {
+    "name": "Scrollable text",
+	"class": "scroll-text-wrapper",
+    "settings": [
+	  {
+        "type": "paragraph",
+        "content": "This section will be shown on mobile only"
+      },
+      {
+        "type": "color",
+        "id": "bg_clr",
+        "label": "Background"
+      }
+	],
+	"blocks": [
+      {
+        "type": "dk_image",
+        "name": "Scrollable text",
+		"settings": [
+          {
+            "type": "text",
+            "id": "scroll_txt",
+            "label": "Text"
+          }
+		]
+      }
+	],
+	"presets": [
+      {
+        "name": "Scrollable text",
+        "category": "Custome"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

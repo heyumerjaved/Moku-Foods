@@ -1,0 +1,18 @@
+{
+  "sections": {
+    "article-detail": {
+      "type": "article-detail",
+      "settings": {
+      }
+    },
+    "article-carousel": {
+      "type": "article-carousel",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "article-detail",
+    "article-carousel"
+  ]
+}

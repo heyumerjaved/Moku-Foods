@@ -1,0 +1,102 @@
+<section class="Section shopify-section-moku-about-stats" id="section-{{ section.id }}" data-section-id="{{ section.id }}" data-section-type="stats">
+  <div class="Container Container--full">
+    <div class="Stats__Wrapper">
+      <div class="Stats__TheImage Container" style="background-image: url({{ section.settings.image_featured | img_url: 'x1300' }})"></div>
+      
+      <div class="Stats__TheNumbers Section--spacingNormal Container">
+        {%- for block in section.blocks -%}
+        <div class="Stats__Number">
+          <h3 class="u-h3">{{ block.settings.stat_description }}</h3>
+        </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  #section-{{ section.id }} {
+    background-color: {{ section.settings.color_background }};
+  }
+  
+  #section-{{ section.id }} .Stats__TheImage::before {
+    content: "{{ section.settings.image_caption }}";
+    color: {{ section.settings.color_image_caption }};
+  }
+   
+  #section-{{ section.id }} .Stats__Number {
+    color: {{ section.settings.color_text }};
+  }
+  
+  {% if section.blocks.size <= 3 %}
+  #section-{{ section.id }} .Stats__Number {
+    width: 100%;
+  } 
+  {% endif %}
+</style>
+
+{% schema %}
+{
+  "name": "Stats",
+  "class": "moku-section--stats shopify-section--bordered",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section colors"
+    },
+    {
+      "type": "color",
+      "id": "color_background",
+      "label": "Background",
+      "default": "#eaeaea"
+    },
+    {
+      "type": "color",
+      "id": "color_text",
+      "label": "Text",
+      "default": "#eaeaea"
+    },
+    {
+      "type": "color",
+      "id": "color_image_caption",
+      "label": "Image caption",
+      "default": "#fff"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_featured",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "image_caption",
+      "label": "Image caption"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        {
+          "type": "text",
+          "id": "stat_name",
+          "label": "Stat",
+          "default": "Stat name"
+        },
+        {
+          "type": "text",
+          "id": "stat_description",
+          "label": "Stat description",
+          "default": "Stat description"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

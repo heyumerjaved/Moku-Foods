@@ -1,0 +1,121 @@
+<style>
+  .SMS_Wrap {
+    color: #1c7561;
+      }
+  .Footer__Block--newsletter {display:none !important;}
+  .atc-button{
+    color: #ffffff;
+    background-color: #1c7561;
+    height: 40px;
+    width: 250px;
+    max-width: 250px;
+    border-radius: 25px;
+    align-self: center;
+    transition: all 0.3s;
+    padding: 10px 40px;
+  }
+  .mobile-message {display:none}
+  .desktop-message {display:block}
+  @media (max-width:980px) {
+    .mobile-message {display:block}
+    .desktop-message {display:none}
+
+  }
+</style>
+
+<div class="Container SMS_Wrap">
+  <header class="PageHeader">
+    <div class="SectionHeader SectionHeader--center">
+      <h1 class="SectionHeader__Heading Heading u-h1">{{ page.title }}</h1>
+    </div>
+  </header>
+
+  <div class="PageContent PageContent--narrow Rte" style="text-align:center"> 
+    {{ page.content }}
+    <div class="mobile-message">
+      <p>Get an exclusive 15% off when you sign up for Moku texts! Then, sit back and relax while we make sure you stay in the loop with upcoming VIP promotions, special announcements, recipes, and more. </p>
+      <a href="#" id="voyage-cta" class="atc-button">Sign up for SMS</a>
+    </div>
+    <div class="desktop-message">
+      <p>Get an exclusive 15% off when you sign up for Moku texts! Then, sit back and relax while we make sure you stay in the loop with upcoming VIP promotions, special announcements, recipes, and more. </p>
+      <p>Text MOKU to +1 (833) 327-0310</p>
+      {% comment %}<div class="Sms_Subscribe_Wrap">
+      <label for="submit_phone">Phone</label>
+      <input type="tel" name="submit_phone" id="submit_phone">
+      <button id="subscribe_phone">Subscribe</button>
+      <div class="success_message">
+
+      </div>
+      </div>{% endcomment %}
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  {% comment %}const initSubscribe = () => {
+    let btn = document.getElementById('subscribe_phone');
+    btn.addEventListener('click', () => {
+                         let input = document.getElementById('submit_phone');
+    let phoneNumber = input.value ? input.value : '';
+    let campaignId = 13522;
+    let data = {
+      "phoneIn": phoneNumber,
+      "campaignId": campaignId,
+    };
+    fetch('https://vyg.mobi/api/events/subscribeNumber', {
+      method: 'POST', // or 'PUT'
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+  })
+  }
+  window.addEventListener('load', () => initSubscribe());{% endcomment %}
+
+  (function(window, document, undefined) {
+    var BUTTON_ELEMENT_ID = 'voyage-cta';
+
+    var createLink = function () {
+      var smsText = 'I would like 15 percent off my order!';
+      var phoneNumber = '+18333270310';
+      var userAgent = navigator.userAgent.toLowerCase();
+      var smsUrlSeparator = '?';
+      var phoneSeparator = '//';
+      if (userAgent.indexOf('iphone') > -1 || userAgent.indexOf('ipad') > -1) {
+        smsUrlSeparator = '&';
+        phoneSeparator = '';
+      }
+      return 'sms:' + phoneSeparator + phoneNumber + smsUrlSeparator + 'body=' + smsText;
+    };
+
+    var handleClick = function (event) {
+      setTimeout(function () {
+        // Note: timeout required for Chrome on iOS
+        window.open(createLink(), '_parent');
+      }, 300);
+    };
+
+    document.getElementById(BUTTON_ELEMENT_ID).addEventListener('click', handleClick);
+  })(window, document)
+</script>
+
+{% schema %}
+  {
+    "name": "sms template",
+	"class": "sms-template section-padding",
+    "settings": []
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

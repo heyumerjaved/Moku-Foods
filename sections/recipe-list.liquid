@@ -1,0 +1,136 @@
+<div class="recipe-list-wrapper">
+  <div class="Container">
+  	  
+    {% if section.settings.title != blank %}
+   	 <h2 class="sec-title">{{ section.settings.title }}</h2>
+    {% endif %}
+    
+       {%- if section.blocks.size > 0 -%}
+        <div class="recipe-list RL__{{ section.blocks.size }}">
+          {% for block in section.blocks %}
+          {%- if block.settings.article != blank -%}      
+            {%- assign _aticle = articles[block.settings.article] -%}
+            {%- assign _aticleImage = block.settings.image | default : _aticle.image -%}
+            {%- assign _aticleTitle = block.settings.title | default : _aticle.title -%}
+            <div class="recipe-item" {{ block.shopify_attributes }}>
+              <a href="{{_aticle.url}}" class="absolute-link"></a>
+              <div class="content">
+                <h3 class="post-title">{{_aticleTitle}}</h3>
+                <a href="{{_aticle.url}}" class="more">{% if block.settings.btn != blank %}{{ block.settings.btn }}{% else %}See recipe{% endif %}</a>
+              </div>   
+              <div class="hover-content">
+                <h3 class="post-title">{{_aticleTitle}}</h3>
+                <a href="{{_aticle.url}}" class="more">{% if block.settings.btn != blank %}{{ block.settings.btn }}{% else %}See recipe{% endif %}</a>
+              </div>   
+
+              <figure class="post-img">
+                <img
+                   srcset="{%- if _aticleImage.width >= 165 -%}{{ _aticleImage | img_url: '165x' }} 165w,{%- endif -%}
+                           {%- if _aticleImage.width >= 360 -%}{{ _aticleImage | img_url: '360x' }} 360w,{%- endif -%}
+                           {%- if _aticleImage.width >= 533 -%}{{ _aticleImage | img_url: '533x' }} 533w,{%- endif -%}
+                           {%- if _aticleImage.width >= 720 -%}{{ _aticleImage | img_url: '720x' }} 720w,{%- endif -%}
+                           {%- if _aticleImage.width >= 1000 -%}{{ _aticleImage | img_url:'1000x' }} 1000w,{%- endif -%}
+                           {%- if _aticleImage.width >= 1500 -%}{{ _aticleImage | img_url: '1500x' }} 1500w,{%- endif -%}
+                           {{ _aticleImage | img_url: 'master' }} {{ _aticleImage.width }}w"
+                   src="{{ _aticleImage | img_url: '533x' }}"
+                   sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
+                   alt="{{ _aticleTitle | escape }}"
+                   class="_motion-reduce"
+                   loading="lazy"
+                   width="{{ _aticleImage.width}}"
+                   height="{{ _aticleImage.height}}"
+                   />
+              </figure>
+            </div>
+          {%- endif -%}
+          {% endfor %}
+        </div>
+      {%- else -%}
+        <div class="recipe-list RL__{{ section.blocks.size }}">
+          {% for article in blog.articles limit:3 %}
+          <div class="recipe-item">        
+            <a href="{{article.url}}" class="absolute-link"></a>
+            <div class="content">
+              <h3 class="post-title">{{article.title}}</h3>
+              <a href="{{article.url}}" class="more">See recipe</a>
+            </div>   
+
+            <div class="hover-content">
+              <h3 class="post-title">{{article.title}}</h3>
+              <a href="{{article.url}}" class="more">See recipe</a>
+            </div>   
+            <figure class="post-img">
+              <img
+                   srcset="{%- if article.image.width >= 165 -%}{{ article.image | img_url: '165x' }} 165w,{%- endif -%}
+                           {%- if article.image.width >= 360 -%}{{ article.image | img_url: '360x' }} 360w,{%- endif -%}
+                           {%- if article.image.width >= 533 -%}{{ article.image | img_url: '533x' }} 533w,{%- endif -%}
+                           {%- if article.image.width >= 720 -%}{{ article.image | img_url: '720x' }} 720w,{%- endif -%}
+                           {%- if article.image.width >= 1000 -%}{{ article.image | img_url:'1000x' }} 1000w,{%- endif -%}
+                           {%- if article.image.width >= 1500 -%}{{ article.image | img_url: '1500x' }} 1500w,{%- endif -%}
+                           {{ article.image | img_url: 'master' }} {{ article.image.width }}w"
+                   src="{{ article.image | img_url: '533x' }}"
+                   sizes="100vw"
+                   alt="{{ article.title | escape }}"
+                   class="_motion-reduce"
+                   loading="lazy"
+                   width="{{ article.image.width }}"
+                   height="{{ article.image.height }}"
+                   />
+            </figure>
+          </div>
+          {% endfor %}
+        </div>
+      {%- endif -%}   
+  </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "Recipe list",
+	"max_blocks":3,
+    "settings": [
+		{
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "About the shop"
+        }	
+	],
+	"blocks":[
+      {
+        "type": "article",
+        "name": "Select Article",
+        "settings": [
+          {
+            "type": "article",
+            "id": "article",
+            "label": "Select article"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Upload article image"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Enter article title"
+          },
+          {
+            "type": "text",
+            "id": "btn",
+            "label": "Enter button text",
+            "default": "See recipe"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

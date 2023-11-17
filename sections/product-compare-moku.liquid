@@ -1,0 +1,181 @@
+{% if template == 'page.veg-news' %}{% assign product = all_products['variety-pack'] %}{% endif %}
+<section id="section-{{ section.id }}" class="Section Section--spacingLarge section-padding pb-0">
+  <div class="Container">    
+    <div class="Section__IntroText">
+      <h1 class="u-h1 be-bold">{{ section.settings.section_heading }}</h1>
+      
+      {%- if section.settings.section_description != blank -%}
+      <div class="Rte">
+        {{ section.settings.section_description }}
+      </div>
+      {%- endif -%}
+    </div>
+    
+    <div class="Compare__Wrapper">
+      <ul class="Compare__Us">
+        <li>
+          {% assign section4Img1 = product.metafields.Moku.ImageSection4 %}
+          
+          {% if section4Img1 != blank %}
+          
+          {% for image in section4Img1 %}
+           <img class="Image--lazyLoad metafield-img" src="{{ image.src }}" alt="{{ image.alt }}"/>
+          {% endfor %}
+          
+          {% else %}
+          
+           {{ product.images[3] | product_img_url: '200x' | img_tag }}
+          
+          {% endif %}
+          
+        </li>
+        {%- for block in section.blocks -%}
+        <li>
+          {% if block.settings.comparison_unit != blank %}
+          <h3 class="u-h3 be-black">{{ block.settings.comparison_us }}</h3>
+          <h7 class="u-h7 muted be-black">{{ block.settings.comparison_unit }}</h7>
+          {% else %}
+          <h7 class="u-h7 be-black">{{ block.settings.comparison_us }}</h7>
+          {% endif %}
+        </li>
+        {%- endfor -%}
+      </ul>
+      
+      <ul class="Compare__Them">
+        <li>
+          {% assign section4Img2 = product.metafields.Moku.Image2Section4 %}
+          {% if section4Img2 != blank %}
+          
+          {% for image in section4Img2 %}
+           <img class="Image--lazyLoad metafield-img" src="{{ image.src }}" alt="{{ image.alt }}"/>
+          {% endfor %}
+          
+          {% else %}
+          
+          {{ product.images[4] | product_img_url: '200x' | img_tag }}
+          
+          {% endif %}
+        </li>
+        {%- for block in section.blocks -%}
+        <li>
+          {% if block.settings.comparison_unit != blank %}
+          <h3 class="u-h3 muted be-black">{{ block.settings.comparison_them }}</h3>
+          <h7 class="u-h7 muted be-black">{{ block.settings.comparison_unit }}</h7>
+          {% else %}
+          <h7 class="u-h7 muted be-black">{{ block.settings.comparison_them }}</h7>
+          {% endif %}
+        </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+<style>
+  #section-{{ section.id }} {
+    background-color: {{ section.settings.color_background }};
+  }
+  
+  #section-{{ section.id }} .Section__IntroText h1 {
+    color: {{ product.metafields.global.product-color }};
+  }
+  
+  #section-{{ section.id }} .Compare__Wrapper {
+    color: {{ section.settings.color_comparison_stat }};
+  }
+
+  #section-{{ section.id }} .Compare__Wrapper .muted {
+    color: {{ section.settings.color_comparison_unit }};
+  }
+</style>
+
+
+{% schema %}
+{
+  "name": "Compare",
+  "class": "moku-section--compare shopify-section--bordered",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section colors"
+    },
+    {
+      "type": "color",
+      "id": "color_background",
+      "label": "Background",
+      "default": "#eaeaea"
+    },
+    {
+      "type": "color",
+      "id": "color_comparison_stat",
+      "label": "Comparison Stat",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "color_comparison_unit",
+      "label": "Comparison Unit",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "section_heading",
+      "label": "Heading"
+    },
+    {
+      "type": "richtext",
+      "id": "section_description",
+      "label": "Text",
+      "default": "<p>Add your own custom content to give more information about your store, availability details...</p>"
+    },
+    {
+      "type": "text",
+      "id": "link_text",
+      "label": "Link text"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Link URL"
+    },
+    {
+      "type": "header",
+      "content": "Comparisons"
+    },
+    {
+      "type": "image_picker",
+      "id": "compare_image",
+      "label": "Compare to"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "comparison",
+      "name": "Comparison",
+      "settings": [
+        {
+          "type": "text",
+          "id": "comparison_unit",
+          "label": "Unit"
+        },
+        {
+          "type": "text",
+          "id": "comparison_us",
+          "label": "Us"
+        },
+        {
+          "type": "text",
+          "id": "comparison_them",
+          "label": "Them"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

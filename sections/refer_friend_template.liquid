@@ -1,0 +1,70 @@
+<div class="full-width">
+  {{ page.content }}
+</div>
+<style>
+  #conjured_accepts_marketing {
+    display: none !important;
+  }
+  #fake_conjured_accepts_marketing {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    display: inline-block !important;
+    margin-bottom: -4px;
+    margin-right: 2px;
+  }
+  #fake_conjured_accepts_marketing svg {
+    display: block;
+    opacity: 0;
+    transition: opacity .3s;
+  }
+  #conjured_accepts_marketing:checked + #fake_conjured_accepts_marketing svg {
+    opacity: 1;
+  }
+</style>
+<script>
+  function insertAfter(newNode, referenceNode) {
+    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+  }
+  function initCheckbox () {
+    let checkboxId = 'conjured_accepts_marketing';
+    let realCheckbox = document.getElementById(checkboxId);
+    if(realCheckbox){
+      let fakeCheckbox = document.createElement("label");
+      fakeCheckbox.setAttribute('for', checkboxId);
+      fakeCheckbox.id = 'fake_conjured_accepts_marketing'
+      fakeCheckbox.innerHTML = `{% include 'subscribe_checkmark' %}`;
+      insertAfter(fakeCheckbox, realCheckbox);
+    }else{
+      let interval = setInterval(function(){
+        let realCheckbox = document.getElementById(checkboxId);
+        if(realCheckbox){
+          let fakeCheckbox = document.createElement("label");
+          fakeCheckbox.id = 'fake_conjured_accepts_marketing'
+          fakeCheckbox.forHtml = checkboxId;
+          fakeCheckbox.innerHTML = `{% include 'subscribe_checkmark' %}`;
+          insertAfter(fakeCheckbox, realCheckbox);
+          clearInterval(interval)
+        }
+      }, 1000);
+    }
+  }
+  window.addEventListener('load', () => initCheckbox());
+
+</script>
+
+
+{% schema %}
+  {
+    "name": "Refer friend template",
+	"class": "refer_friend_template",
+    "settings": []
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

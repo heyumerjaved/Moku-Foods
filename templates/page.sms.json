@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "main": {
+      "type": "sms-template",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

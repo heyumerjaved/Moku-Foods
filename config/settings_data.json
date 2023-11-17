@@ -1,0 +1,501 @@
+{
+  "current": {
+    "colors_solid_button_labels": "#ffffff",
+    "colors_accent_1": "#1c7561",
+    "gradient_accent_1": "",
+    "colors_accent_2": "#1c7561",
+    "gradient_accent_2": "",
+    "colors_text": "#105d49",
+    "colors_outline_button_labels": "#121212",
+    "colors_background_1": "#ffffff",
+    "gradient_background_1": "",
+    "colors_background_2": "#78c9b6",
+    "gradient_background_2": "",
+    "type_header_font": "assistant_n4",
+    "heading_scale": 100,
+    "type_body_font": "assistant_n4",
+    "body_scale": 100,
+    "page_width": 1200,
+    "spacing_sections": 0,
+    "spacing_grid_horizontal": 8,
+    "spacing_grid_vertical": 8,
+    "buttons_border_thickness": 1,
+    "buttons_border_opacity": 100,
+    "buttons_radius": 0,
+    "buttons_shadow_opacity": 0,
+    "buttons_shadow_horizontal_offset": 0,
+    "buttons_shadow_vertical_offset": 4,
+    "buttons_shadow_blur": 5,
+    "variant_pills_border_thickness": 1,
+    "variant_pills_border_opacity": 55,
+    "variant_pills_radius": 40,
+    "variant_pills_shadow_opacity": 0,
+    "variant_pills_shadow_horizontal_offset": 0,
+    "variant_pills_shadow_vertical_offset": 4,
+    "variant_pills_shadow_blur": 5,
+    "inputs_border_thickness": 1,
+    "inputs_border_opacity": 55,
+    "inputs_radius": 0,
+    "inputs_shadow_opacity": 0,
+    "inputs_shadow_horizontal_offset": 0,
+    "inputs_shadow_vertical_offset": 4,
+    "inputs_shadow_blur": 5,
+    "card_style": "standard",
+    "card_image_padding": 0,
+    "card_text_alignment": "left",
+    "card_color_scheme": "background-2",
+    "card_border_thickness": 0,
+    "card_border_opacity": 10,
+    "card_corner_radius": 0,
+    "card_shadow_opacity": 0,
+    "card_shadow_horizontal_offset": 0,
+    "card_shadow_vertical_offset": 4,
+    "card_shadow_blur": 5,
+    "text_boxes_border_thickness": 0,
+    "text_boxes_border_opacity": 10,
+    "text_boxes_radius": 0,
+    "text_boxes_shadow_opacity": 0,
+    "text_boxes_shadow_horizontal_offset": 0,
+    "text_boxes_shadow_vertical_offset": 4,
+    "text_boxes_shadow_blur": 5,
+    "media_border_thickness": 1,
+    "media_border_opacity": 5,
+    "media_radius": 0,
+    "media_shadow_opacity": 0,
+    "media_shadow_horizontal_offset": 0,
+    "media_shadow_vertical_offset": 4,
+    "media_shadow_blur": 5,
+    "popup_border_thickness": 1,
+    "popup_border_opacity": 10,
+    "popup_corner_radius": 0,
+    "popup_shadow_opacity": 0,
+    "popup_shadow_horizontal_offset": 0,
+    "popup_shadow_vertical_offset": 4,
+    "popup_shadow_blur": 5,
+    "drawer_border_thickness": 1,
+    "drawer_border_opacity": 10,
+    "drawer_shadow_opacity": 0,
+    "drawer_shadow_horizontal_offset": 0,
+    "drawer_shadow_vertical_offset": 4,
+    "drawer_shadow_blur": 5,
+    "badge_position": "bottom left",
+    "badge_corner_radius": 40,
+    "sale_badge_color_scheme": "accent-2",
+    "sold_out_badge_color_scheme": "inverse",
+    "accent_icons": "text",
+    "social_twitter_link": "",
+    "social_facebook_link": "https:\/\/www.facebook.com\/mokufoods",
+    "social_pinterest_link": "",
+    "social_instagram_link": "https:\/\/www.instagram.com\/mokufoods",
+    "social_tiktok_link": "",
+    "social_tumblr_link": "",
+    "social_snapchat_link": "",
+    "social_youtube_link": "",
+    "social_vimeo_link": "",
+    "predictive_search_enabled": true,
+    "predictive_search_show_vendor": false,
+    "predictive_search_show_price": false,
+    "favicon": "shopify:\/\/shop_images\/moku-logo-white_140x_2x_1_1_4_256x256_962d177d-df82-4edf-abee-b2a40235929c.webp",
+    "currency_code_enabled": false,
+    "ajax_cart_method": "drawer",
+    "header_text": "100% HAPPINESS GUARANTEE",
+    "freeshipping_enable": true,
+    "freeshipping_val": "40",
+    "before_freeship_unlock": "Spend [value] more for free standard shipping!",
+    "after_freeship_unlock": "You Unlocked Free Standard Shipping!",
+    "bullet_point2": "Free shipping on orders over $40",
+    "bullet_point3": "",
+    "bullet_point4": "",
+    "bullet_point5": "",
+    "checkout_logo_image": "shopify:\/\/shop_images\/MokuLogoBlue-03.webp",
+    "checkout_logo_position": "center",
+    "checkout_logo_size": "large",
+    "checkout_body_background_color": "#ffffff",
+    "checkout_input_background_color_mode": "transparent",
+    "checkout_sidebar_background_color": "#e2f4f0",
+    "checkout_accent_color": "#1c7561",
+    "checkout_button_color": "#1c7561",
+    "checkout_error_color": "#f3754f",
+    "sections": {
+      "announcement-bar": {
+        "type": "announcement-bar",
+        "blocks": {
+          "5b76e4b0-e022-4416-9ec1-7a6742764ad7": {
+            "type": "announcement",
+            "disabled": true,
+            "settings": {
+              "text": "🌎 EARTH DAY SALE! Buy any 6-pack, get a 6-pack of Hawaiian Teriyaki or Sweet & Spicy at 50% off with the code EARTHLOVE",
+              "color_scheme": "accent-1",
+              "link": ""
+            }
+          },
+          "6f178fee-d6ff-4410-96a0-4b17ae88d9d6": {
+            "type": "announcement",
+            "disabled": true,
+            "settings": {
+              "text": "Welcome to our store",
+              "color_scheme": "accent-1",
+              "link": ""
+            }
+          }
+        },
+        "block_order": [
+          "5b76e4b0-e022-4416-9ec1-7a6742764ad7",
+          "6f178fee-d6ff-4410-96a0-4b17ae88d9d6"
+        ],
+        "settings": {
+        }
+      },
+      "header": {
+        "type": "header",
+        "custom_css": [
+          ".header-new .header__menu-item,.header-new .header__icon {color: #105d49;}"
+        ],
+        "settings": {
+          "logo": "shopify:\/\/shop_images\/moku-logo-blue_990b0352-ffe1-4dc3-8b8e-39582142fda1.png",
+          "logo_light": "shopify:\/\/shop_images\/moku-logo-blue_990b0352-ffe1-4dc3-8b8e-39582142fda1.png",
+          "logo_width": 140,
+          "menu": "v3-menu-mobile",
+          "menu_left": "v3-menu-left",
+          "menu_rigth": "v3-menu-right",
+          "menu_type_desktop": "dropdown",
+          "show_line_separator": false,
+          "enable_sticky_header": true,
+          "margin_bottom": 0
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "footer-0": {
+            "type": "link_list",
+            "settings": {
+              "heading": "Shop",
+              "menu": "shop"
+            }
+          },
+          "footer-1": {
+            "type": "link_list",
+            "settings": {
+              "heading": "About",
+              "menu": "about"
+            }
+          },
+          "3d51f152-415a-4950-9023-b9260718b1d6": {
+            "type": "link_list",
+            "settings": {
+              "heading": "More",
+              "menu": "more"
+            }
+          },
+          "cad4cabc-b109-412d-95ad-d8eb98d61789": {
+            "type": "newslatter",
+            "settings": {
+              "newsletter_heading": "Newsletter",
+              "content": "<p>Sign up for all the latest discounts <\/p>",
+              "contect_info": "<p><a href=\"mailto:hello@mokufoods.com\" title=\"mailto:hello@mokufoods.com\">hello@mokufoods.com<br\/><\/a>310-935-4730<\/p>",
+              "svg_logo": "<svg width=\"157\" height=\"39\" viewbox=\"0 0 157 39\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M6.9191 27.1705L0.193044 13.1894C0.14563 13.0908 0.136802 12.9823 0.16656 12.864C0.210396 12.7389 0.288633 12.6492 0.401271 12.595L1.79516 11.9245C1.9078 11.8703 2.01963 11.8685 2.13067 11.9191C2.24902 11.9489 2.33529 12.0201 2.38947 12.1327L5.22417 18.025L12.9539 14.3064L10.1192 8.41406C10.065 8.30143 10.0562 8.19298 10.0927 8.08871C10.1366 7.96359 10.2148 7.87394 10.3274 7.81975L11.7213 7.14918C11.834 7.09499 11.9458 7.0932 12.0568 7.14381C12.182 7.18765 12.2682 7.25885 12.3156 7.3574L19.0417 21.3385C19.0891 21.4371 19.0909 21.5489 19.0471 21.674C19.0173 21.7924 18.9461 21.8786 18.8335 21.9328L17.4396 22.6034C17.3269 22.6576 17.2114 22.6698 17.0931 22.6401C16.9821 22.5894 16.8995 22.5078 16.8453 22.3952L13.909 16.2916L6.17923 20.0103L9.11552 26.1138C9.16971 26.2264 9.17489 26.3453 9.13105 26.4704C9.09452 26.5747 9.01994 26.6539 8.9073 26.7081L7.51341 27.3787C7.40077 27.4329 7.28189 27.4381 7.15678 27.3942C7.04574 27.3436 6.96651 27.269 6.9191 27.1705Z\" fill=\"#FEFADF\"><\/path>\n<path d=\"M19.6677 16.5734C19.257 15.2776 19.3246 14.0433 19.8707 12.8704C20.412 11.6826 21.338 10.881 22.6487 10.4655C23.8104 10.0972 24.9111 10.1827 25.9507 10.7219C26.9856 11.2461 27.6918 12.104 28.0695 13.2955C28.1309 13.4891 28.1798 13.6949 28.2161 13.9129C28.2665 14.1755 28.1726 14.3446 27.9343 14.4201L21.8576 16.3464C22.0857 16.9625 22.5234 17.4384 23.1707 17.7741C23.8132 18.0949 24.4845 18.1443 25.1845 17.9224C25.8399 17.7147 26.4342 17.2887 26.9675 16.6443C27.1986 16.3908 27.3973 16.3196 27.5636 16.4307L28.4583 17.0814C28.7031 17.2333 28.7496 17.4316 28.5977 17.6764C27.9699 18.695 26.9858 19.4167 25.6454 19.8416C24.3198 20.2617 23.096 20.1498 21.974 19.5056C20.8519 18.8615 20.0832 17.8841 19.6677 16.5734ZM21.5232 14.9035L25.8573 13.5296C25.6575 13.0029 25.2952 12.6096 24.7703 12.3499C24.2407 12.0752 23.7078 12.0229 23.1717 12.1928C22.5759 12.3817 22.1234 12.7382 21.8143 13.2623C21.5153 13.7669 21.4182 14.3139 21.5232 14.9035Z\" fill=\"#FEFADF\"><\/path>\n<path d=\"M30.6465 15.0512C30.4994 14.1887 30.702 13.4251 31.2543 12.7602C31.8193 12.0774 32.6794 11.6375 33.8346 11.4404C34.1272 11.3905 34.4238 11.3637 34.7243 11.36C35.0402 11.3536 35.2791 11.3604 35.441 11.3804L35.707 11.4063C35.5936 10.649 35.4119 10.1411 35.1617 9.88264C34.909 9.60876 34.4977 9.52042 33.9278 9.61763C33.1731 9.74636 32.3342 10.0321 31.4112 10.4749C31.1599 10.5811 30.9695 10.4868 30.8399 10.1919L30.5093 9.36864C30.403 9.11732 30.4729 8.92312 30.719 8.78605C31.4902 8.28994 32.5228 7.93153 33.8165 7.71085C34.525 7.58999 35.1196 7.59158 35.6004 7.71562C36.0966 7.83702 36.4803 8.08857 36.7515 8.47026C37.0354 8.83393 37.245 9.22613 37.3801 9.64687C37.5153 10.0676 37.6394 10.6091 37.7524 11.2714L38.5918 16.1923C38.6101 16.3001 38.581 16.4081 38.5044 16.5162C38.4277 16.6244 38.3355 16.6877 38.2277 16.7061L37.5808 16.8164C37.4114 16.8453 37.2621 16.7599 37.1329 16.56L36.7955 15.9756C36.1132 16.9004 35.2329 17.4547 34.1548 17.6386C33.2769 17.7883 32.5134 17.6333 31.8644 17.1734C31.2127 16.6981 30.8068 15.9907 30.6465 15.0512ZM32.6525 14.6853C32.7261 15.1165 32.9174 15.4484 33.2265 15.681C33.5356 15.9135 33.8981 15.9944 34.314 15.9234C34.7452 15.8499 35.14 15.6557 35.4985 15.341C35.8542 15.0108 36.0868 14.7017 36.1962 14.4136L35.9439 12.935C35.5323 12.7517 34.9722 12.7204 34.2637 12.8413C33.7092 12.9358 33.2785 13.152 32.9716 13.4896C32.68 13.8247 32.5737 14.2232 32.6525 14.6853Z\" fill=\"#FEFADF\"><\/path>\n<path d=\"M40.5775 16.0632L39.6692 0.574899C39.6628 0.465717 39.6958 0.362048 39.7683 0.26389C39.8564 0.164817 39.9629 0.11162 40.0877 0.104303L41.4212 0.0260995C41.5304 0.0196968 41.6345 0.0605449 41.7336 0.148642C41.8327 0.236739 41.8854 0.335378 41.8918 0.444559L42.8001 15.9328C42.8065 16.042 42.7656 16.1461 42.6776 16.2452C42.5895 16.3443 42.4908 16.397 42.3816 16.4034L41.0481 16.4816C40.9233 16.4889 40.8113 16.4486 40.7123 16.3605C40.6288 16.2714 40.5839 16.1723 40.5775 16.0632Z\" fill=\"#FEFADF\"><\/path>\n<path d=\"M46.1762 13.7284L46.4165 8.85954L45.4334 8.81102C45.3086 8.80486 45.2013 8.76046 45.1115 8.67781C45.0381 8.58032 45.0045 8.46916 45.0106 8.34432L45.0626 7.29097C45.0772 6.99447 45.2328 6.85353 45.5293 6.86817L46.5124 6.91669L46.6407 4.31841C46.6461 4.20918 46.6901 4.10967 46.7727 4.01989C46.871 3.93088 46.9825 3.88945 47.1074 3.89562L48.4428 3.93806C48.552 3.94345 48.6433 3.99489 48.7167 4.09237C48.8065 4.17502 48.8483 4.27876 48.8422 4.40361L48.7128 7.02529L51.1004 7.14313C51.3969 7.15776 51.5378 7.31333 51.5232 7.60983L51.4712 8.66318C51.465 8.78803 51.4128 8.89495 51.3146 8.98396C51.2327 9.05814 51.1293 9.09214 51.0045 9.08598L48.6169 8.96814L48.3881 13.6029C48.3697 13.9774 48.4198 14.2302 48.5384 14.3612C48.6571 14.4922 48.8413 14.5639 49.091 14.5762C49.4811 14.5954 49.964 14.4785 50.5397 14.2253C50.7947 14.1284 50.9707 14.2075 51.0676 14.4626L51.4381 15.5133C51.5351 15.7684 51.4556 15.9522 51.1997 16.0647C50.9907 16.1795 50.5933 16.3085 50.0074 16.4517C49.4371 16.5956 48.9101 16.6556 48.4264 16.6318C47.5525 16.5886 46.9476 16.3241 46.6118 15.8383C46.2768 15.3368 46.1316 14.6335 46.1762 13.7284Z\" fill=\"#FEFADF\"><\/path>\n<path d=\"M52.8027 16.1524L55.8489 0.939554C55.8704 0.832313 55.9286 0.740402 56.0236 0.66382C56.134 0.590305 56.2504 0.565817 56.373 0.590359L57.7058 0.857249C57.8284 0.88179 57.9188 0.947692 57.9769 1.05495C58.0505 1.16528 58.0765 1.27406 58.055 1.3813L56.6101 8.59708C57.6766 8.12545 58.6617 7.98012 59.5656 8.16112C60.8219 8.41267 61.6904 9.00885 62.1713 9.94966C62.6705 10.8782 62.7898 11.9936 62.529 13.2958L61.6041 17.9148C61.5826 18.0221 61.5167 18.1124 61.4064 18.186C61.2961 18.2595 61.1873 18.2855 61.08 18.264L59.7932 18.0063C59.6706 17.9818 59.571 17.922 59.4944 17.827C59.4362 17.7198 59.4194 17.6048 59.444 17.4823L60.3781 12.8173C60.5253 12.0819 60.4626 11.4798 60.19 11.0109C59.9205 10.5267 59.487 10.2248 58.8895 10.1052C58.2767 9.98247 57.6899 10.0482 57.1291 10.3024C56.5867 10.5444 56.2496 10.7955 56.1178 11.056L55.0088 16.5942C54.9505 16.8853 54.7682 17.0001 54.4618 16.9388L53.1519 16.6765C53.0293 16.652 52.9313 16.5845 52.8578 16.4742C52.7996 16.3669 52.7812 16.2597 52.8027 16.1524Z\" fill=\"#FEFADF\"><\/path>\n<path d=\"M66.6609 19.609L65.4514 10.3165C65.4265 10.1436 65.4709 10.0101 65.5844 9.91613C65.7128 9.82707 65.8585 9.80964 66.0216 9.86383L67.4895 10.3516C67.6675 10.4107 67.7664 10.5341 67.7863 10.7218L68.5785 17.5542L68.6007 17.5616L73.2353 12.5324C73.3637 12.3939 73.5464 12.3641 73.7837 12.4429L75.0514 12.8641C75.2293 12.9233 75.3357 13.0245 75.3704 13.1677C75.4051 13.311 75.3608 13.4444 75.2374 13.568L63.5395 26.0301C63.3915 26.1785 63.2359 26.2256 63.0728 26.1714L61.7383 25.728C61.5752 25.6738 61.4714 25.5652 61.4267 25.4022C61.392 25.2589 61.4363 25.1255 61.5598 25.0018L66.6609 19.609Z\" fill=\"#FEFADF\"><\/path>\n<path d=\"M81.6042 21.1456C82.2839 19.415 83.8658 18.3577 86.3499 17.9737L86.367 17.93L86.0795 17.1876C85.4842 15.7116 85.3965 14.4602 85.8166 13.4334C86.1765 12.5172 86.8454 11.8399 87.8233 11.4015C88.8215 10.9542 89.9459 10.9762 91.1966 11.4674C92.36 11.9243 93.1666 12.6272 93.6165 13.5761C94.0809 14.5306 94.1218 15.4951 93.7391 16.4695C93.5449 16.9639 93.2574 17.3966 92.8768 17.7674C92.5018 18.1237 92.0438 18.4139 91.5026 18.6378C90.976 18.8674 90.5693 19.0266 90.2826 19.1154C90.0162 19.1954 89.6527 19.2876 89.192 19.3921L91.0465 23.6455C91.892 22.9033 92.5795 21.9647 93.1092 20.8299C93.2951 20.3993 93.5672 20.3047 93.9256 20.5462L94.7515 21.072C94.9525 21.2013 95.0361 21.3517 95.0023 21.5231C94.9831 21.7002 94.9346 21.8238 94.8567 21.8939C94.1141 23.3144 93.1222 24.5363 91.881 25.5596L93.1387 28.3197C93.2358 28.5425 93.2688 28.7149 93.2377 28.8369C93.2065 28.959 93.0276 29.1153 92.7009 29.306L91.911 29.6504C91.4768 29.8156 91.1727 29.671 90.9987 29.2165L89.9608 26.7945C88.2573 27.6698 86.4094 27.7162 84.4171 26.9337C83.0791 26.4082 82.1645 25.5958 81.673 24.4963C81.1816 23.3968 81.1587 22.2799 81.6042 21.1456ZM88.4323 17.6081C89.4959 17.4216 90.2547 17.1992 90.7086 16.941C91.2233 16.6564 91.5748 16.2741 91.7633 15.7942C91.9575 15.2997 91.9398 14.7892 91.7102 14.2626C91.4806 13.736 91.0531 13.3498 90.4278 13.1042C89.8315 12.8701 89.2875 12.8662 88.7957 13.0927C88.3096 13.3046 87.9609 13.6797 87.7495 14.2177C87.5808 14.6047 87.5325 15.0054 87.6047 15.4198C87.6972 15.8254 87.8759 16.3321 88.1408 16.9397L88.4323 17.6081ZM83.7279 21.8286C83.4595 22.5122 83.4767 23.1736 83.7795 23.8129C84.0881 24.4377 84.5987 24.89 85.3113 25.1699C86.6056 25.6782 87.9019 25.583 89.2003 24.8844L87.0652 19.6143C85.2973 19.9271 84.1849 20.6652 83.7279 21.8286Z\" fill=\"#FEFADF\"><\/path>\n<path d=\"M105.401 33.1616L108.231 19.6988L104.493 18.9128C104.371 18.8871 104.272 18.8263 104.196 18.7306C104.139 18.6228 104.123 18.5077 104.149 18.3854L104.419 17.101C104.444 16.9787 104.504 16.8874 104.596 16.827C104.707 16.7546 104.824 16.7312 104.946 16.7569L114.808 18.8303C114.93 18.856 115.02 18.9228 115.077 19.0306C115.153 19.1263 115.178 19.2354 115.152 19.3577L114.882 20.6421C114.857 20.7644 114.788 20.8618 114.677 20.9342C114.585 20.9946 114.477 21.0119 114.355 20.9862L110.616 20.2002L107.786 33.6631C107.764 33.7701 107.697 33.8598 107.586 33.9323C107.49 34.0079 107.381 34.0329 107.259 34.0072L105.745 33.689C105.623 33.6632 105.525 33.5949 105.453 33.4838C105.396 33.376 105.378 33.2686 105.401 33.1616Z\" fill=\"#FEFADF\"><\/path>\n<path d=\"M114.467 32.3518C114.507 31.4777 114.868 30.7748 115.549 30.243C116.247 29.6963 117.181 29.4499 118.351 29.5036C118.648 29.5172 118.943 29.5543 119.238 29.6147C119.548 29.6758 119.78 29.7334 119.934 29.7874L120.188 29.8695C120.239 29.1054 120.169 28.5704 119.98 28.2646C119.792 27.9431 119.409 27.7691 118.831 27.7426C118.066 27.7075 117.186 27.8078 116.19 28.0436C115.921 28.0939 115.755 27.9611 115.692 27.6454L115.544 26.7706C115.494 26.5024 115.604 26.3275 115.873 26.2461C116.733 25.9258 117.818 25.7957 119.129 25.8559C119.847 25.8889 120.427 26.0172 120.871 26.2409C121.33 26.4653 121.651 26.7928 121.834 27.2236C122.034 27.6394 122.155 28.0673 122.198 28.5072C122.24 28.947 122.246 29.5025 122.215 30.1737L121.986 35.1604C121.981 35.2696 121.93 35.3689 121.832 35.4583C121.734 35.5476 121.63 35.5898 121.521 35.5848L120.865 35.5547C120.694 35.5468 120.566 35.4315 120.482 35.2086L120.277 34.5658C119.414 35.3238 118.435 35.6777 117.343 35.6276C116.453 35.5867 115.74 35.2725 115.204 34.6848C114.669 34.0815 114.423 33.3038 114.467 32.3518ZM116.505 32.4219C116.485 32.8589 116.601 33.2239 116.853 33.5171C117.106 33.8102 117.443 33.9664 117.864 33.9858C118.301 34.0058 118.728 33.9003 119.145 33.6692C119.563 33.4225 119.857 33.1701 120.025 32.9119L120.094 31.4136C119.731 31.1466 119.19 30.9967 118.472 30.9637C117.91 30.9379 117.443 31.0573 117.071 31.3217C116.715 31.5869 116.526 31.9536 116.505 32.4219Z\" fill=\"#FEFADF\"><\/path>\n<path d=\"M126.063 34.7669C125.863 34.6625 125.799 34.5044 125.871 34.2925L126.263 33.3313C126.363 33.085 126.553 33.0254 126.833 33.1525C127.56 33.4833 128.304 33.608 129.065 33.5267C129.827 33.4453 130.179 33.1404 130.123 32.6122C130.091 32.3171 129.932 32.0826 129.647 31.9089C129.377 31.7335 128.883 31.527 128.166 31.2894C126.312 30.702 125.318 29.7791 125.183 28.5207C125.112 27.8526 125.321 27.2332 125.809 26.6624C126.297 26.076 127.061 25.7272 128.102 25.6159C129.189 25.4996 130.132 25.6424 130.929 26.0443C131.228 26.2008 131.315 26.4194 131.187 26.7002L130.853 27.5373C130.739 27.8009 130.544 27.8846 130.267 27.7885C129.548 27.5354 128.894 27.4404 128.304 27.5035C127.604 27.5782 127.28 27.8487 127.33 28.3147C127.36 28.5944 127.492 28.808 127.728 28.9556C127.978 29.0861 128.387 29.2388 128.956 29.4136C130.045 29.7529 130.87 30.1204 131.43 30.5161C131.991 30.9118 132.314 31.5058 132.399 32.2981C132.479 33.0438 132.221 33.7235 131.627 34.337C131.046 34.9333 130.251 35.2854 129.241 35.3934C127.983 35.528 126.924 35.3191 126.063 34.7669Z\" fill=\"#FEFADF\"><\/path>\n<path d=\"M135.649 31.6423L134.527 26.8984L133.569 27.1249C133.448 27.1537 133.332 27.1409 133.223 27.0864C133.125 27.0132 133.062 26.9157 133.034 26.7941L132.791 25.7678C132.722 25.4789 132.833 25.3003 133.122 25.2319L134.08 25.0054L133.481 22.4738C133.456 22.3674 133.47 22.2595 133.525 22.1503C133.594 22.0375 133.69 21.9667 133.812 21.938L135.106 21.6077C135.213 21.5825 135.315 21.6066 135.412 21.6798C135.522 21.7343 135.591 21.8223 135.619 21.944L136.223 24.4984L138.55 23.9482C138.839 23.8799 139.017 23.9901 139.086 24.279L139.328 25.3053C139.357 25.427 139.337 25.5442 139.267 25.657C139.209 25.751 139.119 25.8124 138.997 25.8412L136.671 26.3914L137.739 30.9072C137.825 31.2721 137.944 31.501 138.094 31.5939C138.245 31.6867 138.441 31.7044 138.685 31.6469C139.065 31.557 139.496 31.3104 139.979 30.9073C140.197 30.7433 140.388 30.7704 140.552 30.9885L141.2 31.8949C141.364 32.113 141.339 32.3117 141.124 32.4908C140.955 32.6592 140.609 32.8936 140.086 33.1939C139.578 33.4906 139.089 33.6947 138.617 33.8062C137.766 34.0075 137.111 33.9215 136.654 33.5481C136.193 33.1594 135.858 32.5242 135.649 31.6423Z\" fill=\"#FEFADF\"><\/path>\n<path d=\"M148.123 30.3801L141.327 23.9282C141.198 23.8097 141.149 23.6781 141.178 23.5336C141.221 23.3835 141.323 23.2781 141.484 23.2174L142.931 22.6709C143.106 22.6046 143.261 22.6381 143.395 22.7712L148.316 27.5763L148.338 27.568L148.766 20.7423C148.779 20.5539 148.902 20.4156 149.136 20.3272L150.385 19.8552C150.561 19.7889 150.707 19.8005 150.824 19.8898C150.942 19.9791 150.991 20.1107 150.973 20.2845L149.747 37.3325C149.725 37.5411 149.634 37.6757 149.473 37.7364L148.158 38.2333C147.997 38.294 147.848 38.2752 147.711 38.1768C147.593 38.0874 147.544 37.9559 147.562 37.7821L148.123 30.3801Z\" fill=\"#FEFADF\"><\/path>\n<\/svg>",
+              "show_social": true
+            }
+          }
+        },
+        "block_order": [
+          "footer-0",
+          "footer-1",
+          "3d51f152-415a-4950-9023-b9260718b1d6",
+          "cad4cabc-b109-412d-95ad-d8eb98d61789"
+        ],
+        "settings": {
+          "color_scheme": "accent-1",
+          "enable_country_selector": false,
+          "enable_language_selector": false,
+          "payment_enable": true,
+          "margin_top": 48,
+          "padding_top": 36,
+          "padding_bottom": 36
+        }
+      },
+      "main-password-header": {
+        "type": "main-password-header",
+        "settings": {
+          "logo_max_width": 100,
+          "color_scheme": "background-1"
+        }
+      },
+      "main-password-footer": {
+        "type": "main-password-footer",
+        "settings": {
+          "color_scheme": "background-1"
+        }
+      },
+      "cart-drawer-ajax": {
+        "type": "cart-drawer-ajax",
+        "settings": {
+        }
+      },
+      "announcement-bar-vegnew": {
+        "type": "announcement-bar-vegnew",
+        "blocks": {
+          "announcement-bar-vegnew-0": {
+            "type": "announcement",
+            "settings": {
+              "text": "ATTN VEGNEWS READERS: Get 40% off our variety pack + free shipping",
+              "color_scheme": "accent-1",
+              "link": ""
+            }
+          }
+        },
+        "block_order": [
+          "announcement-bar-vegnew-0"
+        ],
+        "settings": {
+        }
+      }
+    },
+    "content_for_index": [
+
+    ],
+    "blocks": {
+      "855628211100114053": {
+        "type": "shopify:\/\/apps\/klaviyo-email-marketing-sms\/blocks\/klaviyo-onsite-embed\/2632fe16-c075-4321-a88b-50b567f42507",
+        "disabled": false,
+        "settings": {
+        }
+      },
+      "54063601849206980": {
+        "type": "shopify:\/\/apps\/dcart-discount-on-cart\/blocks\/app-embed\/731e2611-8bdf-4514-b5e4-f64f1cae3fb7",
+        "disabled": false,
+        "settings": {
+        }
+      },
+      "13563634892992855019": {
+        "type": "shopify:\/\/apps\/birdie\/blocks\/app-embed\/e4b71830-a839-432f-9d04-1a9657649a16",
+        "disabled": true,
+        "settings": {
+          "store_name": "Moku",
+          "description_text": "Enter cashback promo or referral code",
+          "refer_friend_text": "Give $10, Get $10. All Cash.",
+          "first_accent_color": "#f37550",
+          "second_accent_color": "#ffffff",
+          "header_color": "#004642",
+          "reward_type_color": "#000000",
+          "button_corner_radius": 8,
+          "hover_widget_bottom_margin": 0
+        }
+      },
+      "471852632697159186": {
+        "type": "shopify:\/\/apps\/stamped-loyalty-referrals\/blocks\/rewards-launcher\/93b8fd18-14d4-464f-a49a-0093afb7e10a",
+        "disabled": false,
+        "settings": {
+        }
+      },
+      "14549625726302301791": {
+        "type": "shopify:\/\/apps\/stamped-loyalty-referrals\/blocks\/referral-modal\/93b8fd18-14d4-464f-a49a-0093afb7e10a",
+        "disabled": true,
+        "settings": {
+          "customer_email": "",
+          "customer_first_name": "",
+          "frequency": "once",
+          "background_image_url": "",
+          "style_color_background": "",
+          "style_color_button": "",
+          "style_color_link": "",
+          "subtitle": "",
+          "title": "",
+          "description": "",
+          "button_text": "",
+          "subtitle_two": "",
+          "text_disclaimer": "",
+          "text_share_manual": "",
+          "button_text_send": ""
+        }
+      }
+    }
+  },
+  "presets": {
+    "Default": {
+      "colors_solid_button_labels": "#ffffff",
+      "colors_accent_1": "#121212",
+      "gradient_accent_1": "",
+      "colors_accent_2": "#334fb4",
+      "gradient_accent_2": "",
+      "colors_text": "#121212",
+      "colors_outline_button_labels": "#121212",
+      "colors_background_1": "#ffffff",
+      "gradient_background_1": "",
+      "colors_background_2": "#f3f3f3",
+      "gradient_background_2": "",
+      "type_header_font": "assistant_n4",
+      "heading_scale": 100,
+      "type_body_font": "assistant_n4",
+      "body_scale": 100,
+      "page_width": 1200,
+      "spacing_sections": 0,
+      "spacing_grid_horizontal": 8,
+      "spacing_grid_vertical": 8,
+      "buttons_border_thickness": 1,
+      "buttons_border_opacity": 100,
+      "buttons_radius": 0,
+      "buttons_shadow_opacity": 0,
+      "buttons_shadow_horizontal_offset": 0,
+      "buttons_shadow_vertical_offset": 4,
+      "buttons_shadow_blur": 5,
+      "variant_pills_border_thickness": 1,
+      "variant_pills_border_opacity": 55,
+      "variant_pills_radius": 40,
+      "variant_pills_shadow_opacity": 0,
+      "variant_pills_shadow_horizontal_offset": 0,
+      "variant_pills_shadow_vertical_offset": 4,
+      "variant_pills_shadow_blur": 5,
+      "inputs_border_thickness": 1,
+      "inputs_border_opacity": 55,
+      "inputs_radius": 0,
+      "inputs_shadow_opacity": 0,
+      "inputs_shadow_horizontal_offset": 0,
+      "inputs_shadow_vertical_offset": 4,
+      "inputs_shadow_blur": 5,
+      "card_style": "standard",
+      "card_image_padding": 0,
+      "card_text_alignment": "left",
+      "card_color_scheme": "background-2",
+      "card_border_thickness": 0,
+      "card_border_opacity": 10,
+      "card_corner_radius": 0,
+      "card_shadow_opacity": 0,
+      "card_shadow_horizontal_offset": 0,
+      "card_shadow_vertical_offset": 4,
+      "card_shadow_blur": 5,
+      "text_boxes_border_thickness": 0,
+      "text_boxes_border_opacity": 10,
+      "text_boxes_radius": 0,
+      "text_boxes_shadow_opacity": 0,
+      "text_boxes_shadow_horizontal_offset": 0,
+      "text_boxes_shadow_vertical_offset": 4,
+      "text_boxes_shadow_blur": 5,
+      "media_border_thickness": 1,
+      "media_border_opacity": 5,
+      "media_radius": 0,
+      "media_shadow_opacity": 0,
+      "media_shadow_horizontal_offset": 0,
+      "media_shadow_vertical_offset": 4,
+      "media_shadow_blur": 5,
+      "popup_border_thickness": 1,
+      "popup_border_opacity": 10,
+      "popup_corner_radius": 0,
+      "popup_shadow_opacity": 0,
+      "popup_shadow_horizontal_offset": 0,
+      "popup_shadow_vertical_offset": 4,
+      "popup_shadow_blur": 5,
+      "drawer_border_thickness": 1,
+      "drawer_border_opacity": 10,
+      "drawer_shadow_opacity": 0,
+      "drawer_shadow_horizontal_offset": 0,
+      "drawer_shadow_vertical_offset": 4,
+      "drawer_shadow_blur": 5,
+      "badge_position": "bottom left",
+      "badge_corner_radius": 40,
+      "sale_badge_color_scheme": "accent-2",
+      "sold_out_badge_color_scheme": "inverse",
+      "accent_icons": "text",
+      "social_twitter_link": "",
+      "social_facebook_link": "",
+      "social_pinterest_link": "",
+      "social_instagram_link": "",
+      "social_tiktok_link": "",
+      "social_tumblr_link": "",
+      "social_snapchat_link": "",
+      "social_youtube_link": "",
+      "social_vimeo_link": "",
+      "predictive_search_enabled": true,
+      "predictive_search_show_vendor": false,
+      "predictive_search_show_price": false,
+      "currency_code_enabled": true,
+      "sections": {
+        "announcement-bar": {
+          "type": "announcement-bar",
+          "blocks": {
+            "announcement-bar-0": {
+              "type": "announcement",
+              "settings": {
+                "text": "Welcome to our store",
+                "color_scheme": "background-1",
+                "link": ""
+              }
+            }
+          },
+          "block_order": [
+            "announcement-bar-0"
+          ],
+          "settings": {
+          }
+        },
+        "header": {
+          "type": "header",
+          "settings": {
+            "logo_width": 90,
+            "menu": "main-menu",
+            "menu_left": "main-menu",
+            "menu_rigth": "main-menu",
+            "menu_type_desktop": "dropdown",
+            "show_line_separator": true,
+            "enable_sticky_header": true,
+            "margin_bottom": 0
+          }
+        },
+        "footer": {
+          "type": "footer",
+          "blocks": {
+            "footer-0": {
+              "type": "link_list",
+              "settings": {
+                "heading": "Quick links",
+                "menu": "footer"
+              }
+            },
+            "footer-1": {
+              "type": "link_list",
+              "settings": {
+                "heading": "Info",
+                "menu": "footer"
+              }
+            },
+            "footer-2": {
+              "type": "text",
+              "settings": {
+                "heading": "Our mission",
+                "subtext": "<p>Share contact information, store details, and brand content with your customers.<\/p>"
+              }
+            }
+          },
+          "block_order": [
+            "footer-0",
+            "footer-1",
+            "footer-2"
+          ],
+          "settings": {
+            "color_scheme": "background-1",
+            "enable_country_selector": false,
+            "enable_language_selector": false,
+            "payment_enable": true,
+            "margin_top": 48,
+            "padding_top": 36,
+            "padding_bottom": 36
+          }
+        },
+        "main-password-header": {
+          "type": "main-password-header",
+          "settings": {
+            "logo_max_width": 100,
+            "color_scheme": "background-1"
+          }
+        },
+        "main-password-footer": {
+          "type": "main-password-footer",
+          "settings": {
+            "color_scheme": "background-1"
+          }
+        }
+      }
+    }
+  }
+}

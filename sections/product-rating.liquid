@@ -1,0 +1,21 @@
+<div class="junip-product-new" id="junip-reviews-new">
+  <div class="Container">
+    <div class="junip-product-new-head">
+      <h2>What they’re saying about moku</h2>
+    </div>
+    {% render 'junip-product-review', product: product %}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Product rating",
+    "settings": []
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

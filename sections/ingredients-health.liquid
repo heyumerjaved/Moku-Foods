@@ -1,0 +1,88 @@
+<section id="section-{{ section.id }}" class="Section Section--spacingLarge shopify-section-moku-ingredients-health">
+  <div class="Container">    
+    <div class="Health__Wrapper">
+      <ul class="Health__Facts">
+        {%- for block in section.blocks -%}
+        <li>
+          {% if block.settings.fact_cross_out %}
+          <span>{{ block.settings.fact_symbol }}</span>
+          <?xml version="1.0" encoding="utf-8"?>
+          <svg viewBox="0 0 48 48" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+            <path fill="{{ section.settings.color_fact }}" d="m 24,1004.3622 c -13.242989,0 -24,10.757 -24,24 0,13.243 10.757011,24 24,24 13.242989,0 24,-10.757 24,-24 0,-13.243 -10.757011,-24 -24,-24 z m 0,2 c 12.162109,0 22,9.8379 22,22 0,12.1621 -9.837891,22 -22,22 -12.162109,0 -22,-9.8379 -22,-22 0,-12.1621 9.837891,-22 22,-22 z" transform="matrix(1, 0, 0, 1, 0, -1004.362183)"/>
+            <path fill="{{ section.settings.color_fact }}" d="m 39.980469,1011.3544 a 1.0001,1.0001 0 0 0 -0.6875,0.3008 l -32.0000002,32 a 1.0001,1.0001 0 1 0 1.4140624,1.4141 l 31.9999998,-32 a 1.0001,1.0001 0 0 0 -0.726562,-1.7149 z" transform="matrix(1, 0, 0, 1, 0, -1004.362183)"/>
+          </svg>
+          {% else %}
+          <span>{{ block.settings.fact_symbol }}</span>
+          <div class="health_symbol_circle"></div>
+          {% endif%}
+          
+          <p>{{ block.settings.fact_label }}</p>
+        </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+<style>
+  #section-{{ section.id }} {
+    background-color: {{ section.settings.color_background }};
+  }
+  
+  #section-{{ section.id }} .health_symbol_circle,
+  #section-{{ section.id }} .Health__Facts span,
+  #section-{{ section.id }} .Health__Facts p {
+    color: {{ section.settings.color_fact }};
+    border-color: {{ section.settings.color_fact }} !Important;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Health Facts",
+  "class": "moku-section--health shopify-section--bordered",
+  "max_blocks": 5,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section colors"
+    },
+    {
+      "type": "color",
+      "id": "color_background",
+      "label": "Background",
+      "default": "#eaeaea"
+    },
+    {
+      "type": "color",
+      "id": "color_fact",
+      "label": "Health fact color",
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "fact",
+      "name": "Fact",
+      "settings": [
+        {
+          "type": "text",
+          "id": "fact_symbol",
+          "label": "Fact symbol"
+        },
+        {
+          "type": "checkbox",
+          "id": "fact_cross_out",
+          "label": "Cross out"
+        },
+        {
+          "type": "text",
+          "id": "fact_label",
+          "label": "Fact label"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

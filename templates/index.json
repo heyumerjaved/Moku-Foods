@@ -1,0 +1,215 @@
+{
+  "sections": {
+    "1650947927b5df9d67": {
+      "type": "slideshow-home",
+      "blocks": {
+        "16509479271d0f3718-0": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/madhu_desktop_cc82694b-47fc-4aad-bd6f-dc7b2a155013.jpg",
+            "image_mobile": "shopify:\/\/shop_images\/madhu_mobile_ab4f1923-2d13-4bb9-a820-cff21b304bc6.jpg",
+            "heading": "<span style=\"color:#fff;\">Plant-BASED <\/span>MEAT TASTE<br>",
+            "heading_size": "h1",
+            "subheading": "Taste Our Meaty, Savory Jerky",
+            "button_label": "Try Moku Mushroom Jerky",
+            "link": "https:\/\/mokufoods.com\/collections\/all-flavors",
+            "button_style_secondary": false,
+            "box_align": "middle-left",
+            "show_text_box": false,
+            "text_alignment": "center",
+            "image_overlay_opacity": 0,
+            "color_scheme": "background-1",
+            "text_alignment_mobile": "center"
+          }
+        }
+      },
+      "block_order": [
+        "16509479271d0f3718-0"
+      ],
+      "settings": {
+        "layout": "full_bleed",
+        "slide_height": "large",
+        "slider_visual": "dots",
+        "auto_rotate": false,
+        "change_slides_speed": 5,
+        "show_text_below": false,
+        "accessibility_info": "Slideshow about our brand"
+      }
+    },
+    "1660929352819810be": {
+      "type": "featured-collection-home",
+      "settings": {
+        "title": "Discover Our Savory Mushroom Jerky",
+        "heading_size": "h0",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "all-flavors",
+        "enable_desktop_slider": false,
+        "image_ratio": "adapt",
+        "show_vendor": false,
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "image-text-home": {
+      "type": "image-text-home",
+      "blocks": {
+        "7220e331-3cbf-4eb3-9ded-ef4f7c855bf7": {
+          "type": "stat",
+          "settings": {
+            "stat_name": "Looks like beef",
+            "stat_description": "created by two renowned chefs"
+          }
+        },
+        "1e51a539-5baa-4fa5-8254-d68bcdfa3b69": {
+          "type": "stat",
+          "settings": {
+            "stat_name": "Tastes like jerky",
+            "stat_description": "but without the beef"
+          }
+        },
+        "0421a76f-aabe-43f0-82c4-152df58780f7": {
+          "type": "stat",
+          "settings": {
+            "stat_name": "Made from ‘shrooms",
+            "stat_description": "for a healthier body and planet!"
+          }
+        }
+      },
+      "block_order": [
+        "7220e331-3cbf-4eb3-9ded-ef4f7c855bf7",
+        "1e51a539-5baa-4fa5-8254-d68bcdfa3b69",
+        "0421a76f-aabe-43f0-82c4-152df58780f7"
+      ],
+      "settings": {
+        "color_background": "#fde384",
+        "color_text_even": "#1c7561",
+        "color_text_odd": "#d9432c",
+        "image_featured": "shopify:\/\/shop_images\/jerky_bite_red2.jpg"
+      }
+    },
+    "logo-list-home": {
+      "type": "logo-list-home",
+      "blocks": {
+        "8b67db2f-54f1-4855-9c06-ae1e9f4743be": {
+          "type": "logo",
+          "settings": {
+            "logo_image": "shopify:\/\/shop_images\/entrepreneur-22.png",
+            "logo_label": "Entrepreneur",
+            "logo_link": "https:\/\/www.entrepreneur.com\/article\/361664"
+          }
+        },
+        "8bbedded-fccd-4651-9e29-c27a27c2651c": {
+          "type": "logo",
+          "settings": {
+            "logo_image": "shopify:\/\/shop_images\/forbeslogo_400x_f59e6f07-4f0e-4c97-9e06-38fbbd410d33.png",
+            "logo_label": "Forbes",
+            "logo_link": "https:\/\/www.forbes.com\/sites\/afdhelaziz\/2021\/02\/10\/how-hawaiian-brand-moku-is-innovating-plant-based-foods-with-the-launch-of-its-vegan-jerky\/"
+          }
+        },
+        "f44323f6-c310-45e0-ad73-42daa27ce10a": {
+          "type": "logo",
+          "settings": {
+            "logo_image": "shopify:\/\/shop_images\/bonappetitlogo2.png",
+            "logo_label": "Bon Appetit",
+            "logo_link": "https:\/\/www.bonappetit.com\/story\/mushroom-jerky-roundup"
+          }
+        }
+      },
+      "block_order": [
+        "8b67db2f-54f1-4855-9c06-ae1e9f4743be",
+        "8bbedded-fccd-4651-9e29-c27a27c2651c",
+        "f44323f6-c310-45e0-ad73-42daa27ce10a"
+      ],
+      "settings": {
+        "color_background": "#1c7561"
+      }
+    },
+    "rich-text-home": {
+      "type": "rich-text-home",
+      "settings": {
+        "color_background": "#78c9b6",
+        "color_text": "#105d49",
+        "color_link": "#1c7561",
+        "subheading": "",
+        "title": "It's the small choices of today that shape tomorrow. Our<br> savory plant-based snack is merely one of those choices<br> on the road to a more mindful you and healthier planet.",
+        "image_position": "right",
+        "content": "",
+        "link_text": "About Us",
+        "link_url": "shopify:\/\/pages\/about"
+      }
+    },
+    "reviews-home": {
+      "type": "reviews-home",
+      "blocks": {
+        "c7dea4de-cd78-4295-a85b-f67024d26f4f": {
+          "type": "review",
+          "settings": {
+            "review_quote": "I ate one piece and was literally waiting to eat another. I love it!",
+            "review_name": "Madhumita",
+            "review_image": "shopify:\/\/shop_images\/review_madhumta.jpg"
+          }
+        },
+        "879225d2-2711-424a-a086-1b72197b8645": {
+          "type": "review",
+          "settings": {
+            "review_quote": "It actually tastes like real jerky - so good. I’m always craving it.",
+            "review_name": "Yulia",
+            "review_image": "shopify:\/\/shop_images\/review_yulia.jpg"
+          }
+        },
+        "ee8ca8d8-3fd7-4d4d-95cb-f468306b37ba": {
+          "type": "review",
+          "settings": {
+            "review_quote": "I loved the jerky. Honestly, I couldn’t tell it wasn’t meat.",
+            "review_name": "Vinayak",
+            "review_image": "shopify:\/\/shop_images\/review_vinny.jpg"
+          }
+        },
+        "ff036874-53e8-4fdf-97c7-efe0a5099797": {
+          "type": "review",
+          "settings": {
+            "review_quote": "I never really liked beef jerky before, until I had Moku.",
+            "review_name": "George",
+            "review_image": "shopify:\/\/shop_images\/Review_George.jpg"
+          }
+        },
+        "bfe2a734-847d-4c2a-a77d-3ff1ff56a79f": {
+          "type": "review",
+          "settings": {
+            "review_quote": "I choose Moku for the animals, the planet, & for my health.",
+            "review_name": "GABBY",
+            "review_image": "shopify:\/\/shop_images\/gabby_square.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "c7dea4de-cd78-4295-a85b-f67024d26f4f",
+        "879225d2-2711-424a-a086-1b72197b8645",
+        "ee8ca8d8-3fd7-4d4d-95cb-f468306b37ba",
+        "ff036874-53e8-4fdf-97c7-efe0a5099797",
+        "bfe2a734-847d-4c2a-a77d-3ff1ff56a79f"
+      ],
+      "settings": {
+        "background_color": "#1c7561",
+        "heading_color": "#1c7561",
+        "text_color": "#000000",
+        "color_slider_dots": "#ffffff",
+        "add_spacing": true,
+        "expand_collection": false,
+        "stack_on_mobile": false
+      }
+    }
+  },
+  "order": [
+    "1650947927b5df9d67",
+    "1660929352819810be",
+    "image-text-home",
+    "logo-list-home",
+    "rich-text-home",
+    "reviews-home"
+  ]
+}

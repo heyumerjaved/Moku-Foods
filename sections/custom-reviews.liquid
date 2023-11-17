@@ -1,0 +1,191 @@
+{% if template == 'page.veg-news' %}{% assign product = all_products['variety-pack'] %}{% endif %}
+
+{% assign star_color = '#227461' %}
+<div class="Custom_Reviews">
+    <div class="Reviews_Container">
+      <div class="Review_Items">
+        {% if section.blocks.size > 0 %}
+          {% for block in section.blocks %}
+            <div class="Review_Item">
+              <div class="Review_Item_Card">
+                <div class="Review_Item_Content">
+                  <div class="Review_Stars">
+                    {% if block.settings.stars > 1 %}
+                      {% for i in (1..block.settings.stars) %}
+                      <span class="Star_Wrap">
+                        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" role="img"><title>Filled star</title><path d="m3.2 16.0001081c-.1687782 0-.33328968-.0531313-.47-.1521081-.24051968-.174488-.36451194-.4679107-.322-.762l.743-5.203-2.917-2.917c-.21191095-.21196521-.28756133-.52460199-.196-.81.09130759-.2851682.3345701-.49522345.63-.544l4.398-.734 2.218-4.435c.13744692-.27145241.41573373-.4426761.72-.443.3045618.00166772.58175678.1761261.715.45l2.123 4.362 4.498.801c.2933158.05211246.5333796.26289081.623.547.0898959.28455453.0135125.59548872-.198.806l-2.917 2.917.744 5.203c.042199.2957461-.0839008.5903645-.327.764-.2421349.1739598-.5609835.1986349-.827.064l-4.382-2.22-4.502 2.223c-.10996656.0547452-.23116004.0831081-.354.0831081z" fill="{% if star_color %}{{ star_color }}{% else %}#1c7561{% endif %}"></path></svg>
+                      </span>
+                      {% endfor %}
+                    {% else %}
+                      <span class="Star_Wrap">
+                        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" role="img"><title>Filled star</title><path d="m3.2 16.0001081c-.1687782 0-.33328968-.0531313-.47-.1521081-.24051968-.174488-.36451194-.4679107-.322-.762l.743-5.203-2.917-2.917c-.21191095-.21196521-.28756133-.52460199-.196-.81.09130759-.2851682.3345701-.49522345.63-.544l4.398-.734 2.218-4.435c.13744692-.27145241.41573373-.4426761.72-.443.3045618.00166772.58175678.1761261.715.45l2.123 4.362 4.498.801c.2933158.05211246.5333796.26289081.623.547.0898959.28455453.0135125.59548872-.198.806l-2.917 2.917.744 5.203c.042199.2957461-.0839008.5903645-.327.764-.2421349.1739598-.5609835.1986349-.827.064l-4.382-2.22-4.502 2.223c-.10996656.0547452-.23116004.0831081-.354.0831081z" fill="{% if star_color %}{{ star_color }}{% else %}#1c7561{% endif %}"></path></svg>
+                      </span>
+                    {% endif %}
+                  </div>
+                  {{ block.settings.text }}
+                  <div class="Review_Author">
+                    {{ block.settings.author }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+    <div class="Reviews_Mob_Carousel">
+      <!-- Swiper -->
+      <div class="swiper-container mySwiper" id="section_{{ section.id }}">
+        <div class="swiper-wrapper">
+          {% for block in section.blocks %}
+            <div class="swiper-slide">
+              <div class="Review_Item">
+                <div class="Review_Item_Card">
+                  <div class="Review_Item_Content">
+                    <div class="Review_Stars">
+                      {% if block.settings.stars > 1 %}
+                        {% for i in (1..block.settings.stars) %}
+                        <span class="Star_Wrap">
+                          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" role="img"><title>Filled star</title><path d="m3.2 16.0001081c-.1687782 0-.33328968-.0531313-.47-.1521081-.24051968-.174488-.36451194-.4679107-.322-.762l.743-5.203-2.917-2.917c-.21191095-.21196521-.28756133-.52460199-.196-.81.09130759-.2851682.3345701-.49522345.63-.544l4.398-.734 2.218-4.435c.13744692-.27145241.41573373-.4426761.72-.443.3045618.00166772.58175678.1761261.715.45l2.123 4.362 4.498.801c.2933158.05211246.5333796.26289081.623.547.0898959.28455453.0135125.59548872-.198.806l-2.917 2.917.744 5.203c.042199.2957461-.0839008.5903645-.327.764-.2421349.1739598-.5609835.1986349-.827.064l-4.382-2.22-4.502 2.223c-.10996656.0547452-.23116004.0831081-.354.0831081z" fill="{% if star_color %}{{ star_color }}{% else %}#1c7561{% endif %}"></path></svg>
+                        </span>
+                        {% endfor %}
+                      {% else %}
+                         <span class="Star_Wrap">
+                           <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" role="img"><title>Filled star</title><path d="m3.2 16.0001081c-.1687782 0-.33328968-.0531313-.47-.1521081-.24051968-.174488-.36451194-.4679107-.322-.762l.743-5.203-2.917-2.917c-.21191095-.21196521-.28756133-.52460199-.196-.81.09130759-.2851682.3345701-.49522345.63-.544l4.398-.734 2.218-4.435c.13744692-.27145241.41573373-.4426761.72-.443.3045618.00166772.58175678.1761261.715.45l2.123 4.362 4.498.801c.2933158.05211246.5333796.26289081.623.547.0898959.28455453.0135125.59548872-.198.806l-2.917 2.917.744 5.203c.042199.2957461-.0839008.5903645-.327.764-.2421349.1739598-.5609835.1986349-.827.064l-4.382-2.22-4.502 2.223c-.10996656.0547452-.23116004.0831081-.354.0831081z" fill="{% if star_color %}{{ star_color }}{% else %}#1c7561{% endif %}"></path></svg>
+                        </span>
+                      {% endif %}
+                    </div>
+                    {{ block.settings.text }}
+                    <div class="Review_Author">
+                      {{ block.settings.author }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+</div>
+
+
+<style>
+  .Reviews_Mob_Carousel {
+    display: none;
+  }
+  .Reviews_Container {
+    max-width: 1280px;
+    margin: 100px auto;
+  }
+  .Star_Wrap svg {
+    width: auto;
+    height: 21px;
+  }
+  .Review_Items {
+    display: flex;
+  }
+  .Review_Item {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+  }
+  .Review_Item_Card {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    height: 300px;
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  .Review_Item_Content {
+    margin: 0 auto;
+  }
+  .Review_Item_Content p {
+    position: relative;
+  }
+  .Review_Item_Content p:before {
+    content: "“";
+    position: absolute;
+    top: -20px;
+    left: -30px;
+    font-size: 400%;
+    color: {{ star_color }};
+  }
+  .Review_Stars {
+    padding-bottom: 20px;
+    text-align: center;
+  }
+  .Review_Author {
+    color: {{ star_color }};
+    font-weight: bold;
+    text-align: center;
+  }
+  @media only screen and (max-width: 1139px) {
+    .Reviews_Container {
+      display: none;
+    }
+    .Reviews_Mob_Carousel {
+      display: block;
+    }
+    .Review_Item_Card {
+      width: 100%;
+    }
+    .swiper-button-next:after, .swiper-button-prev:after {
+      color: {{ star_color }};
+      transform: scale(.6);
+    }
+  }
+</style>
+
+
+<!-- <script type="text/javascript" defer>
+  $(document).ready(function() {
+    
+  });
+</script> -->
+
+
+{% schema %}
+{
+    "name": "Custom Reviews",
+    "settings": [],
+    "max_blocks": 3,
+    "blocks": [
+        {
+          "name": "Review",
+          "type": "text",
+          "settings": [
+              {
+                "type": "range",
+                "id": "stars",
+                "min": 1,
+                "max": 5,
+                "step": 1,
+                "label": "Stars",
+                "default": 5
+              },
+              {
+                "type": "richtext",
+                "id": "text",
+                "label": "Text",
+                "default": "<p>Review text here</p>"
+              },
+              {
+                "type": "text",
+                "id": "author",
+                "label": "Author",
+                "default": "Author"
+              }
+          ]
+        }
+    ],
+ 	"presets": [
+      {  
+        "name": "Custom review", 
+        "category": "Custom" 
+      }
+  ]
+}
+{% endschema %}

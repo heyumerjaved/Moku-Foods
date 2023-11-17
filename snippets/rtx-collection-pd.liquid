@@ -1,0 +1,348 @@
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant | default: product.variants.first
+  assign current_selling_plan_allocation = current_variant.selected_selling_plan_allocation
+   
+  if current_selling_plan_allocation == nil and current_variant.requires_selling_plan
+    assign current_selling_plan_allocation = current_variant.selling_plan_allocations | first
+  endif
+  assign subPrice = product.selected_or_first_available_variant.selling_plan_allocations[0].price | money   
+  assign oneTimePrice = product.price | money 
+  
+  
+  if product.variants.size > 1
+  
+   assign current_variant = product.variants.last
+   assign current_selling_plan_allocation = current_variant.selected_selling_plan_allocation
+  
+
+   if current_selling_plan_allocation == nil and current_variant.requires_selling_plan
+     assign current_selling_plan_allocation = current_variant.selling_plan_allocations | first
+   endif
+  
+   assign oneTimePrice = product.variants.last.price | money 
+   assign subPrice = product.variants.last.selling_plan_allocations[0].price | money   
+   
+  endif
+  
+  
+  assign first_selling_plan_allocation = product.variants.first.selling_plan_allocations[0] 
+  
+  
+  if product.variants.size > 1
+    for variant in product.variants
+     assign product_var_price = variant.price
+     assign productPerCase = variant.metafields.Moku.BagPercaseForPrice | plus: 0
+    endfor
+  else
+   	assign product_var_price = product.price
+    assign productPerCase = product.metafields.Moku.BagPercase | plus: 0
+  endif
+  
+-%}
+
+<label class="variety_label">Select your plan</label>
+{% if product.selling_plan_groups[0].name %}
+  <input type='hidden' name="selling_plan" id="selling_plan_{{ product.id }}" value="">
+  <div class="rtx_buy_box" id="rtx_buy_box_{{ product.id }}">
+    <div class="rtx_container" data-product='{{ product | json }}'>
+      {% unless product.requires_selling_plan %}
+      <div class="rtx_option rtx_option_one_time">
+        <input type="radio" id='product_onetime_{{ product.id }}' value="onetime" name="selling_plan_select" data-product_id="{{ product.id }}">
+        <label for="product_onetime_{{ product.id }}" class="rtx_option_label">
+          <div class="rtx_option_selector">
+            <div class="rtx_option_heading">One-time Purchase:</div>
+          </div>
+          <span class='rtx_price_per_bag 5'>{{ product_var_price | divided_by: productPerCase | money }}/Bag</span>
+        </label>
+      </div>
+      {% endunless %}
+      {% for group in product.selling_plan_groups %}
+      <div class="rtx_option rtx_option_sub rtx--active">
+        <input type="radio" id='product_subsave_{{ product.id }}' value="subsave" name="selling_plan_select" data-product_id="{{ product.id }}" checked>
+        <label for="product_subsave_{{ product.id }}" class="rtx_option_label">
+          <div class='sub-wo-select'> 
+            <div class="rtx_option_selector">
+              <div class="rtx_option_heading">
+                {{ group.name }}:
+              </div>
+            </div>
+            {% for selling_plan in group.selling_plans %}
+            {%- assign discountPercentage = selling_plan.price_adjustments[0].value | round: 2 -%}
+            {% endfor %}
+            {%- if discountPercentage > 0 -%}
+              {% assign discounted_price =  product_var_price | times: discountPercentage | divided_by: 100 %}
+              {% assign discounted_price_1 =  product_var_price | minus: discounted_price %}
+              <span class='rtx_price_per_bag 6'>{{ discounted_price_1 | divided_by: productPerCase | money }}/Bag</span>
+            {%- else -%}
+              <span class='rtx_price_per_bag 7'>{{ productPerCase | times: 100 | money }}/Bag</span>
+            {%- endif -%}
+          </div>
+        </label>
+        
+        <div class="rtx_option_plans__wrap{% if template == 'product' %} _hidden{% endif %}">
+          <div class="rtx_option_plans" >
+            {% for group in product.selling_plan_groups %}
+            <div class='down_arrow'>
+              {% render 'icon' with 'arrow-bottom' %}
+            </div>
+            <select name="rtx_option_plans_dropdown" id="rtx_option_plans_dropdown" data-product_id="{{ product.id }}" >
+              {% for selling_plan in group.selling_plans %}
+              <option class='rtx_option_name' value="{{ selling_plan.id }}">{{ selling_plan.options[0].value }}</option>
+              {% endfor %}
+            </select>
+            {% endfor %}
+          </div>
+          {% comment %}
+          {% for option in group.options %}
+          <label class='copy_label'>{{ option.name }}</label>
+          {% endfor %}
+          {% endcomment %}
+
+          {% unless settings.bullet_point1 == blank %}
+          <div class="subscription-labels">
+            <span class="check-icon">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M15.6033 1.13958C11.3317 5.52195 8.50263 8.51762 5.83973 14.0652C5.17399 15.4521 4.56381 15.6739 3.84264 14.1762C2.73313 11.9017 1.56817 10.515 0.292197 8.96161C-0.539949 7.74122 0.569588 7.90763 1.56812 8.79521C2.28928 9.40539 3.50967 10.6259 4.34177 11.5135C4.78554 11.9573 4.84099 12.0682 5.28487 11.4025C8.39154 7.07552 10.9988 4.07985 15.2148 0.97343C15.6031 0.696039 15.9914 0.751486 15.6031 1.13984L15.6033 1.13958Z" fill="#105D49"/>
+              </svg>
+            </span>
+            <span>{{settings.bullet_point1}}</span>
+          </div>
+          {% endunless %}
+        {% unless settings.bullet_point2 == blank %}
+          <div class="subscription-labels">
+            <span class="check-icon">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M15.6033 1.13958C11.3317 5.52195 8.50263 8.51762 5.83973 14.0652C5.17399 15.4521 4.56381 15.6739 3.84264 14.1762C2.73313 11.9017 1.56817 10.515 0.292197 8.96161C-0.539949 7.74122 0.569588 7.90763 1.56812 8.79521C2.28928 9.40539 3.50967 10.6259 4.34177 11.5135C4.78554 11.9573 4.84099 12.0682 5.28487 11.4025C8.39154 7.07552 10.9988 4.07985 15.2148 0.97343C15.6031 0.696039 15.9914 0.751486 15.6031 1.13984L15.6033 1.13958Z" fill="#105D49"/>
+              </svg>
+            </span>
+            <span>{{settings.bullet_point2}}</span>
+          </div>
+        {% endunless %}
+        {% unless settings.bullet_point3 == blank %}
+          <div class="subscription-labels">
+            <span class="check-icon">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M15.6033 1.13958C11.3317 5.52195 8.50263 8.51762 5.83973 14.0652C5.17399 15.4521 4.56381 15.6739 3.84264 14.1762C2.73313 11.9017 1.56817 10.515 0.292197 8.96161C-0.539949 7.74122 0.569588 7.90763 1.56812 8.79521C2.28928 9.40539 3.50967 10.6259 4.34177 11.5135C4.78554 11.9573 4.84099 12.0682 5.28487 11.4025C8.39154 7.07552 10.9988 4.07985 15.2148 0.97343C15.6031 0.696039 15.9914 0.751486 15.6031 1.13984L15.6033 1.13958Z" fill="#105D49"/>
+              </svg>
+            </span>
+            <span>{{settings.bullet_point3}}</span>
+          </div>
+        {% endunless %}
+        {% unless settings.bullet_point4 == blank %}
+          <div class="subscription-labels">
+            <span class="check-icon">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M15.6033 1.13958C11.3317 5.52195 8.50263 8.51762 5.83973 14.0652C5.17399 15.4521 4.56381 15.6739 3.84264 14.1762C2.73313 11.9017 1.56817 10.515 0.292197 8.96161C-0.539949 7.74122 0.569588 7.90763 1.56812 8.79521C2.28928 9.40539 3.50967 10.6259 4.34177 11.5135C4.78554 11.9573 4.84099 12.0682 5.28487 11.4025C8.39154 7.07552 10.9988 4.07985 15.2148 0.97343C15.6031 0.696039 15.9914 0.751486 15.6031 1.13984L15.6033 1.13958Z" fill="#105D49"/>
+              </svg>
+            </span>
+            <span>{{settings.bullet_point4}}</span>
+          </div>
+        {% endunless %}
+        {% unless settings.bullet_point5 == blank %}
+          <div class="subscription-labels">
+            <span class="check-icon">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M15.6033 1.13958C11.3317 5.52195 8.50263 8.51762 5.83973 14.0652C5.17399 15.4521 4.56381 15.6739 3.84264 14.1762C2.73313 11.9017 1.56817 10.515 0.292197 8.96161C-0.539949 7.74122 0.569588 7.90763 1.56812 8.79521C2.28928 9.40539 3.50967 10.6259 4.34177 11.5135C4.78554 11.9573 4.84099 12.0682 5.28487 11.4025C8.39154 7.07552 10.9988 4.07985 15.2148 0.97343C15.6031 0.696039 15.9914 0.751486 15.6031 1.13984L15.6033 1.13958Z" fill="#105D49"/>
+              </svg>
+            </span>
+            <span>{{settings.bullet_point5}}</span>
+          </div>
+        {% endunless %}
+        </div>
+
+      </div>
+      {% endfor %}
+
+    </div>
+  </div>
+{% endif %}
+
+
+<script>
+
+  var product = {{ product | json }};
+  var currentProductId = {{ product.id }};
+  var currentVar;
+
+  document.querySelectorAll(`.rtx_buy_box #rtx_option_plans_dropdown`).forEach ((ele) => {
+    ele.selectedIndex = 0;
+  });
+
+  document.querySelectorAll(`#rtx_buy_box_${currentProductId}`).forEach((mainBox) => {
+
+    mainBox.querySelectorAll(`input[name="selling_plan_select"]`).forEach((radio) => {
+      
+      currentVariantId = Number(mainBox.closest('form').querySelector('input[name="id"]').value);
+      for (var i = 0; i < product.variants.length; i++) {
+        if (product.variants[i].id === currentVariantId) {
+          currentVar = product.variants[i];
+          break;
+        }
+      }
+
+      mainBox.closest('form').querySelectorAll('[name="selling_plan"]').forEach((el) => {
+        el.value = currentVar.selling_plan_allocations[0].selling_plan_id;
+      });
+
+      radio.addEventListener("change", function (e) {    
+        var colsestForm = e.target.closest('form');
+
+        //console.log('colsestForm--',colsestForm);
+        
+
+        colsestForm.querySelectorAll(`.rtx_buy_box #rtx_option_plans_dropdown`).forEach ((ele) => {
+          ele.addEventListener("change", function (e) {
+          });
+        });
+
+        colsestForm.querySelectorAll(`.rtx_buy_box .rtx_option_plans`).forEach((plans) => {
+          plans.style.display = "inline";
+        });
+
+        var selected = colsestForm.querySelector(`.rtx_buy_box input[name="selling_plan_select"]:checked`);
+
+        colsestForm.querySelectorAll(`.rtx_buy_box .rtx_option`).forEach((option) => {        
+          option.classList.remove(`rtx--active`);
+        });
+        selected.closest(`.rtx_option`).classList.add(`rtx--active`);
+
+        let currentVariantId = '';
+        if (!currentVariantId) {
+          currentVariantId = Number(colsestForm.querySelector('input[name="id"]').value);
+        }
+        for (var i = 0; i < product.variants.length; i++) {
+          if (product.variants[i].id === currentVariantId) {
+            currentVar = product.variants[i];
+            break;
+          }
+        }
+
+        colsestForm.querySelector('[name="selling_plan"]').value = currentVar.selling_plan_allocations[0].selling_plan_id;
+
+        if (colsestForm.querySelector(`.rtx_buy_box input[name="selling_plan_select"]:checked`).value === "onetime") {
+          var spgOneTimeValue = "";
+          colsestForm.querySelector('[name="selling_plan"]').value = spgOneTimeValue;
+          colsestForm.querySelectorAll(`.rtx_buy_box .rtx_option_plans`).forEach((plans) => {
+            plans.style.display = "none";
+          });
+          colsestForm.querySelector(`.rtx_buy_box #rtx_option_plans_dropdown`).selectedIndex = 0;
+
+        }
+        document.querySelectorAll(`.product-form__noscript-wrapper-{{ section.id }}`).forEach(test=>{
+       let select_html = new DOMParser().parseFromString(test.outerHTML, 'text/html');  
+       if(select_html?.querySelector('select option[value="'+ currentVariantId+'"]')){
+        let _price = select_html.querySelector('select option[value="'+currentVariantId+'"]').dataset.price.trim();
+        let _selling_price = select_html.querySelector('select option[value="'+currentVariantId+'"]').dataset.sellingPrice.trim();
+        var _subPrice = '{{subPrice}}';        
+        var _subPrice = _selling_price != '' ? _selling_price : "$"+(currentVar.selling_plan_allocations[0].price / 100);
+        colsestForm.getElementsByClassName("price-item--regular")[0].textContent = _subPrice;
+        if (radio.value === "onetime") {
+          var spgOneTimeValue = "";
+          colsestForm.querySelector('[name="selling_plan"]').value = spgOneTimeValue;
+          colsestForm.getElementsByClassName("price-item--regular")[0].textContent = _price;
+        }
+       }
+       });
+        
+      });
+
+    });
+
+  });
+  
+</script>
+
+
+<style> 
+    .down_arrow{
+      cursor: pointer;
+      position: absolute;
+      left: 90%;
+      z-index: 2;
+      bottom: 6px;
+    }
+    
+    .variety_label {
+        font-size: 18px;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+    }
+    
+    .rtx_option_plans{
+      position: relative;
+    }
+    
+    #rtx_option_plans_dropdown{
+      -webkit-appearance: none;
+      cursor: pointer;
+      margin-top: 20px;
+      width: 100%;
+      padding: 5px 10px 5px 20px;
+      border: 2px solid #105d49;
+      border-radius: 30px;
+      background-color: #fefcf0;
+
+    } 
+
+    .sub-wo-select {
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    .rtx_option_sub {
+        border: 2px solid rgba(33,108,88,.3);
+        border-radius: 30px;
+        margin-top: 12px;
+        padding: 18px 20px 15px;   
+        font-weight: 500;
+        font-size: 20px;
+        text-transform: capitalize;
+       
+    }
+
+    .rtx_option_one_time {
+        border: 2px solid rgba(33,108,88,.3);
+        border-radius: 30px;
+        margin-top: 12px;
+        padding: 18px 20px 15px;   
+        display: flex;
+        font-weight: 500;
+        font-size: 20px;
+        text-transform: capitalize;
+        justify-content: space-between;
+    } 
+        
+    .rtx_option_sub.rtx--active {
+        border-color: #105d49;
+    } 
+
+    .rtx_option_one_time.rtx--active {
+        border-color: #105d49;
+    } 
+
+    .rtx_option_label {
+        display: flex;
+        margin-top: auto;
+        margin-bottom: auto; 
+    }
+
+    input[type="radio"] {
+        cursor: pointer;
+        -webkit-appearance: none;
+        float: left;
+        margin-top: 3px;
+        padding-right: 10px;
+        margin-right: 8px;
+        width: 16px;
+        height: 16px;
+        border-radius: 100%;
+        -webkit-box-shadow: inset 0 0 0 2px #105d49;
+    }
+
+    input[type='radio']:checked{
+        -webkit-box-shadow: inset 0 0 0 8px #1c7561;
+           
+    }
+      
+</style>
+

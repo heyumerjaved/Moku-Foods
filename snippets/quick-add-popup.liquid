@@ -1,0 +1,220 @@
+<div class="quick-popup">
+  {%- assign product_form_id = 'product-form-' | append: product.id -%}
+  
+  
+  {%- if settings.ajax_cart_method == "drawer" -%}
+  	{% assign formClass = 'product-form-wrap'  %} 
+  {% elsif settings.ajax_cart_method == "page" %}
+  	{% assign formClass = 'form method-cart-page'  %}
+  {%- else -%}
+  	{% assign formClass = 'form'  %} 
+  {%- endif -%}
+  
+  <div class="quick-popup-wrap">
+    {%- unless product.has_only_default_variant -%}
+      {%- for option in product.options_with_values -%}
+        <fieldset class="js product-form__input product-variants-new">
+          <legend class="form__label Product_Variants_label">{{'Select your size'}}</legend>
+          <ul class="HorizontalList">
+            {%- for value in option.values -%}
+            <li class="HorizontalList__Item">
+              {% assign variant = product.variants[forloop.index0] %}
+              {% assign bagPerCase = variant.metafields.Moku.BagPercaseForPrice %}
+              {% assign oneTimePricePerBag = variant.price | divided_by: bagPerCase | money %}
+              {% assign SubscriptionPricePerBag = variant.selling_plan_allocations[0].price | divided_by: bagPerCase | money %}
+              <input class="SizeSwatch__Radio" type="radio" id="{{ product.id }}-{{ option.position }}-{{ forloop.index0 }}"
+                     iterable
+                     name="{{ option.name }}"
+                     value="{{ value | escape }}"
+                     form="{{ product_form_id }}"
+                     data-varid="{{product.variants[forloop.index0].id}}"
+                     data-available="{{product.variants[forloop.index0].available}}"
+                     data-bagPerCase="{{bagPerCase}}"
+                     data-pricePerBagOneTime="{{oneTimePricePerBag}}"
+                     data-pricePerBagSubscription="{{SubscriptionPricePerBag}}"
+                     data-priceForOneTimeSelected="{{variant.price | money }}"
+                     data-priceForSubSelected="{{variant.selling_plan_allocations[0].price | money }}"
+                     {% if variant.id == product.selected_or_first_available_variant.id %}checked{% endif %}
+                     >
+              <label class="SizeSwatch" for="{{ product.id }}-{{ option.position }}-{{ forloop.index0 }}">
+                {{ value }}
+              </label>
+            </li>
+            {%- endfor -%}
+          </ul>
+        </fieldset>
+    {%- endfor -%}
+    {%- endunless -%}
+
+
+    {% if settings.ajax_cart_method == "drawer" %}
+
+      <product-form-drawer class="product-form">
+        <div class="product-form__error-message-wrapper" role="alert" hidden>
+          {% render 'icon-error' %}
+          <span class="product-form__error-message"></span>
+        </div>
+
+        {% comment %}
+           {% render 'price', price_class: 'price--large', product: product.selected_or_first_available_variant %}
+                       {%- render 'price-default-new', product: product, use_variant: true, show_badges: true, price_class: 'price--large' -%}
+
+        {% endcomment %}
+            
+        {% form 'product', product, id: product_form_id, class: formClass, novalidate: 'novalidate' %}
+          {%- assign _vid = product.selected_or_first_available_variant.id -%}
+          {%- if product.variants.size > 1 -%}
+          {%- assign _vid = product.variants.first.id -%}
+          {%- endif -%}
+          
+            <div id="priceToBeChanged">
+            {%- render 'price-quick-add', product: product, use_variant: true, show_badges: false, price_class: 'price--large' -%}
+            </div>
+          <input type="hidden" name="id" class="masterVid"  value="{{ _vid }}">
+
+          {% comment %} Retextion Buy Box new {% endcomment %}
+          {% if product.available %}{% render 'rtx-collection-pd', product:product, section: section %}{% endif %}
+          <div class="qty-addToCart-wrapper ProductForm__QuantitySelector">
+            <div class="QuantitySelector QuantitySelector QuantitySelector--large">
+              <span class="QuantitySelector__Label">QTY</span>
+              <quantity-input class="QuantitySelector__Wrapper">
+                <button class="quantity__button no-js-hidden" name="minus" type="button">
+                  <span class="visually-hidden">{{ 'products.product.quantity.decrease' | t: product: product.title | escape }}</span>
+                  {% render 'icon-minus' %}
+                </button>
+                <input class="quantity__input QuantitySelector__CurrentQuantity"
+                       type="number"
+                       name="quantity"
+                       id="Quantity-{{ section.id }}"
+                       min="1"
+                       value="1"
+                       form="{{ product_form_id }}"
+                       >
+                <button class="quantity__button no-js-hidden" name="plus" type="button">
+                  <span class="visually-hidden">{{ 'products.product.quantity.increase' | t: product: product.title | escape }}</span>
+                  {% render 'icon-plus' %}
+                </button>
+              </quantity-input>
+            </div>
+            <button type="submit" name="add" id="productSubmitButton" class="ProductForm__AddToCart Button" {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}>
+              <span>
+                {%- if product.selected_or_first_available_variant.available -%}
+                {{ 'products.product.add_to_cart' | t }}
+                {%- else -%}
+                {{ 'products.product.sold_out' | t }}
+                {%- endif -%}
+              </span>
+              <div class="loading-overlay__spinner hidden">
+                <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg"><circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle></svg>
+              </div>
+            </button>
+          </div>
+        {% endform %}
+      </product-form-drawer>
+
+    {% else %}
+
+      <product-form class="product-form">
+        <div class="product-form__error-message-wrapper" role="alert" hidden>
+          {% render 'icon-error' %}
+          <span class="product-form__error-message"></span>
+        </div>
+
+        {% form 'product', product, id: product_form_id, class: formClass, novalidate: 'novalidate', data-type: 'add-to-cart-form' %}
+          <input type="hidden" name="id" class="masterVid"  value="{{ product.selected_or_first_available_variant.id }}" disabled>
+
+          {% comment %} Retextion Buy Box new {% endcomment %}
+          {% if product.available %}{% render 'rtx-collection-pd', product:product, section: section %}{% endif %}
+
+          <div class="qty-addToCart-wrapper ProductForm__QuantitySelector">
+            <div class="QuantitySelector QuantitySelector QuantitySelector--large">
+              <span class="QuantitySelector__Label">QTY</span>
+              <quantity-input class="QuantitySelector__Wrapper">
+                <button class="quantity__button no-js-hidden" name="minus" type="button">
+                  <span class="visually-hidden">{{ 'products.product.quantity.decrease' | t: product: product.title | escape }}</span>
+                  {% render 'icon-minus' %}
+                </button>
+                <input class="quantity__input QuantitySelector__CurrentQuantity"
+                       type="number"
+                       name="quantity"
+                       id="Quantity-{{ section.id }}"
+                       min="1"
+                       value="1"
+                       form="{{ product_form_id }}"
+                       >
+                <button class="quantity__button no-js-hidden" name="plus" type="button">
+                  <span class="visually-hidden">{{ 'products.product.quantity.increase' | t: product: product.title | escape }}</span>
+                  {% render 'icon-plus' %}
+                </button>
+              </quantity-input>
+            </div>
+            <button type="submit" name="add" id="productSubmitButton" class="ProductForm__AddToCart Button" {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}>
+              <span>
+                {%- if product.selected_or_first_available_variant.available -%}
+                {{ 'products.product.add_to_cart' | t }}
+                {%- else -%}
+                {{ 'products.product.sold_out' | t }}
+                {%- endif -%}
+              </span>
+              <div class="loading-overlay__spinner hidden">
+                <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg"><circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle></svg>
+              </div>
+            </button>
+          </div>
+        {% endform %}
+      </product-form>
+
+    {% endif %}
+
+    
+    <div class="product-form__noscript-wrapper-{{ section.id }}" style="display:none !important">
+      <div class="product-form__input{% if product.has_only_default_variant %} hidden{% endif %}">
+        <label class="form__label" for="Variants-{{ section.id }}">{{ 'products.product.product_variants' | t }}</label>
+        <div class="select">
+          <select id="Variants-{{ section.id }}" class="select__select" form="{{ product_form_id }}">
+            {%- for variant in product.variants -%}
+            {% if product.has_only_default_variant %}
+              {% assign bagPerCase = product.metafields.Moku.BagPercase %}
+            {% else %}
+              {% assign bagPerCase = variant.metafields.Moku.BagPercaseForPrice %}
+            {% endif %}
+            {% assign oneTimePricePerBag = variant.price | divided_by: bagPerCase | money %}
+            {% assign SubscriptionPricePerBag = variant.selling_plan_allocations[0].price | divided_by: bagPerCase | money %}
+            <option
+                    {% if variant.id == product.variants.first.id %}selected="selected"{% endif %}
+                    {% if variant.available == false %}disabled{% endif %}
+                    value="{{ variant.id }}" 
+                    data-price="{{ variant.price | money | strip_html }}" 
+                    data-selling-price="{{ variant.selling_plan_allocations[0].price | money | strip_html }}"
+                    data-bagPerCase="{{bagPerCase}}"
+                    data-pricePerBagOneTime="{{oneTimePricePerBag}}"
+                    data-pricePerBagSubscription="{{SubscriptionPricePerBag}}"
+                    >
+              {{ variant.title }}
+              {%- if variant.available == false %} - {{ 'products.product.sold_out' | t }}{% endif %}
+                        - {{ variant.price | money | strip_html }}
+            </option>
+            {%- endfor -%}
+          </select>
+          {% render 'icon-caret' %}
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+  
+</div>
+
+<script>
+        $(document).ready(function() {
+    document.querySelectorAll(".quick-popup-wrap").forEach(popup => {
+      const swatch = document.querySelector(".SizeSwatch__Radio");
+      var oneTimeBagPrice = swatch.dataset.priceperbagonetime || null, subBagPrice = swatch.dataset.priceperbagsubscription || null;
+      var oneTimePriceDiv =  popup.querySelector(".rtx_option_one_time .rtx_price_per_bag");
+      var subPriceDiv =  popup.querySelector(".rtx_option_sub .rtx_price_per_bag");
+      if(oneTimeBagPrice) oneTimePriceDiv.textContent = `${oneTimeBagPrice}/Bag`;
+      if(subBagPrice) subPriceDiv.textContent = `${subBagPrice}/Bag`;
+    });
+});
+</script>

@@ -1,0 +1,92 @@
+{%- paginate blog.articles by 9 -%}
+<div class="recipe-carousel-wrapper">
+  <div class="Container">
+    <div class="receCarLi__wrapper">
+      <div class="recipe-carousel-list Grid Grid--m 
+              grid grid--2-col-tablet-down
+              grid--3-col-desktop" id="AjaxinateContainer">
+        {% for article in blog.articles %}
+        <div class="grid__item recipe-item Grid__Cell 1/2--tablet 1/3--lap-and-up">      	
+          <figure>
+            <img
+                 srcset="{%- if article.image.width >= 165 -%}{{ article.image | img_url: '165x' }} 165w,{%- endif -%}
+                         {%- if article.image.width >= 360 -%}{{ article.image | img_url: '360x' }} 360w,{%- endif -%}
+                         {%- if article.image.width >= 533 -%}{{ article.image | img_url: '533x' }} 533w,{%- endif -%}
+                         {%- if article.image.width >= 720 -%}{{ article.image | img_url: '720x' }} 720w,{%- endif -%}
+                         {%- if article.image.width >= 1000 -%}{{ article.image | img_url:'1000x' }} 1000w,{%- endif -%}
+                         {%- if article.image.width >= 1500 -%}{{ article.image | img_url: '1500x' }} 1500w,{%- endif -%}
+                         {{ article.image | img_url: 'master' }} {{ article.image.width }}w"
+                 src="{{ article.image | img_url: '533x' }}"
+                 sizes="100vw"
+                 alt="{{ article.title | escape }}"
+                 loading="lazy"
+                 width="{{ article.image.width }}"
+                 height="{{ article.image.height }}"
+                 />
+            <a href="{{article.url}}" class="_button _button--secondary Button Button--secondary">See recipe</a>
+          </figure>
+          <div class="content">
+            <h3>{{article.title}}</h3>
+            <div class="description">Every pizza is a personal pizza if you try hard enough. Our take? Cilantro, onion, pineapple, pepper, and vegan cheese topped with our Hawaiian Teriyaki jerky halfway through baking.</div>
+            <a href="{{article.url}}" class="more">See recipe</a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+	
+    {%- if section.settings.show_loadMore -%}
+    <div class="Pagination Text--subdued" id="AjaxinatePagination">
+      {% if paginate.next %}
+      <a class="Button" href="{{ paginate.next.url }}" style="background-color: #1c7561; border-color: #1c7561;">{{ section.settings.loadMore }}</a>
+      {% endif %}
+    </div>
+	{%- else -%}
+      {%- render 'pagination', paginate: paginate -%}
+    {%- endif -%}
+  </div>
+</div>
+{%- endpaginate -%}
+{%- if section.settings.show_loadMore -%}
+<script defer="defer" type="text/javascript" src="{{ 'ajaxinate.js' | asset_url }}"></script>
+<script defer="defer" type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function() {
+    var endlessScroll = new Ajaxinate({
+      container: '#AjaxinateContainer',
+      pagination: '#AjaxinatePagination',
+      method: 'click',
+      offset: 1000
+    });
+  });
+</script>
+{%- endif -%}
+
+{% schema %}
+  {
+    "name": "Recipes section",
+    "settings": [
+	  {
+		"type":"header",
+		"content":"Load more"
+	  },
+	  {
+		"type":"checkbox",
+		"id":"show_loadMore",
+		"label":"Show Load more",
+		"default": true
+	  },
+	  {
+		"type":"text",
+		"id":"loadMore",
+		"label":"Show Load button text",
+		"default": "Loading More"
+	  }
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

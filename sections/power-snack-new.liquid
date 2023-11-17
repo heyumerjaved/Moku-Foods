@@ -1,0 +1,151 @@
+<div class="Container">
+  <div class="power-snack-new-grid">
+    {% if section.settings.section_title != blank %}
+    <div class="power-snack-head">
+      <h2 class="title-head">{{ section.settings.section_title }}</h2>
+    </div>
+    {% endif %}
+    <div class="power-snack-content">
+      <div class="left-content-wrap">
+        {% for block in section.blocks limit:3 %}
+        <div class="left-content power-snack-box">
+          {% if block.settings.title != blank %}
+          <div class="power-snack-title">
+            <h4>{{ block.settings.title }}</h4>
+          </div>
+          {% endif %}
+          {% if block.settings.content != blank %}
+          <div class="power-snack-desc new-pro-text">
+            {{block.settings.content}}
+          </div>
+          {% endif %}
+          {% if block.settings.content_svg != blank %}
+          <div class="power-snack-svg">
+            {{block.settings.content_svg}}
+          </div>
+          {% endif %}        
+        </div>
+        {% endfor %}
+      </div>
+      {% for img in product.metafields.Moku.SnackImage %}
+      {% if img.src != blank %}
+      <div class="content-img">
+        <div class="content-img-svg left">
+        {% for block in section.blocks limit:3 %}
+          {% if block.settings.content_svg != blank %}
+            <div class="power--snack-svg">
+              {{block.settings.content_svg}}
+            </div>
+          {% endif %}
+        {% endfor %}
+        </div>
+        <img class="Image--lazyLoad" data-src="{{ img.src }}" data-sizes="auto" alt="{{ section.settings.section_title | escape }}"/>
+        <div class="content-img-svg right">
+          {% for block in section.blocks limit:3 offset: 3 %}
+          {% if block.settings.content_svg != blank %}
+          <div class="power--snack-svg">
+            {{block.settings.content_svg}}
+          </div>
+          {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+      <div class="right-content-wrap">
+        {% for block in section.blocks limit:3 offset: 3 %}
+        <div class="right-content power-snack-box">
+          {% if block.settings.title != blank %}
+          <div class="power-snack-title">
+            <h4>{{ block.settings.title }}</h4>
+          </div>
+          {% endif %}
+          {% if block.settings.content != blank %}
+          <div class="power-snack-desc new-pro-text">
+            {{block.settings.content}}
+          </div>
+          {% endif %}
+          {% if block.settings.content_svg != blank %}
+          <div class="power-snack-svg">
+            {{block.settings.content_svg}}
+          </div>
+          {% endif %}  
+          
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<style>
+  {% if section.settings.section_bkg_clr != blank or section.settings.section_bkg_clr != 'rgba(0,0,0,0)' %}
+  .power-snack-new{background-color: {{section.settings.section_bkg_clr}};}
+  {% endif %}
+  {% if section.settings.section_txt_clr != blank or section.settings.section_txt_clr != 'rgba(0,0,0,0)' %}
+  .power-snack-new{color: {{section.settings.section_txt_clr}};}
+  .power-snack-title, .power-snack-head h2{color: {{section.settings.section_title_clr}};}
+  .power-snack-new svg path{fill: {{section.settings.section_txt_clr}};}
+  {% endif %}
+</style>
+
+
+{% schema %}
+  {
+    "name": "Snack section",
+	"class": "power-snack-new",
+    "settings": [
+      {
+		"type": "text",
+		"id": "section_title",
+		"label": "Section tilte"
+      },
+      {
+		"type": "color",
+		"id": "section_bkg_clr",
+		"label": "Section backgound color"
+      },
+      {
+		"type": "color",
+		"id": "section_txt_clr",
+		"label": "Section text color"
+      },
+      {
+		"type": "color",
+		"id": "section_title_clr",
+		"label": "Section title color"
+      }
+	],
+	"blocks": [
+      {
+        "type": "text",
+        "name": "Snack Text",
+		"limit": 6,
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Tilte"
+          },
+          {
+            "type": "richtext",
+            "id": "content",
+            "label": "Content"
+          },
+          {
+            "type": "html",
+            "id": "content_svg",
+            "label": "SVG code"
+          }
+        ]
+      }
+	],
+	"presets": [
+      {
+        "name": "Snack section",
+        "category": "Custome"
+      }
+    ]
+  }
+{% endschema %}

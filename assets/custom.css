@@ -1,0 +1,26 @@
+.sub-wo-select > div > div {
+  margin-left:10px;
+}
+
+.product-experience-new > div > div > div > div > div > h2 {
+  color:#105D49;
+}
+
+.product-experience-new > div > div > div > div > div > h2 + p , .list-li > p {
+  color:#105D49;
+  font-size:18px;
+  line-height: 1.5;
+  font-weight:400;
+}
+
+.experience-new-list > div > h4 {
+  font-size:18px;
+}
+
+
+
+@media screen and (max-width:767px) {
+  .product-experience-new > div > div > div > div > div > h2 + p , .experience-new-list > div > h4 , .list-li > p {
+    font-size:16px;
+  }
+}

@@ -1,0 +1,256 @@
+<style>
+    .Drawer__Main {
+        position: relative;
+    }
+    .fe-drawer-helper {
+        position: absolute;
+        background-color: rgba(28, 117, 97, 0.77);
+        z-index: 1000;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+    .fe-drawer-helper .lds-ring {
+        margin: -40px auto 0;
+    }
+    .lds-ring {
+        display: inline-block;
+        position: relative;
+        width: 80px;
+        height: 80px;
+    }
+    .lds-ring div {
+        box-sizing: border-box;
+        display: block;
+        position: absolute;
+        width: 64px;
+        height: 64px;
+        margin: 8px;
+        border: 8px solid #fff;
+        border-radius: 50%;
+        animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+        border-color: #fff transparent transparent transparent;
+    }
+    .lds-ring div:nth-child(1) {
+        animation-delay: -0.45s;
+    }
+    .lds-ring div:nth-child(2) {
+        animation-delay: -0.3s;
+    }
+    .lds-ring div:nth-child(3) {
+        animation-delay: -0.15s;
+    }
+    @keyframes lds-ring {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+    {% comment %} Custom html css {% endcomment %}
+    .upsell-content-wrap {
+        position: relative;
+        display: flex;
+        margin: 30px auto 15px;
+        max-width: 340px;
+        padding: 40px 25px;
+        background: rgba(255,255,255,0.4);
+      border-radius: 15px;
+      flex-direction: column;
+    }
+    .upsell-content-wrap .us-static-msg {
+        position: static;
+        top: -25px;
+        color: #1c7561;
+        left: 0;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 0.9091;
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    .upsell-content-wrap .upsell-image {
+        flex-basis: 30%;
+        padding-right: 15px;
+    }
+    .upsell-content-wrap .upsell-content {
+        flex-basis: 40%;
+        padding-left: 15px;
+    }
+    .upsell-content-wrap .upsell-content p {
+        margin: 0;
+    }
+    .upsell-content-wrap .upsell-content .title {
+      color: #1c7561; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;
+    }
+    .upsell-content-wrap .upsell-content .prev-price{
+        text-decoration: line-through;
+        color: #f3754f; display: none;
+    }
+    .upsell-content-wrap .upsell-content .price {
+        color: #105D49;
+    }
+    .upsell-content-wrap .upsell-cta {
+        flex-basis: 30%;
+        display: flex;
+    }
+    .upsell-content-wrap .upsell-cta .atc-button {
+        margin-left: auto;
+        color: #ffffff;
+        background-color: #1c7561;
+        height: 40px;
+        width: 100%;
+        border-radius: 25px;
+        align-self: center;
+        transition: all 0.3s;
+    }
+    .upsell-content-wrap .upsell-cta .atc-button:hover {
+        color: #1c7561;
+        background-color: #ffffff;
+    }
+  .upsell-content-wrap .upsell-content .price,
+  .upsell-content-wrap .upsell-content .prev-price,
+  .upsell-content-wrap .upsell-content .title {
+    font-size: 16px; }
+  .upsell-content-wrap .upsell-image, .upsell-content-wrap .upsell-content {
+    padding: 0; }  
+  @media screen and (min-width: 750px){
+    .upsell-content-wrap .us-static-msg { font-size: 22px; margin-bottom: 20px; }  
+  }
+</style>
+<script src="{{ 'axios.min.js' | asset_url }}"></script>
+
+<script>
+  
+  const feCheckoutHelper = (e) => {
+    e.preventDefault();
+    let helper = document.createElement('div');
+    let main = document.querySelector('#CartContainer .ajaxcart__inner');
+    helper.classList.add('fe-drawer-helper');
+    helper.innerHTML = '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>';
+    main.style.overflow = 'hidden';
+    main.prepend(helper);
+    window.location.href = '/checkout';
+  }
+
+    const simulateClick =  (elem) => {
+        // Create our event (with options)
+        let evt = new MouseEvent('click', {
+            bubbles: true,
+            cancelable: true,
+            view: window
+        });
+        // If cancelled, don't dispatch our event
+        let canceled = !elem.dispatchEvent(evt);
+    };
+    const addUpsellItem = (event, variantId) => {
+      event.preventDefault();
+      event.target.parentNode.classList.add('adding');
+      event.target.children[0].classList.remove('hidden');
+      axios.post('/cart/update.js', `updates[${variantId}]=1`).then((response) => {
+        if(response.status === 200){
+          {% if template contains 'cart' %}
+          document.querySelector('cart-items').reRenderCart()
+          {% else %}
+          document.querySelector('cart-drawer-items').renderCart();
+          {% endif %}
+          //simulateClick(reloader);
+        }
+      })
+    };
+    const upsellSlider = () => {
+     if( $('.US_wrap-new .upsell-grid').length == 0 ) return;      
+      var numberSlide = Number($('.US_wrap-new .upsell-grid').attr('data-number-slide'));
+      var centerMode = false;
+      if( numberSlide == 1 ){
+        numberSlide = 1; centerMode = true; }else{ numberSlide = 2 }
+      $('.US_wrap-new .upsell-grid').slick({
+        slidesToShow: 2,
+        slidesToScroll: 1,        
+        speed: 250,        
+        cssEase: 'linear',
+        infinite: true,
+        prevArrow: '<button type="button" class="slick-prev"><svg xmlns="http://www.w3.org/2000/svg" width="6" height="13" viewBox="0 0 6 13" fill="none"><path d="M3.27835e-07 6.35659L6 0.0861247L6 12.6271L3.27835e-07 6.35659Z" fill="#1c7561"/></svg></button>',
+        nextArrow: '<button type="button" class="slick-next"><svg xmlns="http://www.w3.org/2000/svg" width="6" height="13" viewBox="0 0 6 13" fill="none"><path d="M6 6.35659L-6.11749e-07 0.0861247L-4.39216e-08 12.6271L6 6.35659Z" fill="#1c7561"/></svg></button>',
+        responsive: [{
+          breakpoint: 750,
+          settings: {
+            slidesToShow: numberSlide,
+            variableWidth: true,
+            arrows:false,
+            centerMode: centerMode
+          }
+        }]
+      });      
+      setTimeout(function(){
+        if( document.querySelector('cart-drawer') != null ){
+          document.querySelector('cart-drawer').drawerHeight(); 
+        } 
+      },500)
+                   
+    };
+    const clearAction = (reloader) => {
+        fetch('/cart.js').then(response => response.json()).then(cart => {
+            let clearString = '';
+            cart.items.forEach((item, index) => {
+                clearString += `updates[${item.variant_id}]=0`;
+                if (index !== cart.items.length - 1){
+                    clearString += `&`;
+                }
+            });
+            axios.post('/cart/update.js', clearString).then((response) => {
+                if(response.status === 200){
+                  let checkoutBtn = document.querySelector('button[name="checkout"]');
+                  checkoutBtn.disabled = false;
+                  {% if template contains 'cart' %}
+                   document.querySelector('cart-items').reRenderCart()
+                  {% else %}
+                   document.querySelector('cart-drawer-items').renderCart();
+                  {% endif %}
+                }
+            })
+        });
+    }
+
+    const upsellClearCart = () => {
+        let checkoutBtn = document.querySelector('button[name="checkout"]');
+        checkoutBtn.disabled = true;
+        let reloader  = document.querySelector('.fe-clear-and-reload-drawer');
+        if(!reloader){
+            let counter = 0;
+            let timeout = setInterval(() => {
+                let reloader  = document.querySelector('.fe-clear-and-reload-drawer');
+                if(reloader) {
+                    clearInterval(timeout);
+                    clearAction(reloader);
+                }
+                counter++;
+                if(counter > 1000){
+                    clearInterval(timeout)
+                    checkoutBtn.disabled = false;
+                }
+            }, 10);
+        }else{
+            clearAction(reloader);
+        }
+    }
+
+    window.addEventListener('click', (event) => {
+        if(event.target.classList.contains('cart-remove')){
+            upsellClearCart();
+        }else if(event.target.classList.contains('ajaxcart__qty--minus')){
+            upsellClearCart();
+        }
+    })
+</script>
+{% comment %}
+{% if template == 'product' %}
+    {% if product.metafields.global.is_upsell %}
+            <style>body { overflow: hidden !important;}</style>
+            <div style="position: fixed; top: 0; left: 0; height: 100vh; width: 100vw; background-color: white; z-index: 2147483647;"></div>
+            <script>window.location.replace("/products/{{ product.metafields.global.related_handle }}");</script>
+    {% endif %}
+{% endif %}
+{% endcomment %}

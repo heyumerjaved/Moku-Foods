@@ -1,0 +1,130 @@
+{% assign nutrition_info = product.metafields.Moku.NutritionInformation %}
+{% assign ingredient_info = product.metafields.Moku.IngredientsInformation %}
+
+{%- if varietyPack -%}
+
+  {%- capture varietyPackProductsNutrition -%}
+    {% assign flavor_product = product.metafields.Moku.Flavors | split: '|' %}
+    {% if flavor_product != blank %}
+      {% for prodObj in collections.all.products %}
+        {% for flvr_prod in flavor_product %}
+         {% if prodObj.handle == flvr_prod %}
+            {% if nutrition_info != blank  %}
+              <div class="collapsible-content-inner">
+                <a href="#" class="accordion-title">{{- prodObj.title | escape -}}
+                	<span class="accordion-icon-new accordion-icon-plus">
+                      <span class="hidden-phone">{% render 'plus-icon-new' %}</span>
+                      <span class="hidden-tablet-and-up">{% render 'bottom-arrow' %}</span>
+                    </span>
+                    <span class="accordion-icon-new accordion-icon-minus">
+                      <span class="hidden-phone">{% render 'minus-icon-new' %}</span>
+                      <span class="hidden-tablet-and-up">{% render 'top-arrow' %}</span>
+                    </span>
+                </a>
+                {%- assign nutrition_info_split = prodObj.metafields.Moku.NutritionInformation | split: '<h5>' -%}
+                <div class="content-inner">
+                  {%- assign i = nutrition_info_split.size | minus:1 -%}
+                  {%- for arr in (1..i) -%}
+                    {% assign desc_2 = nutrition_info_split[arr] | split:'</h5>' %}
+                    <h5>{{desc_2[0]|strip_html}}</h5>
+                    <div class="ingredients-body-list">{{desc_2[1]}}</div>
+                  {%- endfor -%}
+                </div>
+              </div>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+
+    {% endif %}
+  {%- endcapture -%}
+
+  {%- capture varietyPackProductsIngridiants -%}
+    {% assign flavor_product = product.metafields.Moku.Flavors | split: '|' %}
+    {% if flavor_product != blank %}
+      {% for prodObj in collections.all.products %}
+        {% for flvr_prod in flavor_product %}
+         {% if prodObj.handle == flvr_prod %}
+            {% if prodObj.metafields.Moku.IngredientsInformation != blank %}
+              <div class="collapsible-content-inner">
+                <a href="#" class="accordion-title">{{- prodObj.title | escape -}}
+                	<span class="accordion-icon-new accordion-icon-plus">
+                      <span class="hidden-phone">{% render 'plus-icon-new' %}</span>
+                      <span class="hidden-tablet-and-up">{% render 'bottom-arrow' %}</span>
+                    </span>
+                    <span class="accordion-icon-new accordion-icon-minus">
+                      <span class="hidden-phone">{% render 'minus-icon-new' %}</span>
+                      <span class="hidden-tablet-and-up">{% render 'top-arrow' %}</span>
+                    </span>
+                </a>
+                <div class="content-inner ingredients-content">
+                  {{ prodObj.metafields.Moku.IngredientsInformation }}
+                </div>
+              </div>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+    {% endif %}
+  {%- endcapture -%}
+
+{%- endif -%}
+
+
+{% if nutrition_info != blank or ingredient_info != blank  %}
+<div class="accordion-pro-new">
+  <div class="accordion-container">
+    {%- if ingredient_info != blank -%}
+      <div class="collapsible-content">
+        <a href="#" class="accordion-title">Ingredients 
+          <span class="accordion-icon-new accordion-icon-plus">
+            <span class="hidden-phone">{% render 'plus-icon-new' %}</span>
+            <span class="hidden-tablet-and-up">{% render 'bottom-arrow' %}</span>
+          </span>
+          <span class="accordion-icon-new accordion-icon-minus">
+            <span class="hidden-phone">{% render 'minus-icon-new' %}</span>
+            <span class="hidden-tablet-and-up">{% render 'top-arrow' %}</span>
+          </span>
+        </a>
+        {%- if varietyPackProductsIngridiants != blank -%}
+          {{varietyPackProductsIngridiants}}
+        {%- else -%}
+          <div class="content ingredients-content">
+            {{ ingredient_info }}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+    {%- if nutrition_info != blank -%}
+    {% assign nutrition_info_split = nutrition_info | split:'<h5>' %}
+    <div class="collapsible-content">
+      <a href="#" class="accordion-title">Nutrition
+        <span class="accordion-icon-new accordion-icon-plus">
+          <span class="hidden-phone">{% render 'plus-icon-new' %}</span>
+          <span class="hidden-tablet-and-up">{% render 'bottom-arrow' %}</span>
+          </span>
+          <span class="accordion-icon-new accordion-icon-minus">
+            <span class="hidden-phone">{% render 'minus-icon-new' %}</span>
+            <span class="hidden-tablet-and-up">{% render 'top-arrow' %}</span>
+          </span>
+        </a>
+        {%- if varietyPackProductsNutrition != blank -%}
+          {{varietyPackProductsNutrition}}
+        {%- else -%}
+          <div class="content">
+            {% assign i = nutrition_info_split.size | minus:1 %}
+            {% for arr in (1..i) %}
+            {% assign desc_2 = nutrition_info_split[arr] | split: '</h5>' %}
+            <h5>{{desc_2[0]}}</h5>
+            <div class="ingredients-body-list">{{desc_2[1]}}</div>
+            {% endfor %}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+ </div>
+{% endif %}
+
+
+

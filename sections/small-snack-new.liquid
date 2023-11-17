@@ -1,0 +1,143 @@
+  <div class="small-snack-wrap">
+    <div class="content-wrap">
+      <div class="content-box">
+        {% if section.settings.sub_title != blank or section.settings.title != blank %}
+        <div class="small-snack-title">
+          {% if section.settings.sub_title != blank %}
+          <h5 class="sub_title">{{ section.settings.sub_title }}</h5>
+          {% endif %}
+          {% if section.settings.title != blank %}
+          <h2 class="title">{{ section.settings.title }}</h2>
+          {% endif %}
+        </div>
+        {% endif %}
+        {% if section.settings.desc != blank %}
+        <div class="small-snack-desc new-pro-text">
+          {{ section.settings.desc }}
+        </div>
+        {% endif %}
+        <div class="small-snack-logo">
+          {% for block in section.blocks %}
+          {% if block.settings.svg_img != blank %}
+          <div class="snack-logos">
+            {{ block.settings.svg_img }}
+            {% if block.settings.svg_title != blank %}<h4>{{ block.settings.svg_title }}</h4>{% endif %}
+          </div>
+          {% endif %}
+          {% endfor %}
+        </div>
+        {% if section.settings.tagline != blank %}
+        <div class="small-snack-tagline">
+          {{ section.settings.tagline }}
+        </div>
+        {% endif %}
+        {% if section.settings.btn_txt != blank and section.settings.btn_link != blank %}
+        <div class="small-snack-btn">
+          <a href="{{ section.settings.btn_link }}" class="Button snack-btn btn green-btn">{{section.settings.btn_txt | escape}}</a>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    {% for img in product.metafields.Moku.SmallSnackImage %}
+    {% if img.src != blank %}
+    <div class="img-wrap">
+      <img class="Image--lazyLoad" data-src="{{ img.src }}" data-sizes="auto" alt="{{ img.alt | escape }}"/>
+    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+
+
+<style>
+  {% if section.settings.section_bkg_clr != blank or section.settings.section_bkg_clr != 'rgba(0,0,0,0)' %}
+  .small-snack-new{background-color: {{section.settings.section_bkg_clr}};}
+  {% endif %}
+  
+  {% if section.settings.section_txt_clr != blank or section.settings.section_txt_clr != 'rgba(0,0,0,0)' %}
+  .small-snack-new{color: {{section.settings.section_txt_clr}};}
+  .snack-logos svg path{fill: {{section.settings.section_txt_clr}};}
+  {% endif %}
+</style>
+
+
+{% schema %}
+  {
+    "name": "Small Snack",
+	"class": "small-snack-new",
+    "settings": [
+      {
+		"type": "header",
+		"content": "Color"
+      },
+      {
+		"type": "color",
+		"id": "section_bkg_clr",
+		"label": "Section backgound color"
+      },
+      {
+		"type": "color",
+		"id": "section_txt_clr",
+		"label": "Section text color"
+      },
+      {
+		"type": "header",
+		"content": "Content"
+      },
+      {
+        "type": "html",
+        "id": "sub_title",
+        "label": "Sub title"
+      },
+      {
+        "type": "html",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "richtext",
+        "id": "desc",
+        "label": "Description"
+      },
+      {
+        "type": "text",
+        "id": "tagline",
+        "label": "Tagline"
+      },
+      {
+        "type": "text",
+        "id": "btn_txt",
+        "label": "Button lable"
+      },
+      {
+        "type": "url",
+        "id": "btn_link",
+        "label": "Button link"
+      }
+	],
+	"blocks": [
+      {
+        "type": "image",
+        "name": "Snack Logo",
+		"limit": 6,
+        "settings": [
+          {
+            "type": "html",
+            "id": "svg_title",
+            "label": "Tilte"
+          },
+          {
+            "type": "html",
+            "id": "svg_img",
+            "label": "SVG Code here"
+          }
+        ]
+      }
+	],
+	"presets": [
+      {
+        "name": "Small Snack",
+        "category": "Custome"
+      }
+    ]
+  }
+{% endschema %}

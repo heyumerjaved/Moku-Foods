@@ -1,0 +1,213 @@
+{
+  "sections": {
+    "main": {
+      "type": "ingredients-slideshow",
+      "blocks": {
+        "a95574c2-17fd-4910-8328-1330d0d20bda": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/madhu_desktop_cc82694b-47fc-4aad-bd6f-dc7b2a155013.jpg",
+            "image_mobile": "shopify:\/\/shop_images\/madhu_mobile_ab4f1923-2d13-4bb9-a820-cff21b304bc6.jpg",
+            "heading": "It’s what’s on the inside that counts",
+            "subheading": "We spent a year in the kitchen working with two of the top culinary experts and chefs to create a meat-like jerky from clean, plant-based, allergen free ingredients.",
+            "box_align": "middle-left",
+            "show_text_box": false,
+            "text_alignment": "center",
+            "image_overlay_opacity": 0,
+            "color_scheme": "background-1",
+            "text_alignment_mobile": "center",
+            "popup_btn_text": "See ingredients",
+            "popup_content": "<p><strong>Original <\/strong>Mushrooms,High Oleic Sunflower Oil, Coconut Aminos* (Coconut Sap, Sea Salt),Water, Maple Syrup, Pineapple Juice, Chickpea Miso* (Rice Koji,Chickpeas, Sea Salt, Water, Koji Spores), Tomato Paste, YeastExtract, Natural Hickory Smoke Flavor, Kosher Salt, Fermented RiceExtract, Lactic Acid, Onion Powder, Garlic Powder, Paprika, BlackPepper. *organic<\/p><p><strong>HawaiianTeriyaki <\/strong>Mushrooms,High Oleic Sunflower Oil, Coconut Aminos* (Coconut Sap, Sea Salt),Maple Syrup, Pineapple Juice, Water, Chickpea Miso* (Rice Koji,Chickpeas, Sea Salt, Water, Koji Spores), Tomato Paste, FermentedRice Extract, Dried Pineapple Powder, Yeast Extract, Natural HickorySmoke Flavor, Ginger Powder, Kosher Salt, Lactic Acid, Onion Powder,Garlic Powder, Paprika, Black Pepper. *organic<\/p><p><strong>Sweet& Spicy <\/strong>Mushrooms,High Oleic Sunflower Oil, Coconut Aminos* (Coconut Sap, Sea Salt),Maple Syrup, Pineapple Juice, Water, Chickpea Miso* (Rice Koji,Chickpeas, Sea Salt, Water, Koji Spores), Maple Sugar, Tomato Paste,Yeast Extract, Natural Hickory Smoke Flavor, Kosher Salt, FermentedRice Extract, Lactic Acid, Cayenne Pepper, Onion Powder, GarlicPowder, Paprika, Black Pepper. *organic<\/p>",
+            "text_color": "#ffffff",
+            "bg_color": "#f3754f"
+          }
+        }
+      },
+      "block_order": [
+        "a95574c2-17fd-4910-8328-1330d0d20bda"
+      ],
+      "settings": {
+        "heading_color": "#1c7561",
+        "text_color": "#105d49",
+        "layout": "full_bleed",
+        "slide_height": "large",
+        "slider_visual": "counter",
+        "auto_rotate": false,
+        "change_slides_speed": 5,
+        "show_text_below": false,
+        "accessibility_info": "Slideshow about our brand"
+      }
+    },
+    "ingredients-health": {
+      "type": "ingredients-health",
+      "blocks": {
+        "2d274044-dec3-4e72-8a65-e83366bd0935": {
+          "type": "fact",
+          "settings": {
+            "fact_symbol": "GF",
+            "fact_cross_out": false,
+            "fact_label": "Gluten Free"
+          }
+        },
+        "07f0c0c0-c6af-4d89-98c2-47ff51acf4c7": {
+          "type": "fact",
+          "settings": {
+            "fact_symbol": "CL",
+            "fact_cross_out": false,
+            "fact_label": "Clean Label"
+          }
+        },
+        "0ab9f7eb-46af-4808-8b75-0f3f62934c2d": {
+          "type": "fact",
+          "settings": {
+            "fact_symbol": "V",
+            "fact_cross_out": false,
+            "fact_label": "Vegan"
+          }
+        },
+        "8f12b2a0-b85e-4848-81c8-44565e70842a": {
+          "type": "fact",
+          "settings": {
+            "fact_symbol": "GMO",
+            "fact_cross_out": true,
+            "fact_label": "Non GMO"
+          }
+        },
+        "f6acb221-5eaa-4e30-abb7-9e9c3ade4368": {
+          "type": "fact",
+          "settings": {
+            "fact_symbol": "SOY",
+            "fact_cross_out": true,
+            "fact_label": "Soy Free"
+          }
+        }
+      },
+      "block_order": [
+        "2d274044-dec3-4e72-8a65-e83366bd0935",
+        "07f0c0c0-c6af-4d89-98c2-47ff51acf4c7",
+        "0ab9f7eb-46af-4808-8b75-0f3f62934c2d",
+        "8f12b2a0-b85e-4848-81c8-44565e70842a",
+        "f6acb221-5eaa-4e30-abb7-9e9c3ade4368"
+      ],
+      "settings": {
+        "color_background": "#1c7561",
+        "color_fact": "#fde384"
+      }
+    },
+    "ingredients-new": {
+      "type": "ingredients-new",
+      "blocks": {
+        "4f9e150c-54c2-4999-a62b-97231997c948": {
+          "type": "ingredient",
+          "settings": {
+            "ingredient_name": "Tomato",
+            "ingredient_description": "Tomatoes are rich in the antioxidant compound lycopene, which has been known to reduce the risk of heart disease and cancer.",
+            "ingredient_image": "shopify:\/\/shop_images\/Tomato_ingredient_web.jpg"
+          }
+        },
+        "3b9f3a41-d850-4e6c-aa48-42f24698f77a": {
+          "type": "ingredient",
+          "settings": {
+            "ingredient_name": "King Oyster Mushrooms",
+            "ingredient_description": "King oyster mushrooms pack a robust flavor and meaty texture while also providing fiber and a number of essential nutrients without many calories.",
+            "ingredient_image": "shopify:\/\/shop_images\/King-Oyster_ingredient_web.jpg"
+          }
+        },
+        "25f9aecf-1eea-4d47-b04b-9f69d1059b08": {
+          "type": "ingredient",
+          "settings": {
+            "ingredient_name": "Pineapple",
+            "ingredient_description": "Pineapple doesn't just brighten up our jerky's flavor - it's a key source of manganese, copper, vitamin B6, and vitamin C.",
+            "ingredient_image": "shopify:\/\/shop_images\/Pineapple_ingredient_web.jpg"
+          }
+        },
+        "d47da171-da9d-49ac-a695-499075e97dac": {
+          "type": "ingredient",
+          "settings": {
+            "ingredient_name": "Chickpeas",
+            "ingredient_description": "Just like soybean miso, chickpea miso is fermented and contains all the gut-healthy probiotics that help balance and heal the microbiome.",
+            "ingredient_image": "shopify:\/\/shop_images\/Chickpeas_ingredient_web.jpg"
+          }
+        },
+        "64f41e3e-526d-417d-8698-e4ff786e6499": {
+          "type": "ingredient",
+          "settings": {
+            "ingredient_name": "Coconut",
+            "ingredient_description": "Ideal for those with gluten & soy allergies, coconut aminos is jam-packed with 17 amino acids, potassium, vitamin C and vitamin B while scoring low on the glycemic index.",
+            "ingredient_image": "shopify:\/\/shop_images\/Coconut_ingredient_web.jpg"
+          }
+        },
+        "033329b8-96cb-41d7-af76-2498225a1c64": {
+          "type": "ingredient",
+          "settings": {
+            "ingredient_name": "Maple Syrup",
+            "ingredient_description": "Maple syrup has higher levels of minerals and antioxidants, yet fewer calories than honey",
+            "ingredient_image": "shopify:\/\/shop_images\/Maple-Syrup_ingredient_web.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "4f9e150c-54c2-4999-a62b-97231997c948",
+        "3b9f3a41-d850-4e6c-aa48-42f24698f77a",
+        "25f9aecf-1eea-4d47-b04b-9f69d1059b08",
+        "d47da171-da9d-49ac-a695-499075e97dac",
+        "64f41e3e-526d-417d-8698-e4ff786e6499",
+        "033329b8-96cb-41d7-af76-2498225a1c64"
+      ],
+      "settings": {
+        "background": "#87e0d0",
+        "grid_mobile_items_per_row": "2",
+        "grid_desktop_items_per_row": 3
+      }
+    },
+    "ingredients-image-text": {
+      "type": "ingredients-image-text",
+      "blocks": {
+        "4335d92d-5ce9-4b4e-9261-0f6c36e8a8f6": {
+          "type": "image",
+          "settings": {
+            "desk_image": "shopify:\/\/shop_images\/Pizza_Desktop_da018e9e-0245-41a0-9b28-7b725a388910.jpg",
+            "mob_image": "shopify:\/\/shop_images\/Pizza_Mobile_ce782a9d-13dc-47d9-9bdf-d2576033091b.jpg",
+            "title": "Plant-based pizza",
+            "content": "<p>Every pizza is a personal pizza if you try hard enough. Our take? Cilantro, onion, pineapple, pepper, and vegan cheese topped with our Hawaiian Teriyaki jerky halfway through baking.<\/p>"
+          }
+        },
+        "b30b1dbb-c728-4588-9bae-4a9bd6e2e086": {
+          "type": "image",
+          "settings": {
+            "desk_image": "shopify:\/\/shop_images\/Burger_Desktop_f026edb6-107c-476d-8518-c0f0b162364c.jpg",
+            "mob_image": "shopify:\/\/shop_images\/Burger_Mobile_ed3371ec-6082-450c-8e41-a06bb8a87285.jpg",
+            "title": "‘Bacon’ burger",
+            "content": "<p>Got (burger) buns, hun? Try an American classic with a sustainable twist - a plant-based burger with our Original or Sweet & Spicy jerky, vegan cheese, lettuce, tomato, and a fluffy burger bun. <\/p>"
+          }
+        },
+        "f9fea3fd-e08d-4955-9124-cc6cdcbd4123": {
+          "type": "image",
+          "settings": {
+            "desk_image": "shopify:\/\/shop_images\/Mac___Cheese_Desktop_25d30fd7-74eb-4678-b419-f22f646a219e.jpg",
+            "mob_image": "shopify:\/\/shop_images\/Mac___Cheese_Mobile_67a0d5a7-d867-4f01-b481-05642485642d.jpg",
+            "title": "Bacon mac & ‘cheese’",
+            "content": "<p>Whether it’s gourmet and skillet-baked or just boxed mac & cheese, a little ‘bacon’ goes a long way. Moku strips broken into small bites adds a meaty flavor to the classic comfort meal. <\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "4335d92d-5ce9-4b4e-9261-0f6c36e8a8f6",
+        "b30b1dbb-c728-4588-9bae-4a9bd6e2e086",
+        "f9fea3fd-e08d-4955-9124-cc6cdcbd4123"
+      ],
+      "settings": {
+        "headline": "This is how we rock meatless Monday.",
+        "bg_color": "#1c7561",
+        "headline_color": "#ffffff",
+        "text_color": "#ffffff"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "ingredients-health",
+    "ingredients-new",
+    "ingredients-image-text"
+  ]
+}

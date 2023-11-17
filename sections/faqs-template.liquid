@@ -1,0 +1,137 @@
+<div class="Container Container--extraNarrow">
+  <header class="PageHeader">
+    <div class="SectionHeader">
+      <h1 class="SectionHeader__Heading Heading u-h1">{{ page.title }}</h1>
+    </div>
+  </header>
+
+  <div class="PageContent">
+    <div class="faq-accordion">
+      <h7 class="u-h7 be-bold">Product Related</h7>
+      {%- for block in section.blocks -%}
+        {%- if block.settings.faq_category == "product" -%} 
+        <div class="faq-box faqs-accordion-box" id="faqs-accordion">
+          <div class="faq-question title"><h2 class="u-h2">{{- block.settings.faq_question -}}</h2></div>
+          <div class="faq-answer panel">
+            <p>{{- block.settings.faq_answer -}}</p>
+          </div>
+        </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    <div class="faq-accordion faqs-accordion-box" id="faqs-accordion">
+      <h7 class="u-h7 be-bold">Shipping Related</h7>
+      {%- for block in section.blocks -%}
+        {%- if block.settings.faq_category == "shipping" -%} 
+        <div class="faq-box">
+          <div class="faq-question title"><h2 class="u-h2">{{- block.settings.faq_question -}}</h2></div>
+          <div class="faq-answer panel">
+            <p>{{- block.settings.faq_answer -}}</p>
+          </div>
+        </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+    
+  </div>
+</div>
+
+<style>
+  #shopify-section-{{ section.id }} .faq-accordion h7 {
+    color: {{ section.settings.color_category_heading }};
+  }
+  
+  #shopify-section-{{ section.id }} .faq-accordion .faq-question {
+    color: {{ section.settings.color_question }};
+  }
+  
+  #shopify-section-{{ section.id }} .faq-accordion .faq-answer {
+    color: {{ section.settings.color_answer }};
+  }
+  
+  #shopify-section-{{ section.id }} .faq-accordion .u-h7,
+  #shopify-section-{{ section.id }} .faq-accordion .faq-box  {
+    border-color: {{ section.settings.color_question }};
+  }
+</style>
+
+<script type="text/javascript" defer>
+  $(document).ready(function() {
+
+    $("#faqs-accordion .title").click(function () {
+      $('#faqs-accordion').find('.panel').not($(this).next()).slideUp(300);
+      $('.active').not(this).removeClass('active');
+
+      $(this).toggleClass('active');
+      $(this).next().slideToggle(300);
+    });
+  });
+</script>
+
+
+{% schema %}
+{
+  "name": "FAQs",
+  "class": "moku-section--faqs",
+  "max_blocks": 20,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section colors"
+    },
+    {
+      "type": "color",
+      "id": "color_category_heading",
+      "label": "Category heading",
+      "default": "#eaeaea"
+    },
+    {
+      "type": "color",
+      "id": "color_question",
+      "label": "Question",
+      "default": "#eaeaea"
+    },
+    {
+      "type": "color",
+      "id": "color_answer",
+      "label": "Answer",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "color_separator",
+      "label": "Separator",
+      "default": "#fff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "FAQ",
+      "settings": [
+        {
+          "type": "select",
+          "id": "faq_category",
+          "options": [
+            { "value": "product", "label": "Product"},
+            { "value": "shipping", "label": "Shipping"},
+            { "value": "misc", "label": "Miscellaneous"}
+          ],
+          "label": "FAQ category"
+        },
+        {
+          "type": "text",
+          "id": "faq_question",
+          "label": "Question"
+        },
+        {
+          "type": "textarea",
+          "id": "faq_answer",
+          "label": "Answer"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

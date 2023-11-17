@@ -1,0 +1,90 @@
+<section id="section-{{ section.id }}" class="Section logo-list-home">
+  <div class="Container">    
+    <div class="Logo__Wrapper">
+      <ul class="Logo__List">
+        {%- for block in section.blocks -%}
+        <li>
+          {% if block.settings.logo_link != blank %}<a href="{{ block.settings.logo_link }}" target="_blank" title="{{ block.settings.logo_label }}">{% endif %}
+          <img 
+               srcset="{% if block.settings.logo_image.width >= 100 %}{{ block.settings.logo_image | image_url: width: 100 }} 100w,{% endif %}
+                       {% if block.settings.logo_image.width >= 150 %}{{ block.settings.logo_image | image_url: width: 150 }} 150w,{% endif %}
+                       {% if block.settings.logo_image.width >= 200 %}{{ block.settings.logo_image | image_url: width: 200 }} 200w,{% endif %}
+                       {% if block.settings.logo_image.width >= 300 %}{{ block.settings.logo_image | image_url: width: 300 }} 300w,{% endif %}
+                       {% if block.settings.logo_image.width >= 400 %}{{ block.settings.logo_image | image_url: width: 400 }} 400w,{% endif %}
+                       {% if block.settings.logo_image.width >= 500 %}{{ block.settings.logo_image | image_url: width: 500 }} 500w,{% endif %}
+                       {% if block.settings.logo_image.width >= 600 %}{{ block.settings.logo_image | image_url: width: 600 }} 600w,{% endif %}
+                       {% if block.settings.logo_image.width >= 700 %}{{ block.settings.logo_image | image_url: width: 700 }} 700w,{% endif %}
+                       {% if block.settings.logo_image.width >= 900 %}{{ block.settings.logo_image | image_url: width: 900 }} 900w,{% endif %}
+                       {{ block.settings.logo_image | image_url }} {{ block.settings.logo_image.width }}w"
+               src="{{ block.settings.logo_image | image_url: width: master }}"
+               sizes="100vw"
+               alt="{{ block.settings.logo_image.alt | escape }}"
+               height="{{block.settings.logo_image.width | divided_by: block.settings.logo_image.aspect_ratio}}"
+               width="{{block.settings.logo_image.width}}"
+               loading="lazy"
+               />
+          {% if block.settings.logo_link != blank %}</a>{% endif %}
+        </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+<style>
+  #section-{{ section.id }} {
+    background-color: {{ section.settings.color_background }};
+  }
+  
+  #section-{{ section.id }} .health_symbol_circle,
+  #section-{{ section.id }} .Health__Facts span,
+  #section-{{ section.id }} .Health__Facts p {
+    color: {{ section.settings.color_fact }};
+    border-color: {{ section.settings.color_fact }} !Important;
+  }
+</style>
+
+
+{% schema %}
+{
+  "name": "Logo list",
+  "class": "moku-section--logo-list",
+  "max_blocks": 5,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section colors"
+    },
+    {
+      "type": "color",
+      "id": "color_background",
+      "label": "Background",
+      "default": "#eaeaea"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Logo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "logo_image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "logo_label",
+          "label": "Logo label"
+        },
+        {
+          "type": "text",
+          "id": "logo_link",
+          "label": "Logo link"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

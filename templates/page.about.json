@@ -1,0 +1,127 @@
+{
+  "sections": {
+    "main": {
+      "type": "about-slideshow",
+      "blocks": {
+        "3e2c193d-1f3d-4a59-a22e-3c51065e2604": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/pratix_6dab920c-1834-421d-ad39-eb946990af0d.jpg",
+            "image_mobile": "shopify:\/\/shop_images\/pratix_mobile-crop_347fce1f-4c97-4af0-8b1e-df718631ba0d.jpg",
+            "heading": "We've got some beef with meat",
+            "richtext": "Jerky is great, but its environmental footprint isn’t. So, we created one that captures the<br>texture &amp; flavor of our go-to snack with the<br> <span>power of plants<\/span>. Whether you’re a full vegan<br> or just dabble with meatless Mondays, just <span>one<br> bag is a step in the right direction<\/span>.",
+            "button_label": "",
+            "link": "",
+            "button_style_secondary": false,
+            "box_align": "middle-left",
+            "show_text_box": false,
+            "text_alignment": "center",
+            "image_overlay_opacity": 0,
+            "color_scheme": "background-1",
+            "text_alignment_mobile": "center"
+          }
+        }
+      },
+      "block_order": [
+        "3e2c193d-1f3d-4a59-a22e-3c51065e2604"
+      ],
+      "settings": {
+        "heading_color": "#1c7561",
+        "text_color": "#105d49",
+        "layout": "full_bleed",
+        "slide_height": "large",
+        "slider_visual": "counter",
+        "auto_rotate": false,
+        "change_slides_speed": 5,
+        "show_text_below": false,
+        "accessibility_info": "Slideshow about our brand"
+      }
+    },
+    "about-stats": {
+      "type": "about-stats",
+      "blocks": {
+        "b4e73920-fb9a-4320-933c-c3bd53f06457": {
+          "type": "stat",
+          "settings": {
+            "stat_name": "",
+            "stat_description": "Raised on O‘ahu, Hawaii, an island with limited natural resources, I understood the importance of sustainability from a young age.  As I began learning about the immense carbon footprint of the meat industry, I gravitated towards plant-based foods.  Fast forward to today, I teamed up with two renowned culinary experts to develop a delicious jerky that is better for both our bodies and the planet."
+          }
+        }
+      },
+      "block_order": [
+        "b4e73920-fb9a-4320-933c-c3bd53f06457"
+      ],
+      "custom_css": [
+        ".Stats__Number h3:before {color: #fde384 !important;}"
+      ],
+      "settings": {
+        "color_background": "#d9432c",
+        "color_text": "#ffffff",
+        "color_image_caption": "#ffffff",
+        "image_featured": "shopify:\/\/shop_images\/about_matt_2657f0c7-c56e-430e-aed5-662de9886741.jpg",
+        "image_caption": "Matt Feldman \\A Founder"
+      }
+    },
+    "about-text-image": {
+      "type": "about-text-image",
+      "settings": {
+        "color_background": "#fde384",
+        "color_text": "#1c7561",
+        "color_link": "#1c7561",
+        "subheading": "",
+        "title": "We're not here just to make jerky. We're here to encourage<br> everyone to take mindful steps towards a healthier future - <br> from our snack choices to our day-to-day routines. Let’s take it one day at a time. One choice at a time. One Moku at a time.",
+        "image_position": "right",
+        "content": "",
+        "link_text": "Explore FAQ",
+        "link_url": "shopify:\/\/pages\/faqs"
+      }
+    },
+    "about-community-widget": {
+      "type": "about-community-widget",
+      "settings": {
+        "title": "The pact",
+        "subtitle": "We donate 1% below."
+      }
+    },
+    "16512958212c397550": {
+      "type": "featured-collection-home",
+      "settings": {
+        "title": "",
+        "heading_size": "h1",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "all-flavors",
+        "enable_desktop_slider": false,
+        "image_ratio": "adapt",
+        "show_vendor": false,
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "about-image-text-block": {
+      "type": "about-image-text-block",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/pizza_yellow_2fa21730-70e2-47e0-bbe8-d7e481e3e857.jpg",
+        "background": "#ffffff",
+        "text_color": "#1c1b1b",
+        "block_size": "small",
+        "title": "",
+        "content": "",
+        "button_label": "",
+        "button_link": "",
+        "show_parallax": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "about-stats",
+    "about-text-image",
+    "about-community-widget",
+    "16512958212c397550",
+    "about-image-text-block"
+  ]
+}

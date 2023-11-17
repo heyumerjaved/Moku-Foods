@@ -1,0 +1,122 @@
+{% schema %}
+      {
+        "name": "Beam Community Impact",
+		"class": "about-community-widget",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Header",
+            "default": "The pact"
+          },
+          {
+            "type": "textarea",
+            "id": "subtitle",
+            "label": "SubHeader",
+            "default": "We donate 1% below."
+          }
+		]
+      }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+<!--BEAM START-->
+<span id="community-impact" style="margin-bottom: 15px;"></span>
+<section class="Section" id="section-{{ section.id }}" data-section-id="{{ section.id }}" style="background: #1c7561;" data-section-type="beam-community-impact-widget">
+<div id="beam-community-impact-widget-wrapper" name="impact">
+  <div style="max-width: 835px; text-align: center; margin: 0px auto 30px; padding-top:50px;">
+    <div class="page-width">
+      <h1 class="SectionHeader__SubHeading Heading u-h2 be-bold" style="color: #FFF; font-weight: 900;">
+        The Moku Community's Impact <br />
+      </h1>
+      <p class="SectionHeader__Heading Heading u-h4 be-medium" style="color: #FFF; font-weight: normal;">
+        With every Moku purchase, 1% is donated to a nonprofit of your choice. <br/> Check out the impact the Moku community is making below.
+      </p>
+    </div>
+  </div>
+  <div id="beam-community-widget-container" style=" padding:5px; margin: 0 auto; max-width: 835px;">
+  </div>
+</div>
+</section>
+<!--BEAM END-->
+
+<script src="https://ppc.sdk.beamimpact.com/static/core/js/widgets.js"></script>
+
+<!-- <script type="text/javascript"> -->
+{% assign beam_web_sdk_base_url = 'https://ppc.sdk.beamimpact.com' %}
+{% assign beam_widget_id = '1923996a74994564a880a1e4372cb86b ' %}
+{% assign beam_store_id = '32' %}
+{% assign shop_domain = 'moku-foods.myshopify.com' %}
+<script type="text/javascript">
+  
+    // shop config
+    const widgetId = '1923996a74994564a880a1e4372cb86b'; //"{{ beam_widget_id }}";
+    const storeId = 32;//"{{ beam_store_id }}";
+    const shopDomain = 'moku-foods.myshopify.com'; //"{{ shop_domain }}"
+  
+  
+    let fetchNonprofitsXHR = new XMLHttpRequest();
+    fetchNonprofitsXHR.onreadystatechange = function() {
+        if (fetchNonprofitsXHR.readyState == 4 && fetchNonprofitsXHR.status == 200) {
+           let res = JSON.parse(fetchNonprofitsXHR.responseText);
+          console.log("BEAM NONPROFITS", res)
+          
+              
+           let beam_widget = new beamApps.CommunityImpactWidget({
+               fontFamily: "inherit",
+               widgetId: widgetId,
+               containerId: "beam-community-widget-container",
+             beamCommunityData: res,
+             themeConfig: {
+                fontFamily: "inherit",
+        //             gradientColors: ["#F5D563"],
+                progressBarColors: [
+                   {color: "#1C7561", offset: "100%"},
+                ],
+                causeLetterSpacing: "normal",
+                causeTypeFontSize: "10px",
+            	causeTypeTransform:"uppercase",
+                causeTypeFontWeight: "900",
+                causeTypeMargin: "0px 0px 0px -10px",
+                causeTitleFontSize: "30px",
+                nonprofitTextMargin: "0px 0px -5px -10px",
+                nonprofitTextFontWeight: "700",
+                hideTabs: true,
+                hideBorders: true,
+                hideLogo: false,
+                textColor: "#fff",
+                backgroundColor: "#7BC8B6", //"rgb(247,247,247)",
+                progressBarBackgroundColor: "#9BD6C8",
+                progressBarBorder: "1px solid #7BC8B6",
+                borderRadius: "10px",
+                percentageTextColor: "#fff",
+               percentageFontSize: "22px",
+                titleTextTransform: "capitalize",
+                showLink: true,
+                showGoalCompletionCount: true,
+                noWrap: false,
+                impactDetailsFontSize: "16px",
+                impactDetailsFontWeight: "400",
+               impactDetailsLineHeight: "1.1",
+               learnMoreFontWeight: "400",
+               nonprofitTextLineHeight: ".9",
+                progressBarWidth: "85%",
+               progressBarHeight: "10px",
+               usePartnerRectLogo: true,
+               headerPartnerLogoMargin: "7px 5px 0px 10px",
+               headerBeamLogoMargin: "-26px 0px 0px 5px", //"-12px 0px 0px 5px",
+             }
+
+           });
+          
+          beam_widget.render(null,fetchNonprofitsXHR.responseText);
+        }
+    };
+    fetchNonprofitsXHR.open("GET", "https://ppc.sdk.beamimpact.com/api/v1/impact/?nonprofit=&user=", true);
+    fetchNonprofitsXHR.setRequestHeader('x-widget-id', widgetId)
+    fetchNonprofitsXHR.send();
+  
+  
+</script>

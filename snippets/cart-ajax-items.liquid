@@ -1,0 +1,205 @@
+{% assign allow_upsell = 0 %}
+{% assign upsell_items_count = 0 %}
+{%- for cart_item in cart.items -%}
+  {% if cart_item.product.metafields.global.is_upsell %}
+    {% assign upsell_items_count = upsell_items_count | plus:1 %}
+    {% continue %}
+  {% endif %}
+  {% assign allow_upsell = allow_upsell | plus:1 %}
+{% endfor %}
+
+{%- for item in cart.items -%}
+
+  {% comment %}Procuct variant image logic using metafield{% endcomment %}
+  {%- assign VariantCartimage = blank -%}
+  {%- unless item.product.has_only_default_variant -%}
+    {%- for variant in item.product.variants -%}
+      {%- for option in item.options_with_values -%}
+        {%- if option.value == variant.title -%}
+          {% assign VariantCartimage = variant.metafields.Moku.VariantCartimage %}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endfor -%}
+  {%- endunless -%}
+  {% comment %}---END---{% endcomment %}
+
+  <div class="ajaxcart__product">
+    <div class="ajaxcart__row" id="CartItem-{{ item.index | plus: 1 }}">
+      <div class="ajaxcart__product_grid">
+        <div class="grid_item ajaxcart_item_img">
+          <a href="{{ item.url }}" class="ajaxcart__product-image">
+            {% if VariantCartimage != blank %}
+            	<img src="{{ VariantCartimage }}" alt="{{ item.product.title | escape }}" class="var-meta-img" loading="lazy"/>
+            {% else %}
+              {% if item.product.metafields.global.cartimg %}
+               <img src="{{ item.product.metafields.global.cartimg }}" alt="{{ item.product.title | escape }}" class="pro-meta-img" loading="lazy"/>
+              {% else %}
+               <img src="{{ item.image | image_url: width: 240 }}" alt="{{ item.product.title | escape }}" class="default-img" loading="lazy"/>
+              {% endif %}
+            {% endif %}
+          </a>
+        </div>
+        <div class="grid_item ajaxcart_item_card">
+          <div class="ajaxcart_item_title">
+            <div class="acart_ititle_inner">
+            {% if item.product.metafields.global.cartimg %}
+             {% if item.product.metafields.global.is_upsell %}
+              {% assign related_next_product = all_products[item.product.metafields.global.related_handle] %}
+               <span class="ajaxcart__product-name h5 11">{{ related_next_product.title }}</span>
+             {% else %}
+              <span class="ajaxcart__product-name h5">{{ item.product.title }}</span>
+             {% endif %}
+            {% else %}
+              <span class="ajaxcart__product-name h5">{{ item.product.title }}</span>
+            {% endif %}
+              
+              <div class="ajaxcart-item__price">
+                {%- if item.original_line_price != item.final_line_price -%}
+                 <small class="ajaxcart-item__price-strikethrough"><s>{{ item.original_line_price | money }}</s></small>
+                 <br><span>{{ item.final_line_price | money }}</span>
+                {%- else -%}
+                 {% if item.product.metafields.global.is_upsell %}
+                  <span class="regular-price fe-prev-price">{{ item.product.compare_at_price | money }}</span>
+                  <span class="regular-price">{{ item.original_line_price | money }}</span>
+                 {% else %}
+                  <span class="regular-price">{{ item.original_line_price | money }}</span>
+                 {% endif %}
+                {%- endif -%}
+              </div>
+              
+            </div>
+            {%- if item.product.has_only_default_variant == false -%}
+             {%- for option in item.options_with_values -%}
+              <div class="ajaxcart__product-meta">
+                <span>{{ option.name }}:</span>
+                <span>{{ option.value }}</span>
+              </div>
+             {%- endfor -%}
+            {%- endif -%}
+
+            {%- for property in item.properties -%}
+             {%- assign property_first_char = property.first | slice: 0 -%}
+             {%- if property.last != blank and property_first_char != '_' -%}
+              <div class="ajaxcart__product-meta product-properties">
+                <span>{{ property.first }}: </span>
+                <span>
+                  {%- if property.last contains '/uploads/' -%}
+                  <a href="{{ property.last }}" class="link" target="_blank">
+                    {{ property.last | split: '/' | last }}
+                  </a>
+                  {%- else -%}
+                  {{ property.last }}
+                  {%- endif -%}
+                </span>
+              </div>
+             {%- endif -%}
+            {%- endfor -%}
+            
+            {% unless item.selling_plan_allocation == empty %}
+             <li class="ajaxcart__product-meta" data-cart-item-selling-plan-name>{{ item.selling_plan_allocation.selling_plan.name }}</li>
+            {% endunless %}
+          </div>
+
+          <div class="grid--full display-table">
+            {% comment %}<div class="ajaxcart-item-price-wraper">
+              <div class="loading-overlay hidden">
+                <div class="loading-overlay__spinner">
+                  <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                    <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                  </svg>
+                </div>
+              </div>
+              <div class="grid_item display-table-cell text-right ajaxcart-item__price">
+                {%- if item.original_line_price != item.final_line_price -%}
+                 <small class="ajaxcart-item__price-strikethrough"><s>{{ item.original_line_price | money }}</s></small>
+                 <br><span>{{ item.final_line_price | money }}</span>
+                {%- else -%}
+                 {% if item.product.metafields.global.is_upsell %}
+                  <span class="regular-price fe-prev-price">{{ item.product.compare_at_price | money }}</span>
+                  <span class="regular-price">{{ item.original_line_price | money }}</span>
+                 {% else %}
+                  <span class="regular-price">{{ item.original_line_price | money }}</span>
+                 {% endif %}
+                {%- endif -%}
+              </div>
+            </div>{% endcomment %}
+            {%- if item.discounts != blank -%}
+              <div class="grid--full display-table">
+                <div class="grid__item text-right">
+                  {%- for discount in item.discounts -%}
+                   <small class="ajaxcart-item__discount">{%- render 'icon-discount' -%} {{ discount.title }}</small><br>
+                  {%- endfor -%}
+                </div>
+              </div>
+            {%- endif -%}
+            
+            <div class="grid_item display-table-cell ajaxcart-item__qty">
+              <div class="loading-overlay hidden">
+                <div class="loading-overlay__spinner">
+                  <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                    <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                  </svg>
+                </div>
+              </div>
+              <div class="ajaxcart__qty">
+                <quantity-input>
+                  <button class="quantity__button ajaxcart__qty-adjust ajaxcart__qty--minus no-js-hidden" name="minus" type="button">
+                    <span class="visually-hidden">{{ 'products.product.quantity.decrease' | t: product: item.product.title | escape }}</span>
+                    {% render 'icon-minus' %}
+                  </button>
+                  <input class="ajaxcart__qty-num"
+                         type="number"
+                         name="updates[]"
+                         value="{{ item.quantity }}"
+                         min="0"
+                         aria-label="{{ 'products.product.quantity.input_label' | t: product: item.product.title | escape }}"
+                         id="Quantity-{{ item.index | plus: 1 }}"
+                         data-index="{{ item.index | plus: 1 }}"
+                         >
+                  <button class="quantity__button ajaxcart__qty-adjust ajaxcart__qty--plus no-js-hidden" name="plus" type="button">
+                    <span class="visually-hidden">{{ 'products.product.quantity.increase' | t: product: item.product.title | escape }}</span>
+                    {% render 'icon-plus' %}
+                  </button>
+                </quantity-input>
+                
+              </div>
+              <div class="cart-item__error" id="Line-item-error-{{ item.index | plus: 1 }}" role="alert">
+                <small class="cart-item__error-text"></small>
+                {% render 'icon-error' %}
+              </div>
+            </div>
+            
+            
+            {% if item.product.metafields.global.is_upsell %}
+              <cart-remove-button id="Remove-{{ item.index | plus: 1 }}" data-index="{{ item.index | plus: 1 }}">
+                <a href="{{ item.url_to_remove }}" class="cart-remove" aria-label="{{ 'sections.cart.remove_title' | t: title: item.title }}">
+                  remove{% comment %}{% render 'icon-close' %}{% endcomment %}
+                </a>
+              </cart-remove-button>
+            {% else %}
+              {% if upsell_items_count > 0 %}
+                {% if allow_upsell > 1%}
+                  <cart-remove-button id="Remove-{{ item.index | plus: 1 }}" data-index="{{ item.index | plus: 1 }}">
+                    <a href="{{ item.url_to_remove }}" class="cart-remove" aria-label="{{ 'sections.cart.remove_title' | t: title: item.title }}">
+                      remove{% comment %}{% render 'icon-close' %}{% endcomment %}
+                    </a>
+                  </cart-remove-button>
+                {% endif %}
+              {% else %}
+                  <cart-remove-button id="Remove-{{ item.index | plus: 1 }}" data-index="{{ item.index | plus: 1 }}">
+                    <a href="{{ item.url_to_remove }}" class="cart-remove" aria-label="{{ 'sections.cart.remove_title' | t: title: item.title }}">
+                      remove{% comment %}{% render 'icon-close' %}{% endcomment %}
+                    </a>
+                  </cart-remove-button>
+              {% endif %}
+            {% endif %}
+            
+            
+            <div id="cart-errors"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{%- endfor -%}
+

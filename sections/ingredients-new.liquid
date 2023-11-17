@@ -1,0 +1,113 @@
+<section class="Section Section--spacingNormal shopify-section-moku-ingredients-ingredients" id="section-{{ section.id }}" data-section-id="{{ section.id }}">
+  <div class="Container">
+    <div class="ProductList ProductList--grid ProductList--removeMargin Grid" data-mobile-count="{{ section.settings.grid_mobile_items_per_row }}" data-desktop-count="{{ section.settings.grid_desktop_items_per_row }}">
+      {%- for block in section.blocks -%}
+      <div class="Grid__Cell 1/{{ section.settings.grid_mobile_items_per_row }}--phone 1/2--tablet 1/{{ section.settings.grid_desktop_items_per_row }}--lap-and-up">
+        <img 
+             srcset="{% if block.settings.ingredient_image.width >= 200 %}{{ block.settings.ingredient_image | image_url: width: 200 }} 200w,{% endif %}
+                     {% if block.settings.ingredient_image.width >= 300 %}{{ block.settings.ingredient_image | image_url: width: 300 }} 300w,{% endif %}
+                     {% if block.settings.ingredient_image.width >= 400 %}{{ block.settings.ingredient_image | image_url: width: 400 }} 400w,{% endif %}
+                     {% if block.settings.ingredient_image.width >= 500 %}{{ block.settings.ingredient_image | image_url: width: 500 }} 500w,{% endif %}
+                     {% if block.settings.ingredient_image.width >= 600 %}{{ block.settings.ingredient_image | image_url: width: 600 }} 600w,{% endif %}
+                     {% if block.settings.ingredient_image.width >= 700 %}{{ block.settings.ingredient_image | image_url: width: 700 }} 700w,{% endif %}
+                     {% if block.settings.ingredient_image.width >= 800 %}{{ block.settings.ingredient_image | image_url: width: 800 }} 800w,{% endif %}
+                     {% if block.settings.ingredient_image.width >= 900 %}{{ block.settings.ingredient_image | image_url: width: 900 }} 900w,{% endif %}
+                     {% if block.settings.ingredient_image.width >= 1000 %}{{ block.settings.ingredient_image | image_url: width: 1000 }} 1000w,{% endif %}
+                     {% if block.settings.ingredient_image.width >= 1200 %}{{ block.settings.ingredient_image | image_url: width: 1200 }} 1200w,{% endif %}
+                     {{ block.settings.ingredient_image | image_url }} {{ block.settings.ingredient_image.width }}w"
+             src="{{ block.settings.ingredient_image | image_url : width: 1200 }}"
+             sizes="100vw"
+             alt="{{ block.settings.ingredient_image.alt | escape }}"
+             height="{{ block.settings.ingredient_image.width | divided_by: block.settings.ingredient_image.aspect_ratio | ceil }}"
+             width="{{block.settings.ingredient_image.width}}"
+             loading="lazy"
+             />
+        <div class="ingredient-tooltip">
+            &#43;
+            <div class="ingredient-tooltip-content">
+              <h4 class="u-h4 be-bold">{{ block.settings.ingredient_name }}</h4>
+              <p>{{ block.settings.ingredient_description }}</p>
+            </div>
+          </div>
+      </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<style>
+  #section-{{ section.id }} {
+    background-color: {{ section.settings.background }};
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Ingredients",
+  "class": "moku-section--ingredients shopify-section--bordered ingredients-new",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section colors"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#eaeaea"
+    },
+    {
+      "type": "header",
+      "content": "Settings"
+    },
+    {
+      "type": "select",
+      "id": "grid_mobile_items_per_row",
+      "label": "Ingredients per row (mobile)",
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "range",
+      "min": 2,
+      "max": 4,
+      "id": "grid_desktop_items_per_row",
+      "label": "Ingredients per row (desktop)",
+      "default": 4
+    }
+  ],
+  "blocks": [
+    {
+      "type": "ingredient",
+      "name": "Ingredient",
+      "settings": [
+        {
+          "type": "text",
+          "id": "ingredient_name",
+          "label": "Ingredient name"
+        },
+        {
+          "type": "textarea",
+          "id": "ingredient_description",
+          "label": "Ingredient description"
+        },
+        {
+          "type": "image_picker",
+          "id": "ingredient_image",
+          "label": "Ingredient image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

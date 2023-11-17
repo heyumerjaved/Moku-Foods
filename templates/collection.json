@@ -1,0 +1,73 @@
+{
+  "sections": {
+    "product-grid": {
+      "type": "new-collection-product-grid",
+      "settings": {
+        "products_per_page": 16,
+        "columns_desktop": 3,
+        "image_ratio": "square",
+        "show_rating": true,
+        "enable_quick_add": true,
+        "enable_quick_add_desktop": true,
+        "enable_quick_add_mbl": true,
+        "quick_add_title": "Quick Add",
+        "padding_top": 56,
+        "padding_bottom": 88
+      }
+    },
+    "16619225185beac75b": {
+      "type": "collection-product-experience",
+      "settings": {
+      }
+    },
+    "collection-image-text": {
+      "type": "collection-image-text",
+      "blocks": {
+        "6646a831-a887-4b9c-bf80-a939b23fd320": {
+          "type": "heading",
+          "settings": {
+            "heading": "Moku Starter Pack",
+            "heading_size": "h1"
+          }
+        },
+        "5cefccdf-c790-4c03-924d-c31a73268010": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Haven’t found your favorite flavor or have a few favorite flavors? Try a variety pack to have a few flavors in one refreshing pack.<\/p>",
+            "text_style": "body"
+          }
+        },
+        "9c372912-d377-4906-82bd-e91cb734c532": {
+          "type": "button",
+          "settings": {
+            "button_label": "Shop Now",
+            "button_link": "shopify:\/\/products\/starter-pack"
+          }
+        }
+      },
+      "block_order": [
+        "6646a831-a887-4b9c-bf80-a939b23fd320",
+        "5cefccdf-c790-4c03-924d-c31a73268010",
+        "9c372912-d377-4906-82bd-e91cb734c532"
+      ],
+      "settings": {
+        "section_bkg_clr": "#e3f2e4",
+        "image": "shopify:\/\/shop_images\/Group_292_2.png",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "text_first",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "mobile_content_alignment": "left",
+        "padding_top": 0,
+        "padding_bottom": 100
+      }
+    }
+  },
+  "order": [
+    "product-grid",
+    "16619225185beac75b",
+    "collection-image-text"
+  ]
+}

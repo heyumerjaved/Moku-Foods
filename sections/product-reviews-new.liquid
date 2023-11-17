@@ -1,0 +1,698 @@
+<div class="desktop_div">
+  {% if section.settings.main_title != blank or section.settings.sub_title != blank %}
+    <div class="reviews-new-head">
+      <div class="Container">
+        {% if section.settings.main_title != blank %}<h2 class="title">{{ section.settings.main_title }}</h2>{% endif %}
+        {% if section.settings.sub_title != blank %}<div class="new-pro-text">{{ section.settings.sub_title }}</div>{% endif %}
+      </div>
+    </div>
+  {% endif %}
+
+  <div class="reviews-tab">
+    <div class="Container reviews-tab-head-top">
+      <div class="reviews-tab-head">
+        {%- for block in section.blocks -%}
+          {% if block.settings.tab_title != blank %}
+           <a href="javascript:void(0);" data-id="{{block.settings.tab_title}}" class="tablinks {% if forloop.first %}active{% endif %}">{{block.settings.tab_title}}</a>
+          {% endif %}
+        {%- endfor -%}
+      </div>
+    </div>
+
+    {%- for block in section.blocks -%}
+      {% if block.settings.tab_title != blank %}
+        <div id="{{block.settings.tab_title}}" class="tabcontent reviews-tab-tabcontent" {% if forloop.first %}style="display: block;"{% endif %}>
+
+          {% assign slide_count = 0 %}
+          {%- for i in (1..20) -%}
+              {% capture temp_img %}testimonial_img_{{i}}{% endcapture %}
+          	  {% capture temp_cont %}testimonial_content_{{i}}{% endcapture %}
+              {% assign temp_curr_image = block.settings[temp_img] %}
+          	  {% assign temp_curr_cont = block.settings[temp_cont] %}
+              {% if temp_curr_image != blank and temp_curr_image != '' %}
+                  {% assign slide_count = slide_count | plus:1 %}
+          	  {% else %}
+          		  {% if temp_curr_cont != blank and temp_curr_cont != '' %}
+                   {% assign slide_count = slide_count | plus:1 %}
+          		  {% endif %}
+              {% endif %}
+          {%- endfor -%}
+
+
+          <div class="reviews-tab-slider slider-{{block.id}} {% if slide_count <= 3 %}no-slide no-slide-{{slide_count}}{% endif %}">
+            {%- for i in (1..20) -%}
+
+              {% capture t_img %}testimonial_img_{{i}}{% endcapture %}
+              {% capture t_cont %}testimonial_content_{{i}}{% endcapture %}
+              {% capture t_names %}testimonial_name_{{i}}{% endcapture %}
+
+              {% assign t_image = block.settings[t_img] %}
+              {% assign t_content = block.settings[t_cont] %}
+              {% assign t_name = block.settings[t_names] %}
+
+              {%- if t_image != blank or t_content != blank -%}
+                <div class="reviews-tab-slide">
+                  <div class="reviews-tab-box">
+                    {%- if t_image != blank -%}
+                    <img 
+                         srcset="{% if t_image.width >= 100 %}{{ t_image | image_url: width: 100 }} 100w,{% endif %}
+                                 {% if t_image.width >= 150 %}{{ t_image | image_url: width: 150 }} 150w,{% endif %}
+                                 {% if t_image.width >= 200 %}{{ t_image | image_url: width: 200 }} 200w,{% endif %}
+                                 {% if t_image.width >= 250 %}{{ t_image | image_url: width: 250 }} 250w,{% endif %}
+                                 {% if t_image.width >= 300 %}{{ t_image | image_url: width: 300 }} 300w,{% endif %}
+                                 {% if t_image.width >= 350 %}{{ t_image | image_url: width: 350 }} 350w,{% endif %}
+                                 {% if t_image.width >= 400 %}{{ t_image | image_url: width: 400 }} 400w,{% endif %}
+                                 {{ t_image | image_url }} {{ t_image.width }}w"
+                         src="{{ t_image | image_url: width: master }}"
+                         class="reviews-tab-img"
+                         sizes="100vw"
+                         alt="{{ t_image.alt | escape }}"
+                         height="{{t_image.width | divided_by: t_image.aspect_ratio}}"
+                         width="{{t_image.width}}"
+                         loading="lazy"
+                         />
+                    {%- endif -%}
+                    {%- if t_content != blank -%}
+                     <div class="reviews-tab-text">
+                      <div class="reviews-tab-icon">{% render 'reviews-icon' %}</div>
+                      {{ t_content }}
+                     </div>
+                    {%- endif -%}
+                    {%- if t_name != blank -%}
+                     <div class="reviews-tab-name">{{ t_name }}</div>
+                    {%- endif -%}
+                  </div>
+                </div>
+              {%- endif -%}
+
+            {%- endfor -%}
+
+          </div>
+
+          {% if slide_count > 3 %}
+          <script type="text/javascript">
+            $(document).ready(function() {
+              $('.desktop_div .slider-{{block.id}}').slick({
+                infinite: true,
+                slidesToShow: 3,
+                arrows: false,
+                centerMode: true,
+                centerPadding: '200px',
+                responsive: [
+                  {
+                    breakpoint: 1651,
+                    settings: {
+                      centerPadding: '150px'
+                    }
+                  },
+                  {
+                    breakpoint: 1451,
+                    settings: {
+                      centerPadding: '100px'
+                    }
+                  },
+                  {
+                    breakpoint: 1140,
+                    settings: {
+                      centerPadding: '250px',
+                      slidesToShow: 1
+                    }
+                  },
+                  {
+                    breakpoint: 1008,
+                    settings: {
+                      centerPadding: '150px',
+                      slidesToShow: 1
+                    }
+                  },
+                  {
+                    breakpoint: 641,
+                    settings: {
+                      centerPadding: '50px',
+                      slidesToShow: 1
+                    }
+                  }
+                ]
+              });
+            });
+          </script>
+          {% endif %}
+
+        </div>
+      {% endif %}
+    {%- endfor -%}
+  </div>
+
+  <div class="Container">
+    <a href="#junip-reviews-new" class="reviews-new-more">
+      <span>READ MORE REVIEWS</span>
+      {% render 'plus-icon' %}
+    </a>
+  </div>
+</div>
+
+<div class="mobile_div">
+  {% if section.settings.main_title != blank or section.settings.sub_title != blank %}
+    <div class="reviews-new-head">
+      <div class="Container">
+        {% if section.settings.main_title != blank %}<h2 class="title">{{ section.settings.main_title }}</h2>{% endif %}
+        {% if section.settings.sub_title != blank %}<div class="new-pro-text">{{ section.settings.sub_title }}</div>{% endif %}
+      </div>
+    </div>
+  {% endif %}
+
+  <div class="reviews-tab">
+    <div class="Container reviews-tab-head-top">
+      <div class="reviews-tab-head">
+        {%- for block in section.blocks -%}
+          {% if block.settings.tab_title != blank %}
+           <a href="javascript:void(0);" data-id="{{block.settings.tab_title}}" class="tablinks {% if forloop.first %}active{% endif %}">{{block.settings.tab_title}}</a>
+          {% endif %}
+        {%- endfor -%}
+      </div>
+    </div>
+
+    {%- for block in section.blocks -%}
+      {% if block.settings.tab_title != blank %}
+        <div id="{{block.settings.tab_title}}" class="tabcontent reviews-tab-tabcontent" {% if forloop.first %}style="display: block;"{% endif %}>
+
+          <div class="reviews-tab-slider slider-{{block.id}}">
+            {%- for i in (1..20) -%}
+
+              {% capture t_img %}testimonial_img_{{i}}{% endcapture %}
+              {% capture t_cont %}testimonial_content_{{i}}{% endcapture %}
+              {% capture t_names %}testimonial_name_{{i}}{% endcapture %}
+
+              {% assign t_image = block.settings[t_img] %}
+              {% assign t_content = block.settings[t_cont] %}
+              {% assign t_name = block.settings[t_names] %}
+
+              {%- if t_image != blank or t_content != blank -%}
+                <div class="reviews-tab-slide">
+                  <div class="reviews-tab-box">
+                    {%- if t_image != blank -%}
+                     <img class="Image--lazyLoad Image--fadeIn reviews-tab-img" data-src="{{ t_image | img_url: '300x' }}" data-sizes="auto" alt="{{ t_image.alt | escape }}"/>
+                    {%- endif -%}
+                    {%- if t_content != blank -%}
+                     <div class="reviews-tab-text">
+                      <div class="reviews-tab-icon">{% render 'reviews-icon' %}</div>
+                      {{ t_content }}
+                     </div>
+                    {%- endif -%}
+                    {%- if t_name != blank -%}
+                     <div class="reviews-tab-name">{{ t_name }}</div>
+                    {%- endif -%}
+                  </div>
+                </div>
+              {%- endif -%}
+
+            {%- endfor -%}
+
+          </div>
+
+          
+          <script type="text/javascript">
+            $(document).ready(function() {
+              $('.mobile_div .slider-{{block.id}}').slick({
+                infinite: true,
+                slidesToShow: 1,
+                arrows: false,
+                centerMode: true,
+                centerPadding: '200px',
+                responsive: [
+                  {
+                    breakpoint: 1651,
+                    settings: {
+                      centerPadding: '150px'
+                    }
+                  },
+                  {
+                    breakpoint: 1451,
+                    settings: {
+                      centerPadding: '100px'
+                    }
+                  },
+                  {
+                    breakpoint: 1140,
+                    settings: {
+                      centerPadding: '250px',
+                      slidesToShow: 1
+                    }
+                  },
+                  {
+                    breakpoint: 1008,
+                    settings: {
+                      centerPadding: '150px',
+                      slidesToShow: 1
+                    }
+                  },
+                  {
+                    breakpoint: 641,
+                    settings: {
+                      centerPadding: '50px',
+                      slidesToShow: 1
+                    }
+                  }
+                ]
+              });
+            });
+          </script>
+
+        </div>
+      {% endif %}
+    {%- endfor -%}
+  </div>
+
+  <div class="Container">
+    <a href="#junip-reviews-new" class="reviews-new-more">
+      <span>READ MORE REVIEWS</span>
+      {% render 'plus-icon' %}
+    </a>
+  </div>
+</div>
+
+<!-- <script type="text/javascript" defer="defer">
+
+  $(document).ready(function() {
+    
+  });
+</script> -->
+
+
+{% schema %}
+  {
+    "name": "Testimonial",
+	"class": "product-reviews-new",
+    "settings": [
+        {
+          "type": "text",
+          "id": "main_title",
+          "label": "Section title"
+        },
+        {
+          "type": "text",
+          "id": "sub_title",
+          "label": "Section sub-title"
+        }
+	],
+    "blocks": [
+        {
+          "name": "Block",
+          "type": "review",
+          "settings": [
+             {
+                "type": "text",
+                "id": "tab_title",
+                "label": "Block tab title"
+              },
+              {
+                "type": "header",
+                "content": "Testimonial 1"
+              },
+              {
+                "type": "image_picker",
+                "id": "testimonial_img_1",
+                "label": "Testimonial image"
+              },
+              {
+                "type": "richtext",
+                "id": "testimonial_content_1",
+                "label": "Testimonial content"
+              },
+              {
+                "type": "text",
+                "id": "testimonial_name_1",
+                "label": "Testimonial name"
+              },
+              {
+                "type": "header",
+                "content": "Testimonial 2"
+              },
+              {
+                "type": "image_picker",
+                "id": "testimonial_img_2",
+                "label": "Testimonial image"
+              },
+              {
+                "type": "richtext",
+                "id": "testimonial_content_2",
+                "label": "Testimonial content"
+              },
+              {
+                "type": "text",
+                "id": "testimonial_name_2",
+                "label": "Testimonial name"
+              },
+              {
+                "type": "header",
+                "content": "Testimonial 3"
+              },
+              {
+                "type": "image_picker",
+                "id": "testimonial_img_3",
+                "label": "Testimonial image"
+              },
+              {
+                "type": "richtext",
+                "id": "testimonial_content_3",
+                "label": "Testimonial content"
+              },
+              {
+                "type": "text",
+                "id": "testimonial_name_3",
+                "label": "Testimonial name"
+              },
+              {
+                "type": "header",
+                "content": "Testimonial 4"
+              },
+              {
+                "type": "image_picker",
+                "id": "testimonial_img_4",
+                "label": "Testimonial image"
+              },
+              {
+                "type": "richtext",
+                "id": "testimonial_content_4",
+                "label": "Testimonial content"
+              },
+              {
+                "type": "text",
+                "id": "testimonial_name_4",
+                "label": "Testimonial name"
+              },
+              {
+                "type": "header",
+                "content": "Testimonial 5"
+              },
+              {
+                "type": "image_picker",
+                "id": "testimonial_img_5",
+                "label": "Testimonial image"
+              },
+              {
+                "type": "richtext",
+                "id": "testimonial_content_5",
+                "label": "Testimonial content"
+              },
+              {
+                "type": "text",
+                "id": "testimonial_name_5",
+                "label": "Testimonial name"
+              },
+              {
+                "type": "header",
+                "content": "Testimonial 6"
+              },
+              {
+                "type": "image_picker",
+                "id": "testimonial_img_6",
+                "label": "Testimonial image"
+              },
+              {
+                "type": "richtext",
+                "id": "testimonial_content_6",
+                "label": "Testimonial content"
+              },
+              {
+                "type": "text",
+                "id": "testimonial_name_6",
+                "label": "Testimonial name"
+              },
+              {
+                "type": "header",
+                "content": "Testimonial 7"
+              },
+              {
+                "type": "image_picker",
+                "id": "testimonial_img_7",
+                "label": "Testimonial image"
+              },
+              {
+                "type": "richtext",
+                "id": "testimonial_content_7",
+                "label": "Testimonial content"
+              },
+              {
+                "type": "text",
+                "id": "testimonial_name_7",
+                "label": "Testimonial name"
+              },
+              {
+                "type": "header",
+                "content": "Testimonial 8"
+              },
+              {
+                "type": "image_picker",
+                "id": "testimonial_img_8",
+                "label": "Testimonial image"
+              },
+              {
+                "type": "richtext",
+                "id": "testimonial_content_8",
+                "label": "Testimonial content"
+              },
+              {
+                "type": "text",
+                "id": "testimonial_name_8",
+                "label": "Testimonial name"
+              },
+              {
+                "type": "header",
+                "content": "Testimonial 9"
+              },
+              {
+                "type": "image_picker",
+                "id": "testimonial_img_9",
+                "label": "Testimonial image"
+              },
+              {
+                "type": "richtext",
+                "id": "testimonial_content_9",
+                "label": "Testimonial content"
+              },
+              {
+                "type": "text",
+                "id": "testimonial_name_9",
+                "label": "Testimonial name"
+              },
+              {
+                "type": "header",
+                "content": "Testimonial 10"
+              },
+              {
+                "type": "image_picker",
+                "id": "testimonial_img_10",
+                "label": "Testimonial image"
+              },
+              {
+                "type": "richtext",
+                "id": "testimonial_content_10",
+                "label": "Testimonial content"
+              },
+              {
+                "type": "text",
+                "id": "testimonial_name_10",
+                "label": "Testimonial name"
+              },
+              {
+                "type": "header",
+                "content": "Testimonial 11"
+              },
+              {
+                "type": "image_picker",
+                "id": "testimonial_img_11",
+                "label": "Testimonial image"
+              },
+              {
+                "type": "richtext",
+                "id": "testimonial_content_11",
+                "label": "Testimonial content"
+              },
+              {
+                "type": "text",
+                "id": "testimonial_name_11",
+                "label": "Testimonial name"
+              },
+              {
+                "type": "header",
+                "content": "Testimonial 12"
+              },
+              {
+                "type": "image_picker",
+                "id": "testimonial_img_12",
+                "label": "Testimonial image"
+              },
+              {
+                "type": "richtext",
+                "id": "testimonial_content_12",
+                "label": "Testimonial content"
+              },
+              {
+                "type": "text",
+                "id": "testimonial_name_12",
+                "label": "Testimonial name"
+              },
+              {
+                "type": "header",
+                "content": "Testimonial 13"
+              },
+              {
+                "type": "image_picker",
+                "id": "testimonial_img_13",
+                "label": "Testimonial image"
+              },
+              {
+                "type": "richtext",
+                "id": "testimonial_content_13",
+                "label": "Testimonial content"
+              },
+              {
+                "type": "text",
+                "id": "testimonial_name_13",
+                "label": "Testimonial name"
+              },
+              {
+                "type": "header",
+                "content": "Testimonial 14"
+              },
+              {
+                "type": "image_picker",
+                "id": "testimonial_img_14",
+                "label": "Testimonial image"
+              },
+              {
+                "type": "richtext",
+                "id": "testimonial_content_14",
+                "label": "Testimonial content"
+              },
+              {
+                "type": "text",
+                "id": "testimonial_name_14",
+                "label": "Testimonial name"
+              },
+              {
+                "type": "header",
+                "content": "Testimonial 15"
+              },
+              {
+                "type": "image_picker",
+                "id": "testimonial_img_15",
+                "label": "Testimonial image"
+              },
+              {
+                "type": "richtext",
+                "id": "testimonial_content_15",
+                "label": "Testimonial content"
+              },
+              {
+                "type": "text",
+                "id": "testimonial_name_15",
+                "label": "Testimonial name"
+              },
+              {
+                "type": "header",
+                "content": "Testimonial 16"
+              },
+              {
+                "type": "image_picker",
+                "id": "testimonial_img_16",
+                "label": "Testimonial image"
+              },
+              {
+                "type": "richtext",
+                "id": "testimonial_content_16",
+                "label": "Testimonial content"
+              },
+              {
+                "type": "text",
+                "id": "testimonial_name_16",
+                "label": "Testimonial name"
+              },
+              {
+                "type": "header",
+                "content": "Testimonial 17"
+              },
+              {
+                "type": "image_picker",
+                "id": "testimonial_img_17",
+                "label": "Testimonial image"
+              },
+              {
+                "type": "richtext",
+                "id": "testimonial_content_17",
+                "label": "Testimonial content"
+              },
+              {
+                "type": "text",
+                "id": "testimonial_name_17",
+                "label": "Testimonial name"
+              },
+              {
+                "type": "header",
+                "content": "Testimonial 18"
+              },
+              {
+                "type": "image_picker",
+                "id": "testimonial_img_18",
+                "label": "Testimonial image"
+              },
+              {
+                "type": "richtext",
+                "id": "testimonial_content_18",
+                "label": "Testimonial content"
+              },
+              {
+                "type": "text",
+                "id": "testimonial_name_18",
+                "label": "Testimonial name"
+              },
+              {
+                "type": "header",
+                "content": "Testimonial 19"
+              },
+              {
+                "type": "image_picker",
+                "id": "testimonial_img_19",
+                "label": "Testimonial image"
+              },
+              {
+                "type": "richtext",
+                "id": "testimonial_content_19",
+                "label": "Testimonial content"
+              },
+              {
+                "type": "text",
+                "id": "testimonial_name_19",
+                "label": "Testimonial name"
+              },
+              {
+                "type": "header",
+                "content": "Testimonial 20"
+              },
+              {
+                "type": "image_picker",
+                "id": "testimonial_img_20",
+                "label": "Testimonial image"
+              },
+              {
+                "type": "richtext",
+                "id": "testimonial_content_20",
+                "label": "Testimonial content"
+              },
+              {
+                "type": "text",
+                "id": "testimonial_name_20",
+                "label": "Testimonial name"
+              }
+          ]
+        }
+    ],
+	"presets": [
+      {
+        "name": "Testimonial",
+        "category": "Custome"
+      }
+    ]
+  }
+{% endschema %}
